@@ -35,7 +35,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
     private TextInputLayout Name,Email,Passwors,MobaileNo;
     private Button AdminNext;
     private ProgressDialog progressDialog;
-    private String Url = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
+    private String Url = "http://192.168.1.8/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
 
     private DatePicker datePicker;
     private Calendar calendar;

@@ -37,7 +37,7 @@ public class Main2Activity extends AppCompatActivity {
     private String KEY_NAME = "name";
     String name = "name";
     private int PICK_IMAGE_REQUEST = 1;
-    private String UPLOAD_URL = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/upload.php";
+    private String UPLOAD_URL = "http://192.168.1.8/Web-API-College-Noticeboard/WebServicesApi/upload.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
