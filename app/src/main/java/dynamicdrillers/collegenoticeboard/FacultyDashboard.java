@@ -5,6 +5,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -71,15 +72,21 @@ public class FacultyDashboard extends AppCompatActivity {
 
 
 
+
+
                 }
 
                 return true;
             }
         });
 
-
+        String noticenames1[] = {"College Notice","Scholarship Notice","Events Notice"};
+        String noticenames2[] = {"Accounts Notice","Tnp Notice","Dept Notice"};
+        int noticeicons1[] = {R.drawable.collegenotice,R.drawable.schlorship,R.drawable.events};
+        int noticeicons2[] = {R.drawable.viewnotice,R.drawable.tnp,R.drawable.dept};
         recyclerView = (RecyclerView)findViewById(R.id.notice_recylerview);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(this  ));
+        recyclerView.setAdapter(new DashboardNoticeAdaptor(noticenames1,noticenames2,noticeicons1,noticeicons2));
 
 
 
