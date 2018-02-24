@@ -51,6 +51,18 @@ public class LoginActivity extends AppCompatActivity {
                 LinearLayout linearLayout = (LinearLayout) SpnLoginType.getSelectedView();
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.spn));
+                if(textView.getText().equals("Admin")){
+                    SelectedType = "Admin";
+                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminLogin.php";
+                }
+                else if(textView.getText().equals("Student")){
+                    SelectedType = "Student";
+                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard-master/WebServicesApi/StudentLogin.php";
+                }
+                else{
+                    SelectedType = "Other";
+                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard-master/WebServicesApi/FacultyLogin.php";
+                }
             }
 
             @Override
@@ -81,8 +93,29 @@ public class LoginActivity extends AppCompatActivity {
                     if(!user_detail.getBoolean("error"))
                     {
                         SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(LoginActivity.this);
-                        sharedPreferenceHelper.userlogin(user_detail.getString("email"),
-                                user_detail.getString("collegecode"),user_detail.getString("name"),user_detail.getString("type"));
+                        sharedPreferenceHelper.userlogin(user_detail.getString("name"),user_detail.getString("email")
+                                ,user_detail.getString("collegecode")
+                                ,user_detail.getString("mobileno"),user_detail.getString("dob")
+                                ,user_detail.getString("gender"),user_detail.getString("type"));
+
+                        if(SelectedType.equals("Student"))
+                        sharedPreferenceHelper.studentUser(user_detail.getString("studentprofile"),
+                                user_detail.getString("dept"),
+                                user_detail.getString("sem"),
+                                user_detail.getString("tgemail"),
+                                user_detail.getString("enrollment"));
+
+                        else if(SelectedType.equals("Other"))
+                            sharedPreferenceHelper.otherUser(user_detail.getString("role")
+                            ,user_detail.getString("personprofile"));
+
+                        else
+                            sharedPreferenceHelper.studentUser(user_detail.getString("profilephoto"),
+                                    user_detail.getString("collegelogo"),
+                                    user_detail.getString("collegename"),
+                                    user_detail.getString("collegecity"),
+                                    user_detail.getString("collegestate"));
+
 
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         finish();

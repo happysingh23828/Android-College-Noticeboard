@@ -78,33 +78,33 @@
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-           <ImageView
-               android:id="@+id/imageView9"
-               android:layout_width="24dp"
-               android:layout_height="24dp"
-               android:layout_marginRight="10dp"
-               android:layout_marginTop="25dp"
-               android:src="@drawable/ic_location_on_white_24dp" />
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_location_on_white_24dp" />
 
-           <android.support.design.widget.TextInputLayout
-               android:id="@+id/CollegeState"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               tools:layout_editor_absoluteX="8dp"
-               tools:layout_editor_absoluteY="38dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/CollegeState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="38dp">
 
-               <android.support.design.widget.TextInputEditText
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_weight="1"
-                   android:hint="CollegeState"
-                   android:textColor="@android:color/background_light" />
-           </android.support.design.widget.TextInputLayout>
-       </LinearLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="CollegeState"
+                    android:textColor="@android:color/background_light" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
