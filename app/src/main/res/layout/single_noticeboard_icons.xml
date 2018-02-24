@@ -19,6 +19,7 @@
             android:layout_margin="10dp"
             >
             <LinearLayout
+                android:id="@+id/left_notice_icon_root_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -59,6 +60,7 @@
             android:translationZ="5dp">
 
             <LinearLayout
+                android:id="@+id/right_notice_icon_root_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">

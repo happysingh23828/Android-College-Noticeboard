@@ -80,8 +80,8 @@ public class FacultyDashboard extends AppCompatActivity {
             }
         });
 
-        String noticenames1[] = {"College Notice","Scholarship Notice","Events Notice"};
-        String noticenames2[] = {"Accounts Notice","Tnp Notice","Dept Notice"};
+        String noticenames1[] = {"College","Scholarship","Events"};
+        String noticenames2[] = {"Accounts","Tnp","Dept"};
         int noticeicons1[] = {R.drawable.collegenotice,R.drawable.schlorship,R.drawable.events};
         int noticeicons2[] = {R.drawable.viewnotice,R.drawable.tnp,R.drawable.dept};
         recyclerView = (RecyclerView)findViewById(R.id.notice_recylerview);

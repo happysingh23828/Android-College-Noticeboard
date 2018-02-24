@@ -1,11 +1,15 @@
 package dynamicdrillers.collegenoticeboard;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -14,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNoticeAdaptor.DashboardNoticeViewHolder> {
-
+    private  Context context;
     String[] noticename1,noticename2;
     int[] noticeicons1,noticeicons2;
 
@@ -34,12 +38,34 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
     }
 
     @Override
-    public void onBindViewHolder(DashboardNoticeViewHolder holder, int position) {
+    public void onBindViewHolder(final DashboardNoticeViewHolder holder, final int position) {
+
+
+        holder.lefticon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ShowNoticeByType.class);
+                intent.putExtra("NoticeCollegeCode","0536");
+                intent.putExtra("NoticeType",noticename1[position]);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        holder.righticon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ShowNoticeByType.class);
+                intent.putExtra("NoticeCollegeCode","0536");
+                intent.putExtra("NoticeType",noticename2[position]);
+                v.getContext().startActivity(intent);
+
+            }
+        });
 
         holder.imageView1.setImageResource(noticeicons1[position]);
-        holder.textView1.setText(noticename1[position]);
+        holder.textView1.setText(noticename1[position]+" Notice");
         holder.imageView2.setImageResource(noticeicons2[position]);
-        holder.textView2.setText(noticename2[position]);
+        holder.textView2.setText(noticename2[position]+" Notice");
 
     }
 
@@ -52,6 +78,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
     {
         CircleImageView imageView1,imageView2;
         TextView textView1,textView2;
+        LinearLayout lefticon,righticon;
 
         public DashboardNoticeViewHolder(View itemView) {
             super(itemView);
@@ -59,7 +86,8 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
             textView1 = (TextView)itemView.findViewById(R.id.noticename1);
             imageView2 = (CircleImageView)itemView.findViewById(R.id.noticeicon2);
             textView2 = (TextView)itemView.findViewById(R.id.noticename2);
-
+            lefticon = (LinearLayout)itemView.findViewById(R.id.left_notice_icon_root_layout);
+            righticon = (LinearLayout)itemView.findViewById(R.id.right_notice_icon_root_layout);
         }
 
 
