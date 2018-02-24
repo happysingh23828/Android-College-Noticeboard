@@ -1,74 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_admin"
+    android:orientation="vertical"
     tools:context="dynamicdrillers.collegenoticeboard.AdminRegCollegeActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/CollegeName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="38dp">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
 
-        <android.support.design.widget.TextInputEditText
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_location_city_white_24dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/CollegeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/background_light"
+                android:textColorHint="@android:color/background_light"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="38dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="CollegeName"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHighlight="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:textColorLink="@android:color/background_light" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_code_white_24dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/CollegeCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="38dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="CollegeCode"
+                    android:textColor="@android:color/background_light" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <ImageView
+               android:id="@+id/imageView9"
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:layout_marginRight="10dp"
+               android:layout_marginTop="25dp"
+               android:src="@drawable/ic_location_on_white_24dp" />
+
+           <android.support.design.widget.TextInputLayout
+               android:id="@+id/CollegeState"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:layout_editor_absoluteX="8dp"
+               tools:layout_editor_absoluteY="38dp">
+
+               <android.support.design.widget.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:hint="CollegeState"
+                   android:textColor="@android:color/background_light" />
+           </android.support.design.widget.TextInputLayout>
+       </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/ic_location_on_white_24dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/CollegeCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="38dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/collegeCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="CollegeCity"
+                    android:textColor="@android:color/background_light"
+                    android:textColorHighlight="@android:color/background_light"
+                    android:textColorHint="@android:color/background_light"
+                    android:textColorLink="@android:color/background_light" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="CollegeName" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp"
+            android:gravity="right">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/CollegeCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="38dp">
+            <Button
 
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="CollegeCode" />
+                android:id="@+id/btn_admin_college_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/preshap"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="prev"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
-    </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/AdminCollegeNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/nextshap"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="next"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/CollegeState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="38dp">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="CollegeState" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/CollegeCity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="38dp">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/collegeCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="CollegeCity" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/AdminCollegeNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

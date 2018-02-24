@@ -2,7 +2,6 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -15,26 +14,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AdminRegistrationActivity extends AppCompatActivity {
 
     private TextInputLayout Name,Email,Passwors,MobaileNo;
     private Button AdminNext;
-    private ProgressDialog progressDialog;
+
     private String Url = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
 
     private DatePicker datePicker;
@@ -52,16 +38,48 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_registration);
 
+
         Name = findViewById(R.id.Name);
         Email = findViewById(R.id.Email);
         Passwors = findViewById(R.id.Password);
         MobaileNo = findViewById(R.id.MobaileNo);
+        Gender = findViewById(R.id.Gender);
+        Date = findViewById(R.id.Date);
+
+        Intent intent = getIntent();
+
+        if(intent.getStringExtra("status").equals("prev")){
+            final String NamePre = intent.getStringExtra("Name");
+            final String EmailPre =intent.getStringExtra("Email");
+            final String PasswordPre =intent.getStringExtra("Password");
+            final String MobaleNoPre =intent.getStringExtra("MobaileNo");
+            final String DatePre =intent.getStringExtra("Date");
+            final String GenderPre =intent.getStringExtra("Gender");
+
+            Name.getEditText().setText(NamePre);
+            Email.getEditText().setText(EmailPre);
+            Passwors.getEditText().setText(PasswordPre);
+            MobaileNo.getEditText().setText(MobaleNoPre);
+            Date.setText(DatePre);
+            if(GenderPre.equals("Male")){
+                Gender.check(R.id.Male);
+                Gender_s = "Male";
+            }
+            else{
+                Gender.check(R.id.Female);
+                Gender_s = "Female";
+            }
+
+        }
+
+
 
         AdminNext = findViewById(R.id.AdminNext);
         AdminNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminRegistrationActivity.this,AdminRegCollegeActivity.class);
+                intent.putExtra("status","next");
                 intent.putExtra("Name",Name.getEditText().getText().toString());
                 intent.putExtra("Email",Email.getEditText().getText().toString());
                 intent.putExtra("Password",Passwors.getEditText().getText().toString());
@@ -72,10 +90,9 @@ public class AdminRegistrationActivity extends AppCompatActivity {
             }
         });
 
-        progressDialog = new ProgressDialog(this);
 
 
-        Date = findViewById(R.id.Date);
+
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
 
@@ -84,7 +101,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         showDate(year, month+1, day);
 
 
-        Gender = findViewById(R.id.Gender);
+
         Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -96,64 +113,15 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         });
 
 
-        //  Register = findViewById(R.id.Rgister);
-//        Register.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                   registerAdmin();
-//            }
-//        });
+
     }
 
-    public void registerAdmin(){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
 
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    Toast.makeText(AdminRegistrationActivity.this,jsonObject.getString("error"),Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AdminRegistrationActivity.this,error.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String,String> map = new HashMap<>();
-                map.put("Email",Email.getEditText().getText().toString());
-                map.put("Password",Email.getEditText().getText().toString());
-                map.put("CollegeCode",Email.getEditText().getText().toString());
-                map.put("Name",Email.getEditText().getText().toString());
-                map.put("MobileNo",Email.getEditText().getText().toString());
-                map.put("Dob",Email.getEditText().getText().toString());
-                map.put("Gender",Email.getEditText().getText().toString());
-                map.put("CollegeName",Email.getEditText().getText().toString());
-                map.put("CollegeCity",Email.getEditText().getText().toString());
-                map.put("CollegeState",Email.getEditText().getText().toString());
-                map.put("CollegeLogo",Email.getEditText().getText().toString());
-                map.put("AdminPhoto",Email.getEditText().getText().toString());
-
-                return  map;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
 
     private void showDate(int year, int month, int day) {
-        Date_s =  new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year).toString();
-        Date.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        Date_s =  new StringBuilder().append(year).append("-").append(month).append("-").append(day).toString();
+        Date.setText(new StringBuilder().append(year).append("-").append(month).append("-").append(day));
 
     }
     @SuppressWarnings("deprecation")

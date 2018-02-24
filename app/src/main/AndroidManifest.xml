@@ -21,7 +21,12 @@
         <activity android:name=".AdminRegistrationActivity" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".AdminRegCollegeActivity" />
-        <activity android:name=".AdminRegImgActivity"></activity>
+        <activity android:name=".AdminRegImgActivity" />
+        <activity android:name=".LoginActivity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
