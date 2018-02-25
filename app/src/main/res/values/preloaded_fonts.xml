@@ -3,5 +3,6 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/bevan</item>
         <item>@font/bungee</item>
+        <item>@font/ewert</item>
     </array>
 </resources>
