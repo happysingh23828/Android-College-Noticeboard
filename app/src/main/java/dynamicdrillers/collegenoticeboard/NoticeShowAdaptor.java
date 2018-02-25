@@ -23,7 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.NoticeShowViewHolder> {
     List<Notice> noticelist;
     Context context;
-    public static final  String AuthorImageURL="http://192.168.1.8/Web-API-College-Noticeboard/Storage/PersonProfiles/";
+
 
 
     public NoticeShowAdaptor(List<Notice> noticelist) {
@@ -45,7 +45,7 @@ public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.No
 
         holder.AuthorName.setText(notice.getNoticeAuthor().toUpperCase());
         holder.NoticeTime.setText(notice.getTime());
-        Picasso.with(holder.itemView.getContext()).load(AuthorImageURL+"Person"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
+        Picasso.with(holder.itemView.getContext()).load(Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
 
         if(notice.getNoticeTitle().length()>=50)
         {

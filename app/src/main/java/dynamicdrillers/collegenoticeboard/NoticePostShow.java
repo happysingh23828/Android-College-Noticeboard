@@ -11,12 +11,13 @@ import android.widget.Toolbar;
 import com.squareup.picasso.Picasso;
 
 public class NoticePostShow extends AppCompatActivity {
-    public static final  String NoticeImageURL="http://192.168.1.8/Web-API-College-Noticeboard/Storage/CollegeNotice/";
+
 
     android.support.v7.widget.Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ImageView Notice_image;
     TextView Title,Desc,Time,WriterName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class NoticePostShow extends AppCompatActivity {
         Desc.setText(NoticeDesc);
         Time.setText(NoticeTime);
         WriterName.setText(AuthorName);
-        Picasso.with(getApplicationContext()).load(NoticeImageURL+"Title"+NoticeTitle+".png").into(Notice_image);
+        Picasso.with(getApplicationContext()).load(Constants.COLLEGE_NOTICE_STORAGE_URL+"Title"+NoticeTitle+".png").into(Notice_image);
 
 
 

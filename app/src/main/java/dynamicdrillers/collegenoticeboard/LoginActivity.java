@@ -53,15 +53,15 @@ public class LoginActivity extends AppCompatActivity {
                 textView.setTextColor(getResources().getColor(R.color.spn));
                 if(textView.getText().equals("Admin")){
                     SelectedType = "Admin";
-                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminLogin.php";
+                    URL_LOGIN = Constants.WEB_API_URL+"AdminLogin.php";
                 }
                 else if(textView.getText().equals("Student")){
                     SelectedType = "Student";
-                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard-master/WebServicesApi/StudentLogin.php";
+                    URL_LOGIN = Constants.WEB_API_URL+"StudentLogin.php";
                 }
                 else{
                     SelectedType = "Other";
-                    URL_LOGIN = "http://192.168.56.1/Web-API-College-Noticeboard-master/WebServicesApi/FacultyLogin.php";
+                    URL_LOGIN = Constants.WEB_API_URL+"FacultyLogin.php";
                 }
             }
 

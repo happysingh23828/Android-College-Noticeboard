@@ -11,49 +11,26 @@ import android.widget.Toast;
 public class AdminRegCollegeActivity extends AppCompatActivity {
 
     TextInputLayout CollegeName,CollegeCode,CollegeState,CollegeCity;
-    Button Next,BtnAdminCollegePrev;
-    String Name,Email,Password,MobaleNo,Date,Gender;
+    Button Next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_reg_college);
-
-
-        CollegeCode = findViewById(R.id.CollegeCode);
-        CollegeCity = findViewById(R.id.CollegeCity);
-        CollegeState = findViewById(R.id.CollegeState);
-        CollegeName = findViewById(R.id.CollegeName);
-
-
-        final Intent intent = getIntent();
-
-        if(intent.getStringExtra("status").equals("next")){
-            Name = intent.getStringExtra("Name");
-            Email =intent.getStringExtra("Email");
-            Password =intent.getStringExtra("Password");
-            MobaleNo =intent.getStringExtra("MobaileNo");
-            Date =intent.getStringExtra("Date");
-            Gender =intent.getStringExtra("Gender");
-        }
-        else
-        {
-            Name = intent.getStringExtra("Name");
-            Email =intent.getStringExtra("Email");
-            Password =intent.getStringExtra("Password");
-            MobaleNo =intent.getStringExtra("MobileNo");
-            Date =intent.getStringExtra("Dob");
-            Gender =intent.getStringExtra("Gender");
-            CollegeName.getEditText().setText(intent.getStringExtra("CollegeName"));
-            CollegeCity.getEditText().setText(intent.getStringExtra("CollegeCity"));
-            CollegeState.getEditText().setText(intent.getStringExtra("CollegeState"));
-            CollegeCode.getEditText().setText(intent.getStringExtra("CollegeCode"));
-        }
-
+        Intent intent = getIntent();
+        final String Name = intent.getStringExtra("Name");
+        final String Email =intent.getStringExtra("Email");
+        final String Password =intent.getStringExtra("Password");
+        final String MobaleNo =intent.getStringExtra("MobaileNo");
+        final String Date =intent.getStringExtra("Date");
+        final String Gender =intent.getStringExtra("Gender");
 
         Toast.makeText(this,Name+"\n"+Email+"\n"+Password+"\n"+MobaleNo+"\n"+Date+"\n"+Gender,Toast.LENGTH_LONG).show();
 
-
+        CollegeName = findViewById(R.id.CollegeName);
+        CollegeCode = findViewById(R.id.CollegeCode);
+        CollegeState = findViewById(R.id.CollegeState);
+        CollegeCity = findViewById(R.id.CollegeCity);
 
         Next = findViewById(R.id.AdminCollegeNext);
         Next.setOnClickListener(new View.OnClickListener() {
@@ -75,21 +52,6 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
             }
         });
 
-        BtnAdminCollegePrev = findViewById(R.id.btn_admin_college_prev);
-        BtnAdminCollegePrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(AdminRegCollegeActivity.this,AdminRegistrationActivity.class);
-                intent1.putExtra("status","prev");
-                intent1.putExtra("Name",Name);
-                intent1.putExtra("Email",Email);
-                intent1.putExtra("Password",Password);
-                intent1.putExtra("MobaileNo",MobaleNo);
-                intent1.putExtra("Date",Date);
-                intent1.putExtra("Gender",Gender);
-                startActivity(intent1);
-            }
-        });
 
     }
 

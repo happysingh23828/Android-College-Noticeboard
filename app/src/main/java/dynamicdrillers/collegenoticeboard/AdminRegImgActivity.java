@@ -27,10 +27,12 @@ import java.util.Map;
 
 public class AdminRegImgActivity extends AppCompatActivity {
 
-    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin,BtnAdminRegImgPrev;
+    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin;
     ImageView CollegeLogo,AdminImg;
     private int PICK_IMAGE_REQUEST_ADMIN = 1;
     private int PICK_IMAGE_REQUEST_LOGO = 2;
+    private String KEY_IMAGE = "image";
+    private String KEY_NAME = "name";
     private Bitmap bitmapAdmin,bitmapLogo;
     private String Url = "http://192.168.1.8/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
 
@@ -44,8 +46,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
     String CollegeCode="";
     String CollegeState="";
     String CollegeCity="";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +63,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
         CollegeCode =intent.getStringExtra("CollegeCode");
         CollegeState =intent.getStringExtra("CollegeState");
         CollegeCity =intent.getStringExtra("CollegeCity");
-
-        Toast.makeText(this,Name+"\n"+Email+"\n"+Password+"\n"+MobaleNo+"\n"+Date+"\n"+Gender,Toast.LENGTH_LONG).show();
-
 
         AdminImgBtn = findViewById(R.id.AdminImgBtn);
         CollegeLogoBtn = findViewById(R.id.CollegeLogoBtn);
@@ -99,28 +96,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
                  }
              }
          });
-        BtnAdminRegImgPrev = findViewById(R.id.btn_reg_img_prev);
-        BtnAdminRegImgPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(AdminRegImgActivity.this,"c ndsm c",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AdminRegImgActivity.this,AdminRegCollegeActivity.class);
-
-                intent.putExtra("status","prev");
-                intent.putExtra("Email",Email);
-                intent.putExtra("Password",Name);
-                intent.putExtra("CollegeCode",CollegeCode);
-                intent.putExtra("Name",Name);
-                intent.putExtra("MobileNo",MobaleNo);
-                intent.putExtra("Dob",Date);
-                intent.putExtra("Gender",Gender);
-                intent.putExtra("CollegeName",CollegeName);
-                intent.putExtra("CollegeCity",CollegeCity);
-                intent.putExtra("CollegeState",CollegeState);
-
-                startActivity(intent);
-            }
-        });
 
     }
 

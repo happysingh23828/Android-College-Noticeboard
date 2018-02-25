@@ -41,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         img = findViewById(R.id.image);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Main2Activity.class));
 
-            }
-        });
     }
 }

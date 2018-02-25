@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class ShowNoticeByType extends AppCompatActivity {
 
-    public  static  final String GET_NOTICE_URL="http://192.168.1.8/Web-API-College-Noticeboard/WebServicesApi/StudentGetCollegeNotice.php";
+    public  static  final String GET_NOTICE_URL=Constants.WEB_API_URL+"StudentGetCollegeNotice.php";
     android.support.v7.widget.Toolbar toolbar;
     String Notice_type;
     String Notice_College_Code;
