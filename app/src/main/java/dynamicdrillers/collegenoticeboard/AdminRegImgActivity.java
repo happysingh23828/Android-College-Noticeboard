@@ -34,7 +34,7 @@ public class AdminRegImgActivity extends AppCompatActivity {
     private String KEY_IMAGE = "image";
     private String KEY_NAME = "name";
     private Bitmap bitmapAdmin,bitmapLogo;
-    private String Url = "http://192.168.1.8/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
+    private String Url = Constants.WEB_API_URL+"AdminRegistration.php";
 
     String Name="";
     String Email="";
