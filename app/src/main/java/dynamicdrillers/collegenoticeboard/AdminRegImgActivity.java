@@ -19,6 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,12 +30,14 @@ import java.util.Map;
 
 public class AdminRegImgActivity extends AppCompatActivity {
 
-    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin,BtnAdminRegImgPrev;
+    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin;
     ImageView CollegeLogo,AdminImg;
     private int PICK_IMAGE_REQUEST_ADMIN = 1;
     private int PICK_IMAGE_REQUEST_LOGO = 2;
+    private String KEY_IMAGE = "image";
+    private String KEY_NAME = "name";
     private Bitmap bitmapAdmin,bitmapLogo;
-    private String Url = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
+    private String Url = Constants.WEB_API_URL+"AdminRegistration.php";
 
     String Name="";
     String Email="";
@@ -44,8 +49,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
     String CollegeCode="";
     String CollegeState="";
     String CollegeCity="";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
         CollegeCode =intent.getStringExtra("CollegeCode");
         CollegeState =intent.getStringExtra("CollegeState");
         CollegeCity =intent.getStringExtra("CollegeCity");
-
-        Toast.makeText(this,Name+"\n"+Email+"\n"+Password+"\n"+MobaleNo+"\n"+Date+"\n"+Gender,Toast.LENGTH_LONG).show();
-
 
         AdminImgBtn = findViewById(R.id.AdminImgBtn);
         CollegeLogoBtn = findViewById(R.id.CollegeLogoBtn);
@@ -99,28 +99,6 @@ public class AdminRegImgActivity extends AppCompatActivity {
                  }
              }
          });
-        BtnAdminRegImgPrev = findViewById(R.id.btn_reg_img_prev);
-        BtnAdminRegImgPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(AdminRegImgActivity.this,"c ndsm c",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AdminRegImgActivity.this,AdminRegCollegeActivity.class);
-
-                intent.putExtra("status","prev");
-                intent.putExtra("Email",Email);
-                intent.putExtra("Password",Name);
-                intent.putExtra("CollegeCode",CollegeCode);
-                intent.putExtra("Name",Name);
-                intent.putExtra("MobileNo",MobaleNo);
-                intent.putExtra("Dob",Date);
-                intent.putExtra("Gender",Gender);
-                intent.putExtra("CollegeName",CollegeName);
-                intent.putExtra("CollegeCity",CollegeCity);
-                intent.putExtra("CollegeState",CollegeState);
-
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -171,8 +149,25 @@ public class AdminRegImgActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
                         loading.dismiss();
-                        //Showing toast message of the response
-                        Toast.makeText(AdminRegImgActivity.this, s, Toast.LENGTH_LONG).show();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if(!jsonObject.getBoolean("error"))
+                            {
+                                Toast.makeText(AdminRegImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(AdminRegImgActivity.this,FacultyDashboard.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 },

@@ -2,6 +2,7 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -21,7 +22,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
     private TextInputLayout Name,Email,Passwors,MobaileNo;
     private Button AdminNext;
 
-    private String Url = "http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/AdminRegistration.php";
+    private String Url = Constants.WEB_API_URL+"AdminRegistration.php";
 
     private DatePicker datePicker;
     private Calendar calendar;

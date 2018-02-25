@@ -21,32 +21,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        else
+        {
+            Intent intent = new Intent(MainActivity.this,FacultyDashboard.class);
+            startActivity(intent);
+            finish();
+        }
 
-        button = findViewById(R.id.Register);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,AdminRegistrationActivity.class);
-                intent.putExtra("status","next");
-                startActivity(intent);
-            }
-        });
-        BtnMainLogin = findViewById(R.id.btn_main_login);
-        BtnMainLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        img = findViewById(R.id.image);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Main2Activity.class));
 
-            }
-        });
+
+
+
     }
 }

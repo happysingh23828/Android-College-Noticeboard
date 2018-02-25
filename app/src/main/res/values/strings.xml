@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">College Noticeboard</string>
+    <string name="applicationname">ApplicationName</string>
+    <string name="collegename">CollegeName</string>
+    <string name="CollegeAddress">CollegeAddress</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">logout</string>
+    <string name="aboutus">About App</string>
+    <string name="feedback">Give Us Feedback</string>
+    <string name="share">Share This App</string>
+    <string name="profilename">ProfileName</string>
+    <string name="add_notice">Add Notice</string>
+    <string name="viewnotice">View Notice</string>
+    <string name="CollegeNotice">College Notice</string>
+    <string name="EventsNotice">Events Notice</string>
+    <string name="deptnotice">Dept Notice</string>
 </resources>
