@@ -2,7 +2,6 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -62,6 +61,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
             Passwors.getEditText().setText(PasswordPre);
             MobaileNo.getEditText().setText(MobaleNoPre);
             Date.setText(DatePre);
+
             if(GenderPre.equals("Male")){
                 Gender.check(R.id.Male);
                 Gender_s = "Male";

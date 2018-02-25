@@ -24,6 +24,7 @@
          <activity android:name=".AdminRegCollegeActivity" />
         <activity android:name=".AdminRegImgActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".FacultyRegistrationActivity" />
         <activity android:name=".FacultyDashboard">
 
 

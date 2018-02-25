@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class FacultyDashboard extends AppCompatActivity {
 
+    Button button;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -26,6 +28,15 @@ public class FacultyDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_dashboard);
+
+
+        button = findViewById(R.id.a);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FacultyDashboard.this,FacultyRegistrationActivity.class));
+            }
+        });
 
     //Setting Toolbar
     toolbar = (Toolbar)findViewById(R.id.facultyMainToolbar);
