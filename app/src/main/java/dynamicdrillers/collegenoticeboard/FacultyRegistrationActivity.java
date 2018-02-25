@@ -42,7 +42,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     CheckBox Tg;
     Button BtnRegister;
     String Type[] = {"1","2","3","4","5","6","7","8"};
-    String Tg_s="0",Url="http://192.168.56.1/Web-API-College-Noticeboard/WebServicesApi/FacultyRegistration.php",Gender_s="",TgSem_s="false";
+    String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
 
 
     @Override
@@ -188,7 +188,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
                 map.put("MobileNo","9999999999");
                 map.put("Dob","2018-1-1");
-                map.put("CollegeCode","2018-1-1");
+                map.put("CollegeCode",CollegeCode);
 
                 return  map;
 
