@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                     user_detail.getString("collegestate"));
 
 
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(),FacultyDashboard.class));
                         finish();
                         Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
 

@@ -19,6 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -146,8 +149,25 @@ public class AdminRegImgActivity extends AppCompatActivity {
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
                         loading.dismiss();
-                        //Showing toast message of the response
-                        Toast.makeText(AdminRegImgActivity.this, s, Toast.LENGTH_LONG).show();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if(!jsonObject.getBoolean("error"))
+                            {
+                                Toast.makeText(AdminRegImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(AdminRegImgActivity.this,FacultyDashboard.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
 
                     }
                 },
