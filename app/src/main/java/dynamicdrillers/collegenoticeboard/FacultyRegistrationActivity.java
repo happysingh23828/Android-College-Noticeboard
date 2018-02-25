@@ -132,7 +132,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(!jsonObject.getBoolean("error"))
+                            if(jsonObject.getBoolean("error"))
                             {
                                 Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
@@ -188,7 +188,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
                 map.put("MobileNo","9999999999");
                 map.put("Dob","2018-1-1");
-                map.put("CollegeCode","2018-1-1");
+                map.put("CollegeCode",CollegeCode);
 
                 return  map;
 
