@@ -155,6 +155,27 @@ public class FacultyDashboard extends AppCompatActivity {
                         finish();
                         break;
 
+                    case R.id.Students:
+                        Toast.makeText(getBaseContext(), "Under Your Students Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case  R.id.HeadOfDept:
+                        Toast.makeText(getBaseContext(), "Add HOD Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.your_notices:
+                        Toast.makeText(getBaseContext(), "Your Notices Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case  R.id.dept_notices:
+                        Toast.makeText(getBaseContext(), "Department Notice Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.Faculties:
+                        Toast.makeText(getBaseContext(), "Faculties Clicked", Toast.LENGTH_SHORT).show();
+                        break;
+
+
                     case R.id.feedback:
                         Toast.makeText(getBaseContext(), "Feedback Clicked", Toast.LENGTH_SHORT).show();
                         break;
