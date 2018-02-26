@@ -107,10 +107,12 @@ public class LoginActivity extends AppCompatActivity {
 
                         else if(SelectedType.equals("Other"))
                             sharedPreferenceHelper.otherUser(user_detail.getString("role")
-                            ,user_detail.getString("personprofile"));
+                            ,user_detail.getString("personprofile"),user_detail.getString("dept")
+                            ,user_detail.getInt("tgflag")
+                            ,user_detail.getString("tgsem"));
 
                         else
-                            sharedPreferenceHelper.studentUser(user_detail.getString("profilephoto"),
+                            sharedPreferenceHelper.adminUser(user_detail.getString("profilephoto"),
                                     user_detail.getString("collegelogo"),
                                     user_detail.getString("collegename"),
                                     user_detail.getString("collegecity"),

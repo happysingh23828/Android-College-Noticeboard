@@ -2,6 +2,7 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
     String[] noticename1,noticename2;
     int[] noticeicons1,noticeicons2;
 
+
     public DashboardNoticeAdaptor( String[] noticename1,String[] noticename2,int[] noticeicons1,int[] noticeicons2) {
         this.noticeicons1 = noticeicons1;
         this.noticename1 = noticename1;
@@ -32,6 +34,8 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
     @Override
     public DashboardNoticeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+
+
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.single_noticeboard_icons,parent,false);
         return new DashboardNoticeViewHolder(view);
@@ -39,7 +43,21 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
 
     @Override
     public void onBindViewHolder(final DashboardNoticeViewHolder holder, final int position) {
+        SharedpreferenceHelper sharedpreferenceHelper  = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
+        String checkTypeFlag =  sharedpreferenceHelper.getType();
 
+        if(position==3)
+        {
+            if(checkTypeFlag.equals("student"))
+            {
+                holder.cardViewright.setVisibility(View.GONE);
+            }
+            else
+            {
+                holder.cardViewleft.setVisibility(View.GONE);
+                holder.cardViewright.setVisibility(View.GONE);
+            }
+        }
 
         holder.lefticon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +65,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
                 Intent intent = new Intent(v.getContext(),ShowNoticeByType.class);
                 intent.putExtra("NoticeCollegeCode","0536");
                 intent.putExtra("NoticeType",noticename1[position]);
+
                 v.getContext().startActivity(intent);
             }
         });
@@ -77,6 +96,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
     public  class  DashboardNoticeViewHolder extends  RecyclerView.ViewHolder
     {
         CircleImageView imageView1,imageView2;
+        CardView cardViewleft,cardViewright;
         TextView textView1,textView2;
         LinearLayout lefticon,righticon;
 
@@ -88,6 +108,8 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
             textView2 = (TextView)itemView.findViewById(R.id.noticename2);
             lefticon = (LinearLayout)itemView.findViewById(R.id.left_notice_icon_root_layout);
             righticon = (LinearLayout)itemView.findViewById(R.id.right_notice_icon_root_layout);
+            cardViewleft = (CardView)itemView.findViewById(R.id.leftcardview);
+            cardViewright = (CardView)itemView.findViewById(R.id.rightcardview);
         }
 
 

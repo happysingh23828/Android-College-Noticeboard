@@ -11,24 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" >
-
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".AdminRegistrationActivity" />
-         <activity android:name=".AdminRegCollegeActivity" />
+        <activity android:name=".AdminRegCollegeActivity" />
         <activity android:name=".AdminRegImgActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FacultyRegistrationActivity" />
-        <activity android:name=".FacultyDashboard">
-
-
-        </activity>
+        <activity android:name=".FacultyDashboard"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -37,7 +32,10 @@
         <activity
             android:name=".ShowNoticeByType"
             android:parentActivityName=".FacultyDashboard" />
-        <activity android:name=".NoticePostShow" android:parentActivityName=".FacultyDashboard"></activity>
+        <activity
+            android:name=".NoticePostShow"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

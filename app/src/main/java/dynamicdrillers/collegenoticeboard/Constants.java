@@ -11,6 +11,7 @@ public class Constants {
     public static  final  String STUDENT_PROFILE_STORAGE_URL=BASE_URL+"Storage/StudentProfiles/";
     public static  final  String PERSON_PROFILE_STORAGE_URL=BASE_URL+"Storage/PersonProfiles/";
     public static  final  String COLLEGE_NOTICE_STORAGE_URL=BASE_URL+"Storage/CollegeNotice/";
+    public static  final  String COLLEGE_LOGO_STORAGE_URL=BASE_URL+"Storage/CollegeIcons/";
 
 
 }

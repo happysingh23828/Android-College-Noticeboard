@@ -26,11 +26,11 @@
             android:layout_gravity="bottom">
 
             <TextView
-                android:id="@+id/navigation_profile_name"
+                android:id="@+id/navitext1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.8"
-                android:text="@string/profilename"
+                android:text="@string/aboutus"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -38,11 +38,11 @@
                 />
 
             <TextView
-                android:id="@+id/navigation_profile_dept"
+                android:id="@+id/navitext2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/profilename"
+                android:text="@string/aboutus"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -51,11 +51,11 @@
                 />
 
             <TextView
-                android:id="@+id/navigation_profile_email_or_enrollment"
+                android:id="@+id/navitext3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"
-                android:text="@string/profilename"
+                android:text="@string/aboutus"
                 android:gravity="center"
                 android:layout_marginBottom="20dp"
                 android:textStyle="bold"
