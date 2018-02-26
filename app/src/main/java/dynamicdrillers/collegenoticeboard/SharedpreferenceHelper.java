@@ -207,4 +207,10 @@ public class SharedpreferenceHelper {
         return sharedPreference.getString("collegecode",null);
     }
 
+    public  String getTgEmail()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("tgemail","");
+    }
+
 }

@@ -29,9 +29,10 @@ import java.util.Map;
 
 public class ShowNoticeByType extends AppCompatActivity {
 
-    public  static  final String GET_NOTICE_URL=Constants.WEB_API_URL+"StudentGetCollegeNotice.php";
+    public  static  final String GET_COLLEGE_NOTICE_URL=Constants.WEB_API_URL+"StudentGetCollegeNotice.php";
+    public  static  final String GET_TG_NOTICE_URL=Constants.WEB_API_URL+"StudentGetTgNotice.php";
     android.support.v7.widget.Toolbar toolbar;
-    String Notice_type;
+    String Notice_type,Notice_Tg_Email;
     String Notice_College_Code;
     TextView noticeTitle;
     RecyclerView recyclerView;
@@ -45,6 +46,7 @@ public class ShowNoticeByType extends AppCompatActivity {
 
 
         //getting Notice Type And College Code From Another Activity
+        Notice_Tg_Email = getIntent().getStringExtra("tgemail");
         Notice_type = getIntent().getStringExtra("NoticeType");
         Notice_College_Code = getIntent().getStringExtra("NoticeCollegeCode");
 
@@ -58,7 +60,15 @@ public class ShowNoticeByType extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
 
-        showNotice();
+        if(Notice_Tg_Email.equals("notg"))
+        {
+            showCollegeNotice();
+        }
+        else
+        {
+            showTgNotice();
+        }
+
 
         recyclerView = (RecyclerView)findViewById(R.id.noticelist_recylerview);
         noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
@@ -68,9 +78,59 @@ public class ShowNoticeByType extends AppCompatActivity {
 
     }
 
-    private void showNotice() {
-         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST, GET_NOTICE_URL, new Response.Listener<String>() {
+    private void showTgNotice() {
+
+        StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST, GET_TG_NOTICE_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(getBaseContext(),response,Toast.LENGTH_SHORT).show();
+                try {
+                    JSONArray NoticeArrray = new JSONArray(response);
+                    int JsonArrayLength = NoticeArrray.length();
+                    for (int i  =0;i<NoticeArrray.length();i++)
+                    {
+                        JSONObject singleNotice =NoticeArrray.getJSONObject(i);
+                        Notice notice = new Notice(singleNotice.getString("id")
+                                ,singleNotice.getString("authorname")
+                                ,singleNotice.getString("title")
+                                ,singleNotice.getString("string")
+                                ,singleNotice.getString("time")
+                                ,singleNotice.getString("image")
+                                ,singleNotice.getString("authoremail"));
+
+                        noticelist.add(notice);
+
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),"There Is No Tg Notice..",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> param = new HashMap<>();
+                param.put("TgEmail",Notice_Tg_Email);
+                return param;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
+
+    }
+
+    private void showCollegeNotice() {
+        StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST,GET_COLLEGE_NOTICE_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -115,7 +175,7 @@ public class ShowNoticeByType extends AppCompatActivity {
             }
         };
 
-        requestQueue.add(stringRequest);
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
 }

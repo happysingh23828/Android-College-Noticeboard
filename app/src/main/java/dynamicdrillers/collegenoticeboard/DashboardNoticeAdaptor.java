@@ -43,7 +43,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
 
     @Override
     public void onBindViewHolder(final DashboardNoticeViewHolder holder, final int position) {
-        SharedpreferenceHelper sharedpreferenceHelper  = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
+        final SharedpreferenceHelper sharedpreferenceHelper  = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
         String checkTypeFlag =  sharedpreferenceHelper.getType();
 
         if(position==3)
@@ -63,6 +63,14 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),ShowNoticeByType.class);
+                if(position==3)
+                {
+
+                    intent.putExtra("tgemail",sharedpreferenceHelper.getTgEmail());
+                }
+                else {
+                    intent.putExtra("tgemail","notg");
+                }
                 intent.putExtra("NoticeCollegeCode","0536");
                 intent.putExtra("NoticeType",noticename1[position]);
 
@@ -74,6 +82,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),ShowNoticeByType.class);
+                intent.putExtra("tgemail","notg");
                 intent.putExtra("NoticeCollegeCode","0536");
                 intent.putExtra("NoticeType",noticename2[position]);
                 v.getContext().startActivity(intent);
