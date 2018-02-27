@@ -1,7 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
-import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -30,8 +29,8 @@ public class FacultyDashboard extends AppCompatActivity {
     ImageView navigationicon;
     RecyclerView recyclerView;
     Menu menu;
-    ImageView ProfileIcon, NavigationProfileImage, CollegeLogo;
-    TextView NavigationText1, NavigationText2, NavigationText3, CollegeName, CollegeAddress;
+    ImageView ProfileIcon, NavigationProfileImage,CollegeLogo;
+    TextView NavigationText1, NavigationText2, NavigationText3,CollegeName,CollegeAddress;
 
     SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(getBaseContext());
 
@@ -50,14 +49,32 @@ public class FacultyDashboard extends AppCompatActivity {
         });
 
 
-        //Setting college Details In Main toolbar
-        CollegeLogo = (ImageView) findViewById(R.id.toolbar_college_logo);
-        CollegeName = (TextView) findViewById(R.id.toolbar_college_name);
-        CollegeAddress = (TextView) findViewById(R.id.toolbar_college_address);
+        button = findViewById(R.id.a);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FacultyDashboard.this, StudentRegistrationActivity.class));
+            }
+        });
 
-        Picasso.with(getBaseContext()).load(Constants.COLLEGE_LOGO_STORAGE_URL + sharedPreferenceHelper.getCollegeLogoName()).into(CollegeLogo);
+        button = findViewById(R.id.b);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FacultyDashboard.this, StudentProfileActivity.class));
+            }
+        });
+
+
+        //Setting college Details In Main toolbar
+        CollegeLogo = (ImageView)findViewById(R.id.toolbar_college_logo);
+        CollegeName = (TextView)findViewById(R.id.toolbar_college_name);
+        CollegeAddress = (TextView)findViewById(R.id.toolbar_college_address);
+
+        Picasso.with(getBaseContext()).load(Constants.COLLEGE_LOGO_STORAGE_URL+sharedPreferenceHelper.getCollegeLogoName()).into(CollegeLogo);
         CollegeAddress.setText(sharedPreferenceHelper.getCollegeAddress());
         CollegeName.setText(sharedPreferenceHelper.getCollegeAddress());
+
 
 
         //Setting Toolbar
@@ -115,7 +132,7 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.your_notices).setVisible(false);
         } else if (sharedPreferenceHelper.getType().equals("admin")) {
 
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedPreferenceHelper.getAdminProfileName())
+           Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedPreferenceHelper.getAdminProfileName())
                     .into(NavigationProfileImage);
 
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
@@ -126,17 +143,12 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);
-        } else {
+        }
+        else{
             Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedPreferenceHelper.getHodProfileName())
                     .into(NavigationProfileImage);
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
-
-            menu.findItem(R.id.HeadOfDept).setVisible(false);
-            menu.findItem(R.id.Students).setVisible(false);
-            menu.findItem(R.id.your_notices).setVisible(false);
-
-
         }
 
         //checking Which Navigationitem Selected
@@ -145,8 +157,7 @@ public class FacultyDashboard extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.editProfile:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),EditProfile.class));
+                        Toast.makeText(getBaseContext(), "Editprofile Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.ProfileLogout:
@@ -159,43 +170,35 @@ public class FacultyDashboard extends AppCompatActivity {
                         break;
 
                     case R.id.Students:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),StudentList.class));
+                        Toast.makeText(getBaseContext(), "Under Your Students Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
-                    case R.id.HeadOfDept:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(FacultyDashboard.this, HodRgistrationActivity.class));
+                    case  R.id.HeadOfDept:
+                        Toast.makeText(getBaseContext(), "Add HOD Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.your_notices:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),YourNotices.class));
+                        Toast.makeText(getBaseContext(), "Your Notices Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
-                    case R.id.dept_notices:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),YourNotices.class));
+                    case  R.id.dept_notices:
+                        Toast.makeText(getBaseContext(), "Department Notice Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.Faculties:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(FacultyDashboard.this, FacultyRegistrationActivity.class));
+                        Toast.makeText(getBaseContext(), "Faculties Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
 
                     case R.id.feedback:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),FeedBack.class));
+                        Toast.makeText(getBaseContext(), "Feedback Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.aboutus:
-                        drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),AboutApp.class));
+                        Toast.makeText(getBaseContext(), "Aboutus Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.sharethisapp:
-                        drawerLayout.closeDrawer(Gravity.START);
                         Toast.makeText(getBaseContext(), "Share Clicked", Toast.LENGTH_SHORT).show();
                         break;
 
@@ -206,10 +209,10 @@ public class FacultyDashboard extends AppCompatActivity {
             }
         });
 
-        String noticenames1[] = {"College", "Scholarship", "Events", "Tg"};
-        String noticenames2[] = {"Accounts", "Tnp", "Dept", "Tg"};
-        int noticeicons1[] = {R.drawable.collegenotice, R.drawable.schlorship, R.drawable.events, R.drawable.tg};
-        int noticeicons2[] = {R.drawable.viewnotice, R.drawable.tnp, R.drawable.dept, R.drawable.tg};
+        String noticenames1[] = {"College", "Scholarship", "Events","Tg"};
+        String noticenames2[] = {"Accounts", "Tnp", "Dept","Tg"};
+        int noticeicons1[] = {R.drawable.collegenotice, R.drawable.schlorship, R.drawable.events,R.drawable.tg};
+        int noticeicons2[] = {R.drawable.viewnotice, R.drawable.tnp, R.drawable.dept,R.drawable.tg};
         recyclerView = (RecyclerView) findViewById(R.id.notice_recylerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new DashboardNoticeAdaptor(noticenames1, noticenames2, noticeicons1, noticeicons2));
