@@ -36,7 +36,13 @@
             android:name=".NoticePostShow"
             android:parentActivityName=".FacultyDashboard" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".HodRgistrationActivity"></activity>
+        <activity android:name=".HodRgistrationActivity" />
+        <activity android:name=".StudentList" />
+        <activity android:name=".YourNotices" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".AboutApp" />
+        <activity android:name=".FeedBack" />
+        <activity android:name=".HodList"></activity>
     </application>
 
 </manifest>

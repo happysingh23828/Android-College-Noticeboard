@@ -76,8 +76,7 @@ public class ShowNoticeByType extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(getBaseContext(),response,Toast.LENGTH_SHORT).show();
-                try {
+               try {
                     JSONArray NoticeArrray = new JSONArray(response);
                     int JsonArrayLength = NoticeArrray.length();
                     for (int i  =0;i<NoticeArrray.length();i++)
@@ -90,7 +89,6 @@ public class ShowNoticeByType extends AppCompatActivity {
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
                                 ,singleNotice.getString("authoremail"));
-
                         noticelist.add(notice);
 
                     }

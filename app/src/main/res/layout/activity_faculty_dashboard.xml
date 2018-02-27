@@ -16,10 +16,7 @@
         >
         <include layout="@layout/maintoolbar" android:id="@+id/facultyMainToolbar"></include>
 
-        <Button
-            android:id="@+id/a"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/notice_recylerview"

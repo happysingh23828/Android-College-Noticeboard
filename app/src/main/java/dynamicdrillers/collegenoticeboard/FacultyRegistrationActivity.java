@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,6 +36,7 @@ import java.util.Map;
 
 public class FacultyRegistrationActivity extends AppCompatActivity {
 
+    android.support.v7.widget.Toolbar toolbar;
     TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole,TxtInputlayloutDept;
     Spinner SpnSem;
     RadioGroup Gender;
@@ -64,6 +66,8 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
         SpnSem = findViewById(R.id.reg_faculty_sem);
 
         BtnRegister = findViewById(R.id.reg_faculty_register);
+
+        toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);
 
         Tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

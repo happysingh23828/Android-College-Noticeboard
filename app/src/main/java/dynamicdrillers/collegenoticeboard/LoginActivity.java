@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                                 user_detail.getString("sem"),
                                 user_detail.getString("tgemail"),
                                 user_detail.getString("enrollment"));
+
                         else if(SelectedType.equals("Hod")){
                             sharedPreferenceHelper.hodUser(user_detail.getString("personphoto"),
                                     user_detail.getString("dept")
