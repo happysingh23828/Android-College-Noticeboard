@@ -11,15 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,60 +31,46 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class FacultyRegistrationActivity extends AppCompatActivity {
+public class StudentRegistrationActivity extends AppCompatActivity {
 
-    android.support.v7.widget.Toolbar toolbar;
-    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole,TxtInputlayloutDept;
-    Spinner SpnSem;
+    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutEnrollment;
     RadioGroup Gender;
     RadioButton RadioMale,RadioFemale;
-    CheckBox Tg;
     Button BtnRegister;
+    Spinner SpnSem;
+    String Url=Constants.WEB_API_URL+"FacultyStudentRegistration.php",Gender_s="",Sem_s;
     String Type[] = {"1","2","3","4","5","6","7","8"};
-    String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faculty_registration);
+        setContentView(R.layout.activity_student_registration);
 
-        TxtInputlayloutName = findViewById(R.id.reg_faculty_name);
-        TxtInputlayloutEmail = findViewById(R.id.reg_faculty_email);
-        TxtInputlayloutPassword = findViewById(R.id.reg_faculty_password);
-        TxtInputlayloutRole = findViewById(R.id.reg_faculty_role);
-        TxtInputlayloutDept = findViewById(R.id.reg_faculty_department);
+        TxtInputlayloutName = findViewById(R.id.reg_student_name);
+        TxtInputlayloutEmail = findViewById(R.id.reg_student_email);
+        TxtInputlayloutPassword = findViewById(R.id.reg_student_password);
+        TxtInputlayloutEnrollment = findViewById(R.id.reg_stdent_enrollment);
 
-        Gender = findViewById(R.id.reg_faculty_gender);
-        RadioMale = findViewById(R.id.reg_faculty_male);
-        RadioFemale = findViewById(R.id.reg_faculty_female);
+        Gender = findViewById(R.id.reg_student_gender);
+        RadioMale = findViewById(R.id.reg_student_male);
+        RadioFemale = findViewById(R.id.reg_student_female);
 
-        Tg = findViewById(R.id.reg_faculty_tg);
-        SpnSem = findViewById(R.id.reg_faculty_sem);
+        SpnSem = findViewById(R.id.reg_student_sem);
 
-        BtnRegister = findViewById(R.id.reg_faculty_register);
+        BtnRegister = findViewById(R.id.reg_student_register);
 
-        toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);
-
-        Tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    SpnSem.setEnabled(true);
-                    SpnSem.setClickable(true);
-                    Tg_s="1";
-                }
-                else{
-                    SpnSem.setEnabled(false);
-                    SpnSem.setClickable(false);
-                    Tg_s="0";
-                    TgSem_s = "false";
-                }
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selectedId=Gender.getCheckedRadioButtonId();
+                RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
+                Gender_s = radioSexButton.getText().toString();
+                Toast.makeText(StudentRegistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
             }
         });
 
-        SpnSem.setEnabled(false);
-        SpnSem.setClickable(false);
+
         SpnSem.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
         SpnSem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -95,7 +78,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 LinearLayout linearLayout = (LinearLayout) SpnSem.getSelectedView();
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.spn));
-                TgSem_s = textView.getText().toString();
+                Sem_s = textView.getText().toString();
             }
 
             @Override
@@ -104,24 +87,12 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
             }
         });
 
-        Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selectedId=Gender.getCheckedRadioButtonId();
-                RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
-                Gender_s = radioSexButton.getText().toString();
-                Toast.makeText(FacultyRegistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 upload();
             }
         });
-
 
     }
 
@@ -136,15 +107,15 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(jsonObject.getBoolean("error"))
+                            if(!jsonObject.getBoolean("error"))
                             {
-                                Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
+                                Intent intent = new Intent(StudentRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
                             }
                             else
                             {
-                                Toast.makeText(FacultyRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(StudentRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
@@ -161,7 +132,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(FacultyRegistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(StudentRegistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -179,17 +150,19 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                 SharedPreferences sharedPreference = getSharedPreferences(SharedpreferenceHelper.SharedprefenceName, Context.MODE_PRIVATE);
                 String CollegeCode = sharedPreference.getString("collegecode", null);
+                String dept = sharedPreference.getString("dept", null);
+                String tgemail = sharedPreference.getString("email", null);
 
 
                 map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
-                map.put("Role",TxtInputlayloutRole.getEditText().getText().toString());
-                map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
                 map.put("Gender",Gender_s);
-                map.put("TgFlag",Tg_s);
-                map.put("TgSem",TgSem_s);
-                map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
+                map.put("Sem",Sem_s);
+                map.put("Dept",dept);
+                map.put("TgEmail",tgemail);
+                map.put("Enrollment",TxtInputlayloutEnrollment.getEditText().getText().toString());
+                map.put("StudentPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
                 map.put("MobileNo","9999999999");
                 map.put("Dob","2018-1-1");
                 map.put("CollegeCode",CollegeCode);
@@ -210,6 +183,4 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
     }
 
-
 }
-

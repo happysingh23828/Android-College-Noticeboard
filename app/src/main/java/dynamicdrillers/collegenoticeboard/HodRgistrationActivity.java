@@ -8,18 +8,10 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,75 +26,31 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class FacultyRegistrationActivity extends AppCompatActivity {
+public class HodRgistrationActivity extends AppCompatActivity {
 
-    android.support.v7.widget.Toolbar toolbar;
-    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole,TxtInputlayloutDept;
-    Spinner SpnSem;
+    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutDept;
     RadioGroup Gender;
     RadioButton RadioMale,RadioFemale;
-    CheckBox Tg;
     Button BtnRegister;
-    String Type[] = {"1","2","3","4","5","6","7","8"};
-    String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
+    String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faculty_registration);
+        setContentView(R.layout.activity_hod_rgistration);
 
-        TxtInputlayloutName = findViewById(R.id.reg_faculty_name);
-        TxtInputlayloutEmail = findViewById(R.id.reg_faculty_email);
-        TxtInputlayloutPassword = findViewById(R.id.reg_faculty_password);
-        TxtInputlayloutRole = findViewById(R.id.reg_faculty_role);
-        TxtInputlayloutDept = findViewById(R.id.reg_faculty_department);
+        TxtInputlayloutName = findViewById(R.id.reg_hod_name);
+        TxtInputlayloutEmail = findViewById(R.id.reg_hod_email);
+        TxtInputlayloutPassword = findViewById(R.id.reg_hod_password);
+        TxtInputlayloutDept = findViewById(R.id.reg_hod_department);
 
-        Gender = findViewById(R.id.reg_faculty_gender);
-        RadioMale = findViewById(R.id.reg_faculty_male);
-        RadioFemale = findViewById(R.id.reg_faculty_female);
+        Gender = findViewById(R.id.reg_hod_gender);
+        RadioMale = findViewById(R.id.reg_hod_male);
+        RadioFemale = findViewById(R.id.reg_hod_female);
 
-        Tg = findViewById(R.id.reg_faculty_tg);
-        SpnSem = findViewById(R.id.reg_faculty_sem);
+        BtnRegister = findViewById(R.id.reg_hod_register);
 
-        BtnRegister = findViewById(R.id.reg_faculty_register);
-
-        toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);
-
-        Tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    SpnSem.setEnabled(true);
-                    SpnSem.setClickable(true);
-                    Tg_s="1";
-                }
-                else{
-                    SpnSem.setEnabled(false);
-                    SpnSem.setClickable(false);
-                    Tg_s="0";
-                    TgSem_s = "false";
-                }
-            }
-        });
-
-        SpnSem.setEnabled(false);
-        SpnSem.setClickable(false);
-        SpnSem.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
-        SpnSem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                LinearLayout linearLayout = (LinearLayout) SpnSem.getSelectedView();
-                TextView textView = linearLayout.findViewById(R.id.txt_type);
-                textView.setTextColor(getResources().getColor(R.color.spn));
-                TgSem_s = textView.getText().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -110,10 +58,9 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 int selectedId=Gender.getCheckedRadioButtonId();
                 RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
                 Gender_s = radioSexButton.getText().toString();
-                Toast.makeText(FacultyRegistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(HodRgistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
             }
         });
-
 
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +68,6 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 upload();
             }
         });
-
-
     }
 
     private void upload() {
@@ -136,15 +81,15 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(jsonObject.getBoolean("error"))
+                            if(!jsonObject.getBoolean("error"))
                             {
-                                Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
+                                Intent intent = new Intent(HodRgistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
                             }
                             else
                             {
-                                Toast.makeText(FacultyRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(HodRgistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
@@ -161,7 +106,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(FacultyRegistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(HodRgistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
@@ -184,13 +129,10 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
-                map.put("Role",TxtInputlayloutRole.getEditText().getText().toString());
                 map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
                 map.put("Gender",Gender_s);
-                map.put("TgFlag",Tg_s);
-                map.put("TgSem",TgSem_s);
                 map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
-                map.put("MobileNo","9999999999");
+                map.put("MobileNo","9999999");
                 map.put("Dob","2018-1-1");
                 map.put("CollegeCode",CollegeCode);
 
@@ -210,6 +152,4 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
     }
 
-
 }
-
