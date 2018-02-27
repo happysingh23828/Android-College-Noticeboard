@@ -1,7 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
-import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -46,6 +45,23 @@ public class FacultyDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(FacultyDashboard.this, ProfileActivity.class));
 
+            }
+        });
+
+
+        button = findViewById(R.id.a);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FacultyDashboard.this, StudentRegistrationActivity.class));
+            }
+        });
+
+        button = findViewById(R.id.b);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FacultyDashboard.this, StudentProfileActivity.class));
             }
         });
 
