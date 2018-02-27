@@ -109,6 +109,20 @@ public class SharedpreferenceHelper {
     }
 
 
+    public boolean hodUser(String PersonProfile,String Dept) {
+
+        SharedPreferences sharedPreference = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreference.edit();
+        editor.putString("dept",Dept);
+        editor.putString("hodProfile",PersonProfile);
+
+
+        editor.apply();
+
+        return true;
+    }
+
+
     public String getName() {
         SharedPreferences sharedPreference = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
 
@@ -192,6 +206,12 @@ public class SharedpreferenceHelper {
     {
         SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
         return sharedPreference.getString("profilephoto",null);
+    }
+
+    public  String getHodProfileName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("hodProfile",null);
     }
 
     public  String getCollegeLogoName()

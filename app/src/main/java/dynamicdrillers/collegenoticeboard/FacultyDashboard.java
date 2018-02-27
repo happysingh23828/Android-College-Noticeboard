@@ -53,7 +53,7 @@ public class FacultyDashboard extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FacultyDashboard.this, FacultyRegistrationActivity.class));
+                startActivity(new Intent(FacultyDashboard.this, HodRgistrationActivity.class));
             }
         });
 
@@ -135,6 +135,12 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);
+        }
+        else{
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedPreferenceHelper.getHodProfileName())
+                    .into(NavigationProfileImage);
+            NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
+            NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
         }
 
         //checking Which Navigationitem Selected

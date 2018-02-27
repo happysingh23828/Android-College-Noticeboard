@@ -1,27 +1,21 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +43,6 @@ public class ShowNoticeByType extends AppCompatActivity {
         Notice_Tg_Email = getIntent().getStringExtra("tgemail");
         Notice_type = getIntent().getStringExtra("NoticeType");
         Notice_College_Code = getIntent().getStringExtra("NoticeCollegeCode");
-
-
         // Setting Toolbar......
         noticeTitle = (TextView)findViewById(R.id.notice_name);
         toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);

@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner SpnLoginType;
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
-    String Type[] = {"Student","Admin","Other"};
+    String Type[] = {"Student","Admin","Hod","Other"};
     String SelectedType="";
 
     @Override
@@ -54,6 +54,10 @@ public class LoginActivity extends AppCompatActivity {
                 if(textView.getText().equals("Admin")){
                     SelectedType = "Admin";
                     URL_LOGIN = Constants.WEB_API_URL+"AdminLogin.php";
+                }
+                else if(textView.getText().equals("Hod")){
+                    SelectedType = "Hod";
+                    URL_LOGIN = Constants.WEB_API_URL+"HodLogin.php";
                 }
                 else if(textView.getText().equals("Student")){
                     SelectedType = "Student";
@@ -104,6 +108,11 @@ public class LoginActivity extends AppCompatActivity {
                                 user_detail.getString("sem"),
                                 user_detail.getString("tgemail"),
                                 user_detail.getString("enrollment"));
+                        else if(SelectedType.equals("Hod")){
+                            sharedPreferenceHelper.hodUser(user_detail.getString("personphoto"),
+                                    user_detail.getString("dept")
+                                   );
+                        }
 
                         else if(SelectedType.equals("Other"))
                             sharedPreferenceHelper.otherUser(user_detail.getString("role")

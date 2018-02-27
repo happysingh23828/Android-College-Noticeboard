@@ -23,7 +23,7 @@
         <activity android:name=".AdminRegImgActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FacultyRegistrationActivity" />
-        <activity android:name=".FacultyDashboard"></activity>
+        <activity android:name=".FacultyDashboard" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -35,7 +35,8 @@
         <activity
             android:name=".NoticePostShow"
             android:parentActivityName=".FacultyDashboard" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".HodRgistrationActivity"></activity>
     </application>
 
 </manifest>
