@@ -9,7 +9,7 @@
     tools:context="dynamicdrillers.collegenoticeboard.HodRgistrationActivity">
 
     <include
-        android:id="@+id/single_notice_toolbar"
+        android:id="@+id/hod_registration_toolbar"
         layout="@layout/noticetoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></include>

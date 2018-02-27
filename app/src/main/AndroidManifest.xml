@@ -35,14 +35,31 @@
         <activity
             android:name=".NoticePostShow"
             android:parentActivityName=".FacultyDashboard" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".HodRgistrationActivity" />
-        <activity android:name=".StudentList" />
-        <activity android:name=".YourNotices" />
-        <activity android:name=".EditProfile" />
-        <activity android:name=".AboutApp" />
-        <activity android:name=".FeedBack" />
-        <activity android:name=".HodList"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".HodRgistrationActivity"
+            android:parentActivityName=".HodList" />
+        <activity
+            android:name=".StudentList"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".YourNotices"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".EditProfile"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".AboutApp"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".FeedBack"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".HodList"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity android:name=".FacultyList" android:parentActivityName=".FacultyList"></activity>
     </application>
 
 </manifest>

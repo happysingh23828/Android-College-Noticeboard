@@ -165,7 +165,7 @@ public class FacultyDashboard extends AppCompatActivity {
 
                     case R.id.HeadOfDept:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(FacultyDashboard.this, HodRgistrationActivity.class));
+                        startActivity(new Intent(FacultyDashboard.this, HodList.class));
                         break;
 
                     case R.id.your_notices:
@@ -180,7 +180,7 @@ public class FacultyDashboard extends AppCompatActivity {
 
                     case R.id.Faculties:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(FacultyDashboard.this, FacultyRegistrationActivity.class));
+                        startActivity(new Intent(FacultyDashboard.this, FacultyList.class));
                         break;
 
 

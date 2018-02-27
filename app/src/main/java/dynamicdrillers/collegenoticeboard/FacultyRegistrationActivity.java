@@ -45,6 +45,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     Button BtnRegister;
     String Type[] = {"1","2","3","4","5","6","7","8"};
     String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
+    TextView toolbarheading;
 
 
     @Override
@@ -67,7 +68,12 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
         BtnRegister = findViewById(R.id.reg_faculty_register);
 
-        toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);
+        toolbarheading = (TextView)findViewById(R.id.notice_name);
+        toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.facultyregistrationtoolbar);
+        toolbarheading.setText("Faculty Registration");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Tg.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

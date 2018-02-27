@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HodList extends AppCompatActivity {
+public class FacultyList extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolbarheading;
@@ -16,22 +16,21 @@ public class HodList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hod_list);
+        setContentView(R.layout.activity_faculty_list);
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
         toolbaraddhodicon = (ImageView)findViewById(R.id.addpersonicon);
-        toolbar = (Toolbar)findViewById(R.id.hodlisttoolbar);
+        toolbar = (Toolbar)findViewById(R.id.faultyaddtoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbarheading.setText("HOD's List");
+        toolbarheading.setText("Faculty's List");
         toolbaraddhodicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),HodRgistrationActivity.class));
+                startActivity(new Intent(getApplicationContext(),FacultyRegistrationActivity.class));
             }
         });
-
 
     }
 }
