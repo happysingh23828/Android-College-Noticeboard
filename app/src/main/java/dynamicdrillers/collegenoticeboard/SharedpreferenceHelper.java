@@ -49,6 +49,7 @@ public class SharedpreferenceHelper {
         SharedPreferences.Editor editor = sharedPreference.edit();
 
         editor.putString("name",Name);
+
         editor.putString("collegecode", CollegeCode);
         editor.putString("email", Email);
         editor.putString("mobaileno",MobaileNo);
