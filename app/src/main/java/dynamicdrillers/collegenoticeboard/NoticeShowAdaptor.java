@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +43,8 @@ public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.No
 
         holder.AuthorName.setText(notice.getNoticeAuthor().toUpperCase());
         holder.NoticeTime.setText(notice.getTime());
-        Picasso.with(holder.itemView.getContext()).load(Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
+        //Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png")
+        Picasso.with(holder.itemView.getContext()).load("http://192.168.56.1/Web-API-College-Noticeboard/Storage/PersonProfiles/Personhappy123@gmail.com.png").into(holder.Author_Profile);
 
         if(notice.getNoticeTitle().length()>=50)
         {

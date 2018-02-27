@@ -92,13 +92,30 @@ public class SharedpreferenceHelper {
         return true;
     }
 
-    public boolean otherUser(String Role,String PersonProfile) {
+    public boolean otherUser(String Role,String PersonProfile,String Dept,int TgFlag,String TgSem) {
 
         SharedPreferences sharedPreference = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreference.edit();
-
+        editor.putString("dept",Dept);
         editor.putString("role",Role);
-        editor.putString("role",PersonProfile);
+        editor.putString("PersonProfile",PersonProfile);
+        editor.putInt("tgflag",TgFlag);
+        editor.putString("tgsem",TgSem);
+
+
+        editor.apply();
+
+        return true;
+    }
+
+
+    public boolean hodUser(String PersonProfile,String Dept) {
+
+        SharedPreferences sharedPreference = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreference.edit();
+        editor.putString("dept",Dept);
+        editor.putString("hodProfile",PersonProfile);
+
 
         editor.apply();
 
@@ -136,6 +153,84 @@ public class SharedpreferenceHelper {
         return sharedPreference.getString("type",null);
 
 
+    }
+
+    public  String getRole()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("role",null);
+
+    }
+
+    public String getDept()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("dept",null);
+
+    }
+
+    public  int getTgflag()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getInt("tgflag",0);
+
+    }
+
+    public  String getTgSem()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("tgsem",null);
+
+    }
+
+    public  String getSem()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("sem",null);
+
+    }
+
+    public  String getPersonProfileName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("PersonProfile",null);
+    }
+
+    public  String getStudentProfileName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("studentprofile",null);
+    }
+
+    public  String getAdminProfileName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("profilephoto",null);
+    }
+
+    public  String getHodProfileName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("hodProfile",null);
+    }
+
+    public  String getCollegeLogoName()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        String collegelogoname = "Logo"+sharedPreference.getString("collegecode",null)+".png";
+        return collegelogoname;
+    }
+
+    public  String getCollegeAddress()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("collegecode",null);
+    }
+
+    public  String getTgEmail()
+    {
+        SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
+        return sharedPreference.getString("tgemail","");
     }
 
 }

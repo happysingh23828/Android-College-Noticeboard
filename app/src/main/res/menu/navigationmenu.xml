@@ -8,6 +8,39 @@
             android:icon="@drawable/ic_profile"
             >
         </item>
+
+        <item android:id="@+id/Faculties"
+            android:title="Faculties"
+            android:icon="@drawable/ic_faculties"
+            >
+        </item>
+
+        <item android:id="@+id/Students"
+            android:title="Students Under TG"
+            android:icon="@drawable/ic_faculties"
+            >
+        </item>
+
+        <item android:id="@+id/HeadOfDept"
+            android:title="HOD's"
+            android:icon="@drawable/ic_faculties"
+            >
+        </item>
+
+        <item android:id="@+id/your_notices"
+            android:title="Your Tg Notices"
+            android:icon="@drawable/ic_notices"
+            >
+        </item>
+
+        <item android:id="@+id/dept_notices"
+            android:title="Your Dept Notices"
+            android:icon="@drawable/ic_notices"
+            >
+        </item>
+
+
+
         <item android:id="@+id/ProfileLogout"
             android:title="@string/logout"
             android:icon="@drawable/ic_logout"
