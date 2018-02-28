@@ -49,21 +49,6 @@ public class FacultyDashboard extends AppCompatActivity {
         });
 
 
-        button = findViewById(R.id.a);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(FacultyDashboard.this, StudentRegistrationActivity.class));
-            }
-        });
-
-        button = findViewById(R.id.b);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(FacultyDashboard.this, StudentProfileActivity.class));
-            }
-        });
 
 
         //Setting college Details In Main toolbar
