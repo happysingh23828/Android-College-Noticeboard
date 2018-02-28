@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://G:\Android Apps\Chat App\CollegeNoticeboard\Android-College-Noticeboard.iml" filepath="G:\Android Apps\Chat App\CollegeNoticeboard\Android-College-Noticeboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/CollegeNoticeboard.iml" filepath="$PROJECT_DIR$/CollegeNoticeboard.iml" />
-      <module fileurl="file://C:\Users\Mayank\Documents\Android-College-Noticeboard\CollegeNoticeboard.iml" filepath="C:\Users\Mayank\Documents\Android-College-Noticeboard\CollegeNoticeboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

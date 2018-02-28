@@ -167,7 +167,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(FacultyRegistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FacultyRegistrationActivity.this,volleyError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
