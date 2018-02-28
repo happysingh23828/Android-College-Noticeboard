@@ -142,7 +142,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(!jsonObject.getBoolean("error"))
+                            if(jsonObject.getBoolean("error"))
                             {
                                 Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
