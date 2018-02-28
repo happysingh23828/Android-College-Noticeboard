@@ -9,9 +9,6 @@ public class Notice {
     String NoticeId;
     String NoticeAuthor;
     String NoticeAuthorImage;
-
-
-
     String NoticeTitle;
     String NoticeDesc;
     String Time;

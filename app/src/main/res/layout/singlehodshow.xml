@@ -36,7 +36,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="HOD NAME"
-                    android:fontFamily="@font/bevan"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
                     android:gravity="center"/>
 
                 <TextView
@@ -46,7 +48,8 @@
                     android:layout_weight="1"
                     android:text="CSE"
                     android:gravity="center"
-                    android:fontFamily="@font/bungee"/>
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,7 +66,7 @@
                         android:text="Edit"
                         android:textSize="15dp"
                         android:layout_margin="5dp"
-                        android:fontFamily="@font/bungee"
+                        android:textStyle="bold"
                         android:background="@android:color/holo_green_light"/>
 
                     <Button
@@ -77,7 +80,7 @@
                         android:textSize="15dp"
                         android:elevation="100dp"
                         android:translationZ="5dp"
-                        android:fontFamily="@font/bungee"
+                        android:textStyle="bold"
                         android:layout_margin="5dp"
                         />
 
