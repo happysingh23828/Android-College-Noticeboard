@@ -43,7 +43,7 @@ public class FacultyDashboard extends AppCompatActivity {
         ProfileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FacultyDashboard.this, ProfileActivity.class));
+                startActivity(new Intent(FacultyDashboard.this, StudentProfileActivity.class));
 
             }
         });
