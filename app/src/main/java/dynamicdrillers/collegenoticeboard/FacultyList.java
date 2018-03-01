@@ -57,7 +57,9 @@ public class FacultyList extends AppCompatActivity {
         showFacultyList();
         recyclerView =(RecyclerView)findViewById(R.id.facultylistrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new FacultyListAdaptor(facultyList));
+        FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
+        recyclerView.setAdapter(facultyListAdaptor);
+        facultyListAdaptor.notifyDataSetChanged();
 
     }
 
@@ -103,7 +105,12 @@ public class FacultyList extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> param  = new HashMap<>();
                 param.put("CollegeCode",HODCollegecode);
-                param.put("Dept",HODdept);
+                if(sharedpreferenceHelper.getType().equals("admin")){
+                    param.put("Dept","admin");
+                }
+                else {
+                    param.put("Dept", HODdept);
+                }
                 return  param;
             }
         };

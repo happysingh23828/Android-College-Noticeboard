@@ -37,6 +37,7 @@ import java.util.Map;
 public class FacultyRegistrationActivity extends AppCompatActivity {
 
     android.support.v7.widget.Toolbar toolbar;
+    LinearLayout role,dept;
     TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole,TxtInputlayloutDept;
     Spinner SpnSem;
     RadioGroup Gender;
@@ -46,6 +47,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     String Type[] = {"1","2","3","4","5","6","7","8"};
     String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
     TextView toolbarheading;
+    SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
 
 
     @Override
@@ -56,8 +58,17 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
         TxtInputlayloutName = findViewById(R.id.reg_faculty_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_faculty_email);
         TxtInputlayloutPassword = findViewById(R.id.reg_faculty_password);
-        TxtInputlayloutRole = findViewById(R.id.reg_faculty_role);
-        TxtInputlayloutDept = findViewById(R.id.reg_faculty_department);
+
+        if(!sharedpreferenceHelper.getType().equals("hod"))
+        {
+            role = (LinearLayout)findViewById(R.id.Role_Faculty);
+            dept = (LinearLayout)findViewById(R.id.Department_faculty);
+            role.setVisibility(View.VISIBLE);
+            dept.setVisibility(View.VISIBLE);
+            TxtInputlayloutRole = findViewById(R.id.reg_faculty_role);
+            TxtInputlayloutDept = findViewById(R.id.reg_faculty_department);
+        }
+
 
         Gender = findViewById(R.id.reg_faculty_gender);
         RadioMale = findViewById(R.id.reg_faculty_male);
@@ -142,11 +153,13 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(jsonObject.getBoolean("error"))
+                            if(!jsonObject.getBoolean("error"))
                             {
+                                Toast.makeText(FacultyRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
+
                             }
                             else
                             {
@@ -190,8 +203,18 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
-                map.put("Role",TxtInputlayloutRole.getEditText().getText().toString());
-                map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
+
+                if(sharedpreferenceHelper.getType().equals("hod"))
+                {
+                    map.put("Role","Faculty");
+                    map.put("Dept",sharedpreferenceHelper.getDept());
+                }
+                else
+                {
+                    map.put("Role",TxtInputlayloutRole.getEditText().getText().toString());
+                    map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
+
+                }
                 map.put("Gender",Gender_s);
                 map.put("TgFlag",Tg_s);
                 map.put("TgSem",TgSem_s);

@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/Widget.AppCompat.Button.Colored"
-                        android:text="Edit"
+                        android:text="Password"
                         android:textSize="15dp"
                         android:layout_margin="5dp"
                         android:textStyle="bold"
