@@ -95,6 +95,7 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText2.setText("DEPT : " + sharedPreferenceHelper.getDept());
             NavigationText3.setText("ROLE : " + sharedPreferenceHelper.getRole());
 
+            menu.findItem(R.id.college_notices).setVisible(false);
             menu.findItem(R.id.HeadOfDept).setVisible(false);
             menu.findItem(R.id.Faculties).setVisible(false);
             if (sharedPreferenceHelper.getTgflag() == 0) {
@@ -109,6 +110,8 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText2.setText("DEPT : " + sharedPreferenceHelper.getDept());
             NavigationText3.setText("SEM : " + sharedPreferenceHelper.getSem());
 
+            menu.findItem(R.id.college_notices).setVisible(false);
+            menu.findItem(R.id.events_notice).setVisible(false);
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.HeadOfDept).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
@@ -123,6 +126,7 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText3.setText("CollegeCode :" + sharedPreferenceHelper.getCollegeCode());
 
 
+            menu.findItem(R.id.events_notice).setVisible(false);
             menu.findItem(R.id.Faculties).setVisible(false);
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
@@ -133,6 +137,7 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
 
+            menu.findItem(R.id.college_notices).setVisible(false);
             menu.findItem(R.id.HeadOfDept).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);
@@ -164,6 +169,14 @@ public class FacultyDashboard extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),StudentList.class));
                         break;
 
+                    case R.id.college_notices:
+                        drawerLayout.closeDrawer(Gravity.START);
+                        Intent l = new Intent(getApplicationContext(),YourNotices.class);
+                        l.putExtra("istgnotice","no");
+                        l.putExtra("noticetype","college");
+                        startActivity(l);
+                        break;
+
                     case R.id.HeadOfDept:
                         drawerLayout.closeDrawer(Gravity.START);
                         startActivity(new Intent(FacultyDashboard.this, HodList.class));
@@ -171,12 +184,26 @@ public class FacultyDashboard extends AppCompatActivity {
 
                     case R.id.your_notices:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),YourNotices.class));
+                        Intent i = new Intent(getApplicationContext(),YourNotices.class);
+                        i.putExtra("istgnotice","yes");
+                        i.putExtra("noticetype","no");
+                        startActivity(i);
                         break;
 
                     case R.id.dept_notices:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),YourNotices.class));
+                        Intent j = new Intent(getApplicationContext(),YourNotices.class);
+                        j.putExtra("istgnotice","no");
+                        j.putExtra("noticetype","dept");
+                        startActivity(j);
+                        break;
+
+                    case R.id.events_notice:
+                        drawerLayout.closeDrawer(Gravity.START);
+                        Intent k = new Intent(getApplicationContext(),YourNotices.class);
+                        k.putExtra("istgnotice","no");
+                        k.putExtra("noticetype","events");
+                        startActivity(k);
                         break;
 
                     case R.id.Faculties:
@@ -207,8 +234,8 @@ public class FacultyDashboard extends AppCompatActivity {
             }
         });
 
-        String noticenames1[] = {"College", "Scholarship", "Events", "Tg"};
-        String noticenames2[] = {"Accounts", "Tnp", "Dept", "Tg"};
+        String noticenames1[] = {"college", "scholarship", "events", "tg"};
+        String noticenames2[] = {"accounts", "tnp", "dept", "tg"};
         int noticeicons1[] = {R.drawable.collegenotice, R.drawable.schlorship, R.drawable.events, R.drawable.tg};
         int noticeicons2[] = {R.drawable.viewnotice, R.drawable.tnp, R.drawable.dept, R.drawable.tg};
         recyclerView = (RecyclerView) findViewById(R.id.notice_recylerview);

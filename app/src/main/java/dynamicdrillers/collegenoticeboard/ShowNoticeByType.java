@@ -88,7 +88,7 @@ public class ShowNoticeByType extends AppCompatActivity {
                                 ,singleNotice.getString("string")
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
-                                ,singleNotice.getString("authoremail"));
+                                ,singleNotice.getString("authoremail"),"tg");
                         noticelist.add(notice);
 
                     }
@@ -136,7 +136,7 @@ public class ShowNoticeByType extends AppCompatActivity {
                                 ,singleNotice.getString("string")
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
-                                ,singleNotice.getString("authoremail"));
+                                ,singleNotice.getString("authoremail"),Notice_type);
 
                         noticelist.add(notice);
 
