@@ -38,7 +38,9 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HodRgistrationActivity" />
         <activity android:name=".StudentRegistrationActivity" />
-        <activity android:name=".StudentProfileActivity"></activity>
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".EditStudentProActivity" />
+        <activity android:name=".UpdateProImgActivity"></activity>
     </application>
 
 </manifest>
