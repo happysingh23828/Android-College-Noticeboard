@@ -123,7 +123,7 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText3.setText("CollegeCode :" + sharedPreferenceHelper.getCollegeCode());
 
 
-
+            menu.findItem(R.id.Faculties).setVisible(false);
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);

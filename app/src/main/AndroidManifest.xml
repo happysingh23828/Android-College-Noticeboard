@@ -59,9 +59,14 @@
         <activity
             android:name=".HodList"
             android:parentActivityName=".FacultyDashboard" />
-        <activity android:name=".FacultyList" android:parentActivityName=".FacultyList"></activity>
-        <activity android:name=".StudentRegistrationActivity" android:parentActivityName=".StudentList"/>
-        <activity android:name=".StudentProfileActivity" ></activity>
+        <activity
+            android:name=".FacultyList"
+            android:parentActivityName=".FacultyList" />
+        <activity
+            android:name=".StudentRegistrationActivity"
+            android:parentActivityName=".StudentList" />
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".AddNotice"></activity>
     </application>
 
 </manifest>
