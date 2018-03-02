@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -32,7 +34,9 @@ public class HodRgistrationActivity extends AppCompatActivity {
     RadioGroup Gender;
     RadioButton RadioMale,RadioFemale;
     Button BtnRegister;
+    Toolbar toolbar;
     String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="";
+    TextView toolbarheading;
 
 
     @Override
@@ -50,6 +54,13 @@ public class HodRgistrationActivity extends AppCompatActivity {
         RadioFemale = findViewById(R.id.reg_hod_female);
 
         BtnRegister = findViewById(R.id.reg_hod_register);
+
+        toolbarheading = (TextView)findViewById(R.id.notice_name);
+        toolbarheading.setText("Hod Registration");
+        toolbar = (Toolbar)findViewById(R.id.hod_registration_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

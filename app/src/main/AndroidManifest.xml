@@ -18,12 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminRegistrationActivity" />
-        <activity android:name=".AdminRegCollegeActivity" />
-        <activity android:name=".AdminRegImgActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".FacultyRegistrationActivity" />
-        <activity android:name=".FacultyDashboard" />
+
 
         <meta-data
             android:name="preloaded_fonts"
@@ -35,6 +30,38 @@
         <activity
             android:name=".NoticePostShow"
             android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".HodRgistrationActivity"
+            android:parentActivityName=".HodList" />
+        <activity
+            android:name=".StudentList"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".YourNotices"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".EditProfile"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".AboutApp"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".FeedBack"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".HodList"
+            android:parentActivityName=".FacultyDashboard" />
+        <activity
+            android:name=".FacultyList"
+            android:parentActivityName=".FacultyList" />
+        <activity
+            android:name=".StudentRegistrationActivity"
+            android:parentActivityName=".StudentList" />
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".AddNotice"></activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HodRgistrationActivity" />
         <activity android:name=".StudentRegistrationActivity" />

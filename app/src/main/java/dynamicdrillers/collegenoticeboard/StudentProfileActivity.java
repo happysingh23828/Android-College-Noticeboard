@@ -145,7 +145,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences sharedPreference = StudentProfileActivity.this.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
-                dialogBulder(sharedPreference.getString("mobaileno",null),"mobaileno","Enter mobaileno...");
+                dialogBulder(sharedPreference.getString("mobileno",null),"mobileno","Enter mobileno...");
             }
         });
 

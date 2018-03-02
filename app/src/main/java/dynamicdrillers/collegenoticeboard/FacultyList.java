@@ -25,45 +25,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StudentList extends AppCompatActivity {
+public class FacultyList extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolbarheading;
     ImageView toolbaraddhodicon;
     RecyclerView recyclerView;
-    List<Student> studentList = new ArrayList<Student>();
+    List<Faculty> facultyList = new ArrayList<Faculty>();
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
-    String FacultyEmail = sharedpreferenceHelper.getEmail();
-
+    String HODCollegecode=sharedpreferenceHelper.getCollegeCode();
+    String HODdept=sharedpreferenceHelper.getDept();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_list);
+        setContentView(R.layout.activity_faculty_list);
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
         toolbaraddhodicon = (ImageView)findViewById(R.id.addpersonicon);
-        toolbar = (Toolbar)findViewById(R.id.studentlisttoolbar);
+        toolbar = (Toolbar)findViewById(R.id.faultyaddtoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbarheading.setText("Students's List");
+        toolbarheading.setText("Faculty's List");
         toolbaraddhodicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),StudentRegistrationActivity.class));
+                startActivity(new Intent(getApplicationContext(),FacultyRegistrationActivity.class));
             }
         });
 
-        recyclerView = (RecyclerView)findViewById(R.id.studentlistrecylerview);
-        showStudentList();
+        showFacultyList();
+        recyclerView =(RecyclerView)findViewById(R.id.facultylistrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new StudentListAdaptor(studentList));
+        FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
+        recyclerView.setAdapter(facultyListAdaptor);
+        facultyListAdaptor.notifyDataSetChanged();
 
     }
 
-    private void showStudentList() {
+    private void showFacultyList() {
 
-        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "FacultyGetStudentList.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "HodGetFacultiesList.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -72,21 +74,22 @@ public class StudentList extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i=0;i<jsonArray.length();i++)
                     {
-                        JSONObject Student_details  = jsonArray.getJSONObject(i);
-                        Student student = new Student(Student_details.getString("name"),Student_details.getString("email")
-                        ,Student_details.getString("mobileno"),Student_details.getString("dob"),Student_details.getString("gender")
-                        ,Student_details.getString("collegecode"),Student_details.getString("studentprofile"),Student_details.getString("dept")
-                        ,Student_details.getString("sem"),Student_details.getString("tgemail"),Student_details.getString("enrollment"));
+                        JSONObject Faculty_details  = jsonArray.getJSONObject(i);
 
+                        Faculty faculty = new Faculty(Faculty_details.getString("name"),Faculty_details.getString("email")
+                                                    ,Faculty_details.getString("mobileno"),Faculty_details.getString("dob")
+                                                    ,Faculty_details.getString("gender"),Faculty_details.getString("collegecode"),
+                                                    Faculty_details.getString("personprofile"),Faculty_details.getString("tgflag")
+                                                    ,Faculty_details.getString("tgsem"),Faculty_details.getString("dept")
+                                                    ,Faculty_details.getString("role"));
 
-
-                        studentList.add(student);
+                        facultyList.add(faculty);
                     }
 
 
 
                 } catch (JSONException e) {
-                    Toast.makeText(getBaseContext(),"There Is No Student",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"There Is No Faculty",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
@@ -101,13 +104,17 @@ public class StudentList extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> param  = new HashMap<>();
-                param.put("TgEmail",FacultyEmail);
-
+                param.put("CollegeCode",HODCollegecode);
+                if(sharedpreferenceHelper.getType().equals("admin")){
+                    param.put("Dept","admin");
+                }
+                else {
+                    param.put("Dept", HODdept);
+                }
                 return  param;
             }
         };
 
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-
     }
 }

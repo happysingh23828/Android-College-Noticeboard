@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dynamicdrillers.collegenoticeboard.StudentList">
+    tools:context="dynamicdrillers.collegenoticeboard.FacultyList">
 
-    <include layout="@layout/addtoolbar" android:id="@+id/studentlisttoolbar">
-
-    </include>
+    <include layout="@layout/addtoolbar" android:id="@+id/faultyaddtoolbar"></include>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/studentlistrecylerview"
+        android:id="@+id/facultylistrecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/studentlisttoolbar" />
-
+        android:layout_below="@+id/faultyaddtoolbar"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

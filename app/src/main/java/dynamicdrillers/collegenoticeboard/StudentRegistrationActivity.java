@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,8 @@ public class StudentRegistrationActivity extends AppCompatActivity {
     Spinner SpnSem;
     String Url=Constants.WEB_API_URL+"FacultyStudentRegistration.php",Gender_s="",Sem_s;
     String Type[] = {"1","2","3","4","5","6","7","8"};
+    Toolbar toolbar;
+    TextView toolbarheading;
 
 
     @Override
@@ -59,6 +62,14 @@ public class StudentRegistrationActivity extends AppCompatActivity {
         SpnSem = findViewById(R.id.reg_student_sem);
 
         BtnRegister = findViewById(R.id.reg_student_register);
+
+        toolbarheading = (TextView)findViewById(R.id.notice_name);
+        toolbar = (Toolbar)findViewById(R.id.studentregistrationtoolbar);
+        setSupportActionBar(toolbar);
+        toolbarheading.setText("Student Registration");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+
 
         Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
