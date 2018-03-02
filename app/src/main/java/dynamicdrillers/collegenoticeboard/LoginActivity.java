@@ -105,8 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                         SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(LoginActivity.this);
                         sharedPreferenceHelper.userlogin(user_detail.getString("name"),user_detail.getString("email")
                                 ,user_detail.getString("collegecode")
-                                ,user_detail.getString("mobileno"),user_detail.getString("dob")
-                                ,user_detail.getString("gender"),user_detail.getString("type"));
+                                ,user_detail.getString("mobileno")
+                                ,user_detail.getString("dob")
+                                ,user_detail.getString("gender")
+                                ,user_detail.getString("type")
+                                );
 
                         if(SelectedType.equals("Student"))
                         sharedPreferenceHelper.studentUser(user_detail.getString("studentprofile"),

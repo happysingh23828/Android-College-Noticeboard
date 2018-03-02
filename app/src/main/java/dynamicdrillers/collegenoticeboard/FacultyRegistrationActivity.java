@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -54,6 +53,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_registration);
+
 
         TxtInputlayloutName = findViewById(R.id.reg_faculty_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_faculty_email);

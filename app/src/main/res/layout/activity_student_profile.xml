@@ -9,15 +9,15 @@
     tools:context="dynamicdrillers.collegenoticeboard.StudentProfileActivity">
 
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:foregroundGravity="center"
-            android:src="@drawable/sudent" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pro_img"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/sudent" />
 
 
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name  : "
@@ -41,11 +41,18 @@
 
             <TextView
                 android:id="@+id/stu_pro_txt_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:text="TextView"
                 android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/pro_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,7 +62,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email  : "
@@ -65,9 +72,48 @@
                 android:id="@+id/stu_pro_txt_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:text="TextView"
                 android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/pro_edit_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/pro_enrollment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enrollment No  : "
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/stu_pro_txt_enrollment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,29 +123,6 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password  : "
-                android:textColor="@android:color/background_light" />
-
-            <TextView
-                android:id="@+id/stu_pro_txt_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="TextView"
-                android:textColor="@android:color/background_light" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mobaile No  : "
@@ -109,9 +132,16 @@
                 android:id="@+id/stu_pro_txt_mobaileno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:text="TextView"
                 android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/pro_edit_mobaileno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,7 +151,6 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender  : "
@@ -131,56 +160,107 @@
                 android:id="@+id/stu_pro_txt_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:text="TextView"
                 android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/pro_edit_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/pro_tg_sem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textView4"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Department  : "
+                android:text="Tg sem  : "
                 android:textColor="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/stu_pro_txt_dept"
+                android:id="@+id/stu_pro_txt_tg_sem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:layout_weight="1"
                 android:text="TextView"
                 android:textColor="@android:color/background_light" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:srcCompat="@drawable/ic_edit" />
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+           >
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dob  : "
+                android:textColor="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/stu_pro_txt_dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/pro_edit_dob"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/update_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@drawable/preshap"
-            android:text="Change Image"
+            android:text="Edit Image"
             android:textColor="@android:color/background_light" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/pro_edi_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/nextshap"
-            android:text="Edit Profile"
+            android:text="Edit Pass"
             android:textColor="@android:color/background_light" />
     </LinearLayout>
 
