@@ -17,6 +17,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner SpnLoginType;
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
-    String Type[] = {"Student","Admin","Hod","Other"};
+    String Type[] = {"Student","Admin","Hod","Faculty"};
     String SelectedType="";
 
     @Override
@@ -78,7 +79,11 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userLogin();
+
+
+                    userLogin();
+
+
             }
         });
     }
@@ -96,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject user_detail = new JSONObject(response);
                     if(!user_detail.getBoolean("error"))
                     {
+
                         SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(LoginActivity.this);
                         sharedPreferenceHelper.userlogin(user_detail.getString("name"),user_detail.getString("email")
                                 ,user_detail.getString("collegecode")
@@ -166,4 +172,7 @@ public class LoginActivity extends AppCompatActivity {
       mySingleton.addToRequestQueue(stringRequest);
 
     }
+
+
+
 }

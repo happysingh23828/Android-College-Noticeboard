@@ -18,7 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FacultyDashboard extends AppCompatActivity {
 
@@ -31,6 +40,8 @@ public class FacultyDashboard extends AppCompatActivity {
     Menu menu;
     ImageView ProfileIcon, NavigationProfileImage, CollegeLogo;
     TextView NavigationText1, NavigationText2, NavigationText3, CollegeName, CollegeAddress;
+
+
 
     SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(getBaseContext());
 
@@ -47,6 +58,7 @@ public class FacultyDashboard extends AppCompatActivity {
 
             }
         });
+
 
 
 
@@ -145,6 +157,7 @@ public class FacultyDashboard extends AppCompatActivity {
 
         }
 
+
         //checking Which Navigationitem Selected
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -242,6 +255,38 @@ public class FacultyDashboard extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new DashboardNoticeAdaptor(noticenames1, noticenames2, noticeicons1, noticeicons2));
 
+        sendTokenToserver();
+
+    }
+    public void sendTokenToserver() {
+
+        final SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
+        final String token = FirebaseInstanceId.getInstance().getToken();
+        Toast.makeText(getBaseContext(),token,Toast.LENGTH_LONG).show();
+
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendToken.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> param = new HashMap<>();
+                param.put("Email",sharedpreferenceHelper.getEmail());
+                param.put("Type",sharedpreferenceHelper.getType());
+                param.put("Token",token);
+                return param;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
 }

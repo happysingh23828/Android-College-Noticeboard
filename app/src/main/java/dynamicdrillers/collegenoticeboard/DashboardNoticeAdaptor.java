@@ -71,7 +71,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
                 else {
                     intent.putExtra("tgemail","notg");
                 }
-                intent.putExtra("NoticeCollegeCode","0536");
+                intent.putExtra("NoticeCollegeCode",sharedpreferenceHelper.getCollegeCode());
                 intent.putExtra("NoticeType",noticename1[position]);
 
                 v.getContext().startActivity(intent);

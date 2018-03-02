@@ -35,7 +35,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
+                    android:hint="Enter Your Email"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
 
@@ -63,7 +63,7 @@
                     android:id="@+id/edt_login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="Enter Your Password"
                     android:inputType="textPassword"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>

@@ -32,6 +32,7 @@ public class ShowNoticeByType extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Notice> noticelist = new ArrayList<Notice>();
     NoticeShowAdaptor noticeShowAdaptor;
+    SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,16 @@ public class ShowNoticeByType extends AppCompatActivity {
         noticeTitle = (TextView)findViewById(R.id.notice_name);
         toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.single_notice_toolbar);
         setSupportActionBar(toolbar);
-        noticeTitle.setText(Notice_type + " Notices");
+        noticeTitle.setText(Notice_type.toUpperCase() + " NOTICES");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
 
-        if(Notice_Tg_Email.equals("notg"))
+        if(Notice_type.equals("dept"))
+        {
+            showDeptNotices();
+        }
+        else if(Notice_Tg_Email.equals("notg"))
         {
             showCollegeNotice();
         }
@@ -66,6 +71,58 @@ public class ShowNoticeByType extends AppCompatActivity {
         noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(noticeShowAdaptor);
+
+
+    }
+
+    private void showDeptNotices() {
+
+
+        StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL+"StudentGetDeptNotice.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray NoticeArrray = new JSONArray(response);
+                    int JsonArrayLength = NoticeArrray.length();
+                    for (int i  =0;i<NoticeArrray.length();i++)
+                    {
+                        JSONObject singleNotice =NoticeArrray.getJSONObject(i);
+                        Notice notice = new Notice(singleNotice.getString("id")
+                                ,singleNotice.getString("authorname")
+                                ,singleNotice.getString("title")
+                                ,singleNotice.getString("string")
+                                ,singleNotice.getString("time")
+                                ,singleNotice.getString("image")
+                                ,singleNotice.getString("authoremail"),"dept");
+                        noticelist.add(notice);
+
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> param = new HashMap<>();
+                param.put("CollegeCode",sharedpreferenceHelper.getCollegeCode());
+                param.put("Dept",sharedpreferenceHelper.getDept());
+                return param;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+
 
 
     }
@@ -93,7 +150,7 @@ public class ShowNoticeByType extends AppCompatActivity {
 
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),"There Is No Tg Notice..",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
 
                 }
 
