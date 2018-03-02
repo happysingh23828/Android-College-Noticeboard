@@ -9,16 +9,14 @@ public class Notice {
     String NoticeId;
     String NoticeAuthor;
     String NoticeAuthorImage;
-
-
-
     String NoticeTitle;
     String NoticeDesc;
     String Time;
     String image;
+    String Notice_Type;
 
 
-    public Notice(String noticeId, String noticeAuthor, String noticeTitle, String noticeDesc, String time, String image,String NoticeAuthorImage) {
+    public Notice(String noticeId, String noticeAuthor, String noticeTitle, String noticeDesc, String time, String image,String NoticeAuthorImage,String Notice_Type) {
 
         this.NoticeId = noticeId;
         this.NoticeAuthor = noticeAuthor;
@@ -27,6 +25,15 @@ public class Notice {
         this.image = image;
         this.Time = time;
         this.NoticeAuthorImage=NoticeAuthorImage;
+        this.Notice_Type = Notice_Type;
+    }
+
+    public String getNotice_Type() {
+        return Notice_Type;
+    }
+
+    public void setNotice_Type(String notice_Type) {
+        Notice_Type = notice_Type;
     }
 
     public String getImage() {

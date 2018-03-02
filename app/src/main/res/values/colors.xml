@@ -6,5 +6,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="spn">#FFFFFF</color>
+    <color name="Dialog">#000000</color>
 
 </resources>

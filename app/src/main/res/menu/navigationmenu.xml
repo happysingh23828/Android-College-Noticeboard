@@ -27,14 +27,26 @@
             >
         </item>
 
+        <item android:id="@+id/college_notices"
+            android:title="College Notices"
+            android:icon="@drawable/ic_notices"
+            >
+        </item>
+
         <item android:id="@+id/your_notices"
-            android:title="Your Tg Notices"
+            android:title="Tg Notices"
             android:icon="@drawable/ic_notices"
             >
         </item>
 
         <item android:id="@+id/dept_notices"
-            android:title="Your Dept Notices"
+            android:title="Dept Notices"
+            android:icon="@drawable/ic_notices"
+            >
+        </item>
+
+        <item android:id="@+id/events_notice"
+            android:title="Events Notices"
             android:icon="@drawable/ic_notices"
             >
         </item>

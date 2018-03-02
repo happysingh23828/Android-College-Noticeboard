@@ -45,7 +45,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
-
+                    android:textSize="10sp"
                     />
 
 
@@ -63,7 +63,7 @@
                 <TextView
                     android:id="@+id/noticetitle"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Notice Title"
                     android:textSize="15sp"
@@ -74,7 +74,7 @@
                 <TextView
                     android:id="@+id/noticedescription"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textSize="14sp"
                     android:text="Notice Description"
@@ -83,12 +83,13 @@
                 <TextView
                     android:id="@+id/noticetime"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Time Will bew here"
                     android:gravity="right"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
+                    android:textSize="10sp"
                     />
 
 

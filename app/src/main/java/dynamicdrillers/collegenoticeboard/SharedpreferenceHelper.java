@@ -49,9 +49,10 @@ public class SharedpreferenceHelper {
         SharedPreferences.Editor editor = sharedPreference.edit();
 
         editor.putString("name",Name);
+
         editor.putString("collegecode", CollegeCode);
         editor.putString("email", Email);
-        editor.putString("mobaileno",MobaileNo);
+        editor.putString("mobileno",MobaileNo);
         editor.putString("gender",Gender);
         editor.putString("dob",Dob);
         editor.putString("type",Type);
@@ -231,6 +232,20 @@ public class SharedpreferenceHelper {
     {
         SharedPreferences sharedPreference =mCtx.getSharedPreferences(SharedprefenceName,Context.MODE_PRIVATE);
         return sharedPreference.getString("tgemail","");
+    }
+
+    public boolean saveDeviceToken(String token){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token", token);
+        editor.apply();
+        return true;
+    }
+
+    //this method will fetch the device token from shared preferences
+    public String getDeviceToken(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
+        return  sharedPreferences.getString("token", null);
     }
 
 }
