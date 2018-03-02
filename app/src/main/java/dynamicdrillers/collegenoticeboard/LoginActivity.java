@@ -17,7 +17,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +26,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button BtnLogin;
+    Button BtnLogin,BtnReg;
     Spinner SpnLoginType;
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
@@ -42,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         TxtLoginUsername = findViewById(R.id.txt_login_username);
         TxtLoginPassword = findViewById(R.id.txt_login_password);
         BtnLogin = findViewById(R.id.btn_login);
+        BtnReg = findViewById(R.id.btn_reg);
 
         SpnLoginType = findViewById(R.id.spn_login_type);
         SpnLoginType.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
@@ -80,13 +80,32 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                    validate();
                     userLogin();
 
 
             }
         });
+
+        BtnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,AdminRegistrationActivity.class);
+                intent.putExtra("status","next");
+                startActivity(intent);
+            }
+        });
+
+
     }
+
+    private void validate() {
+
+        Validation validation = new Validation();
+        validation.emailValidation(TxtLoginUsername);
+
+    }
+
     private void userLogin() {
 
         final String email = TxtLoginUsername.getEditText().getText().toString();

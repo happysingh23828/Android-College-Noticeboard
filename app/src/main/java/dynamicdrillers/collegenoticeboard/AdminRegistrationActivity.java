@@ -30,7 +30,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
     private TextView Date;
 
     private RadioGroup Gender;
-
+    String DatePre;
     private String Date_s,Gender_s;
 
     @Override
@@ -46,6 +46,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         Gender = findViewById(R.id.Gender);
         Date = findViewById(R.id.Date);
 
+
         Intent intent = getIntent();
 
         if(intent.getStringExtra("status").equals("prev")){
@@ -53,7 +54,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
             final String EmailPre =intent.getStringExtra("Email");
             final String PasswordPre =intent.getStringExtra("Password");
             final String MobaleNoPre =intent.getStringExtra("MobaileNo");
-            final String DatePre =intent.getStringExtra("Date");
+            DatePre =intent.getStringExtra("Date");
             final String GenderPre =intent.getStringExtra("Gender");
 
             Name.getEditText().setText(NamePre);
@@ -121,8 +122,14 @@ public class AdminRegistrationActivity extends AppCompatActivity {
 
 
     private void showDate(int year, int month, int day) {
-        Date_s =  new StringBuilder().append(year).append("-").append(month).append("-").append(day).toString();
-        Date.setText(new StringBuilder().append(year).append("-").append(month).append("-").append(day));
+        if(DatePre==null){
+            Date_s =  new StringBuilder().append(year).append("-").append(month).append("-").append(day).toString();
+            Date.setText(new StringBuilder().append(year).append("-").append(month).append("-").append(day));
+        }
+        else{
+            Date_s = DatePre;
+            Date.setText(DatePre);
+        }
 
     }
     @SuppressWarnings("deprecation")

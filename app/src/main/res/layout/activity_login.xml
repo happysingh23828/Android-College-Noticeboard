@@ -91,17 +91,35 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/nextshap"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="Login"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+       <LinearLayout
+           android:layout_marginTop="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <Button
+               android:id="@+id/btn_login"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:layout_marginTop="20dp"
+               android:background="@drawable/nextshap"
+               android:paddingLeft="30dp"
+               android:paddingRight="30dp"
+               android:text="Login"
+               android:textColor="@android:color/background_light"
+               android:textSize="18sp" />
+           <Button
+               android:id="@+id/btn_reg"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:layout_marginTop="20dp"
+               android:background="@drawable/nextshap"
+               android:paddingLeft="30dp"
+               android:paddingRight="30dp"
+               android:layout_marginLeft="30dp"
+               android:text="Registration"
+               android:textColor="@android:color/background_light"
+               android:textSize="18sp" />
+       </LinearLayout>
     </LinearLayout>
 </LinearLayout>

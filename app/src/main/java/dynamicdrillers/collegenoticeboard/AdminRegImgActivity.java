@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class AdminRegImgActivity extends AppCompatActivity {
 
-    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin;
+    Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin,BtnPrev;
     ImageView CollegeLogo,AdminImg;
     private int PICK_IMAGE_REQUEST_ADMIN = 1;
     private int PICK_IMAGE_REQUEST_LOGO = 2;
@@ -55,7 +55,7 @@ public class AdminRegImgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_reg_img);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
          Name = intent.getStringExtra("Name");
          Email =intent.getStringExtra("Email");
         Password =intent.getStringExtra("Password");
@@ -73,6 +73,8 @@ public class AdminRegImgActivity extends AppCompatActivity {
 
         AdminImg = findViewById(R.id.AdminImg);
         CollegeLogo = findViewById(R.id.CollegeLogo);
+
+        BtnPrev = findViewById(R.id.btn_reg_img_prev);
 
         AdminImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +96,30 @@ public class AdminRegImgActivity extends AppCompatActivity {
                  if (bitmapAdmin == null||bitmapLogo==null) {
                      Toast.makeText(AdminRegImgActivity.this, "Please Upload Image", Toast.LENGTH_SHORT).show();
                  } else {
+
+
                      upload();
 
                  }
+             }
+         });
+
+         BtnPrev.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Intent intent1 = new Intent(AdminRegImgActivity.this,AdminRegCollegeActivity.class);
+                 intent1.putExtra("status","prev");
+                 intent1.putExtra("Name",Name);
+                 intent1.putExtra("Email",Email);
+                 intent1.putExtra("Password",Password);
+                 intent1.putExtra("MobaileNo",MobaleNo);
+                 intent1.putExtra("Date",Date);
+                 intent1.putExtra("Gender",Gender);
+                 intent1.putExtra("CollegeName",CollegeName);
+                 intent1.putExtra("CollegeCode",CollegeCode);
+                 intent1.putExtra("CollegeState",CollegeState);
+                 intent1.putExtra("CollegeCity",CollegeCity);
+                 startActivity(intent1);
              }
          });
 
@@ -151,14 +174,29 @@ public class AdminRegImgActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         try {
-                            JSONObject jsonObject = new JSONObject(s);
-                            if(!jsonObject.getBoolean("error"))
+                            JSONObject user_detail = new JSONObject(s);
+                            if(user_detail.getBoolean("error"))
                             {
-                                Toast.makeText(AdminRegImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(AdminRegImgActivity.this, user_detail.getString("message"), Toast.LENGTH_LONG).show();
 
                             }
                             else
                             {
+                                SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(AdminRegImgActivity.this);
+                                sharedPreferenceHelper.userlogin(user_detail.getString("name"),user_detail.getString("email")
+                                        ,user_detail.getString("collegecode")
+                                        ,user_detail.getString("mobileno")
+                                        ,user_detail.getString("dob")
+                                        ,user_detail.getString("gender")
+                                        ,user_detail.getString("type")
+                                );
+
+                                sharedPreferenceHelper.adminUser(user_detail.getString("profilephoto"),
+                                        user_detail.getString("collegelogo"),
+                                        user_detail.getString("collegename"),
+                                        user_detail.getString("collegecity"),
+                                        user_detail.getString("collegestate"));
+
                                 Intent intent = new Intent(AdminRegImgActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();

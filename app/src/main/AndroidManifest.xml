@@ -64,6 +64,9 @@
         <activity android:name=".AddNotice"></activity>
         <activity android:name=".FacultyDashboard"></activity>
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".AdminRegistrationActivity"></activity>
+        <activity android:name=".AdminRegCollegeActivity"></activity>
+        <activity android:name=".AdminRegImgActivity"></activity>
 
         <activity android:name=".EditStudentProActivity" />
         <activity android:name=".UpdateProImgActivity"></activity>

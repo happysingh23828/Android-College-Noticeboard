@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class AdminRegCollegeActivity extends AppCompatActivity {
 
     TextInputLayout CollegeName,CollegeCode,CollegeState,CollegeCity;
-    Button Next;
+    Button Next,Prev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,22 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
         final String Date =intent.getStringExtra("Date");
         final String Gender =intent.getStringExtra("Gender");
 
+
+
         Toast.makeText(this,Name+"\n"+Email+"\n"+Password+"\n"+MobaleNo+"\n"+Date+"\n"+Gender,Toast.LENGTH_LONG).show();
 
         CollegeName = findViewById(R.id.CollegeName);
         CollegeCode = findViewById(R.id.CollegeCode);
         CollegeState = findViewById(R.id.CollegeState);
         CollegeCity = findViewById(R.id.CollegeCity);
+
+        if(intent.getStringExtra("status").equals("prev")){
+            CollegeCity.getEditText().setText(intent.getStringExtra("CollegeCity"));
+            CollegeState.getEditText().setText(intent.getStringExtra("CollegeState"));
+            CollegeCode.getEditText().setText(intent.getStringExtra("CollegeCode"));
+            CollegeName.getEditText().setText(intent.getStringExtra("CollegeName"));
+
+        }
 
         Next = findViewById(R.id.AdminCollegeNext);
         Next.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +59,22 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
                 intent1.putExtra("CollegeCity",CollegeCity.getEditText().getText().toString());
                 startActivity(intent1);
 
+            }
+        });
+
+        Prev = findViewById(R.id.btn_admin_college_prev);
+        Prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(AdminRegCollegeActivity.this,AdminRegistrationActivity.class);
+                intent1.putExtra("status","prev");
+                intent1.putExtra("Name",Name);
+                intent1.putExtra("Email",Email);
+                intent1.putExtra("Password",Password);
+                intent1.putExtra("MobaileNo",MobaleNo);
+                intent1.putExtra("Date",Date);
+                intent1.putExtra("Gender",Gender);
+                startActivity(intent1);
             }
         });
 
