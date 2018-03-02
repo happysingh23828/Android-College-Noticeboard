@@ -52,7 +52,7 @@ public class SharedpreferenceHelper {
 
         editor.putString("collegecode", CollegeCode);
         editor.putString("email", Email);
-        editor.putString("mobaileno",MobaileNo);
+        editor.putString("mobileno",MobaileNo);
         editor.putString("gender",Gender);
         editor.putString("dob",Dob);
         editor.putString("type",Type);

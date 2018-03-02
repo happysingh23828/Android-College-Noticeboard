@@ -62,10 +62,10 @@
             android:parentActivityName=".StudentList" />
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".AddNotice"></activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".HodRgistrationActivity" />
-        <activity android:name=".StudentRegistrationActivity" />
-        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".FacultyDashboard"></activity>
+        <activity android:name=".LoginActivity"></activity>
+
+
         <activity android:name=".EditStudentProActivity" />
         <activity android:name=".UpdateProImgActivity"></activity>
     </application>
