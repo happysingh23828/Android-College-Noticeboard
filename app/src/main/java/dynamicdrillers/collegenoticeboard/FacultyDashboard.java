@@ -140,8 +140,10 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);
         } else {
+
             Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedPreferenceHelper.getHodProfileName())
                     .into(NavigationProfileImage);
+            Toast.makeText(getApplicationContext(),sharedPreferenceHelper.getHodProfileName(),Toast.LENGTH_LONG).show();
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
 
