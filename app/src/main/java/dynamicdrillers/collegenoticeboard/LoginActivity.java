@@ -17,7 +17,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +26,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button BtnLogin,BtnRegistration;
+    Button BtnLogin,BtnReg;
     Spinner SpnLoginType;
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
@@ -42,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         TxtLoginUsername = findViewById(R.id.txt_login_username);
         TxtLoginPassword = findViewById(R.id.txt_login_password);
         BtnLogin = findViewById(R.id.btn_login);
-        BtnRegistration = findViewById(R.id.btn_Registration);
+        BtnReg = findViewById(R.id.btn_Registration);
+
         SpnLoginType = findViewById(R.id.spn_login_type);
         SpnLoginType.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
         SpnLoginType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,9 +79,10 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                    userLogin();
+                    if(validate())
+                      userLogin();
+            }
+        });
 
 
             }

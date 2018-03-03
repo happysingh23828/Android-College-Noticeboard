@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.View;
@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -132,7 +131,7 @@ public class AddNotice extends AppCompatActivity {
         sendnotice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(validate())
                 SendNotice();
             }
         });
@@ -140,6 +139,26 @@ public class AddNotice extends AppCompatActivity {
 
 
     }
+
+
+
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.titleValidation(title))
+            status = false;
+
+
+        if(!validation.disValidation(desc))
+            status = false;
+
+        return status;
+    }
+
+
 
     private void SendNotice() {
 

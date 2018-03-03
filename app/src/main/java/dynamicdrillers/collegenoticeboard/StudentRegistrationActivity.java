@@ -101,10 +101,34 @@ public class StudentRegistrationActivity extends AppCompatActivity {
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validate())
                 upload();
             }
         });
 
+    }
+
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.nameValidation(TxtInputlayloutName))
+            status = false;
+
+
+        if(!validation.emailValidation(TxtInputlayloutEmail))
+            status = false;
+
+        if(!validation.passwordValidation(TxtInputlayloutPassword))
+            status = false;
+
+        if(!validation.deptValidation(TxtInputlayloutEnrollment))
+            status = false;
+
+
+        return status;
     }
 
     private void upload() {

@@ -76,10 +76,35 @@ public class HodRgistrationActivity extends AppCompatActivity {
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
+                if(validate())
+                 upload();
             }
         });
     }
+
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.nameValidation(TxtInputlayloutName))
+            status = false;
+
+
+        if(!validation.emailValidation(TxtInputlayloutEmail))
+            status = false;
+
+        if(!validation.passwordValidation(TxtInputlayloutPassword))
+            status = false;
+
+        if(!validation.deptValidation(TxtInputlayloutDept))
+            status = false;
+
+
+        return status;
+    }
+
 
     private void upload() {
         final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);

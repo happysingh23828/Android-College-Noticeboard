@@ -133,6 +133,7 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:checkedButton="@+id/Male"
                 android:id="@+id/Gender"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
