@@ -17,6 +17,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.tuyenmonkey.mkloader.MKLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     String URL_LOGIN="";
     String Type[] = {"Student","Admin","Hod","Faculty"};
     String SelectedType="";
+    MKLoader loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         TxtLoginPassword = findViewById(R.id.txt_login_password);
         BtnLogin = findViewById(R.id.btn_login);
         BtnReg = findViewById(R.id.btn_Registration);
+
+        loader = findViewById(R.id.loader);
+
 
         SpnLoginType = findViewById(R.id.spn_login_type);
         SpnLoginType.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
@@ -105,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, URL_LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+              loader.setVisibility(View.VISIBLE);
                 try {
                     JSONObject user_detail = new JSONObject(response);
                     if(!user_detail.getBoolean("error"))
@@ -146,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                                     user_detail.getString("collegecity"),
                                     user_detail.getString("collegestate"));
 
-
+                        loader.setVisibility(View.GONE);
                         startActivity(new Intent(getApplicationContext(),FacultyDashboard.class));
                         finish();
                         Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
@@ -154,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
+                        loader.setVisibility(View.GONE);
                         Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
 
                     }

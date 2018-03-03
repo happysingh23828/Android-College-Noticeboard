@@ -9,9 +9,13 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +41,10 @@ public class HodRgistrationActivity extends AppCompatActivity {
     Toolbar toolbar;
     String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="";
     TextView toolbarheading;
+    Spinner SpnRole;
+    String Role_s="hod",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
+    String Type[] = {"hod","account","exam","scholarship","t&p"};
+
 
 
     @Override
@@ -49,14 +57,16 @@ public class HodRgistrationActivity extends AppCompatActivity {
         TxtInputlayloutPassword = findViewById(R.id.reg_hod_password);
         TxtInputlayloutDept = findViewById(R.id.reg_hod_department);
 
+
         Gender = findViewById(R.id.reg_hod_gender);
         RadioMale = findViewById(R.id.reg_hod_male);
         RadioFemale = findViewById(R.id.reg_hod_female);
 
+        SpnRole = findViewById(R.id.reg_hod_role);
         BtnRegister = findViewById(R.id.reg_hod_register);
 
         toolbarheading = (TextView)findViewById(R.id.notice_name);
-        toolbarheading.setText("Hod Registration");
+        toolbarheading.setText("Staf Registration");
         toolbar = (Toolbar)findViewById(R.id.hod_registration_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
@@ -80,9 +90,33 @@ public class HodRgistrationActivity extends AppCompatActivity {
                  upload();
             }
         });
+
+        SpnRole.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
+        SpnRole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LinearLayout linearLayout = (LinearLayout) SpnRole.getSelectedView();
+                TextView textView = linearLayout.findViewById(R.id.txt_type);
+                textView.setTextColor(getResources().getColor(R.color.spn));
+                Role_s = textView.getText().toString();
+                if(Role_s.equals("hod"))
+                    TxtInputlayloutDept.setEnabled(true);
+                else
+                    TxtInputlayloutDept.setEnabled(false);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
     }
 
     private boolean validate() {
+
+
 
         boolean status = true;
 
@@ -98,7 +132,8 @@ public class HodRgistrationActivity extends AppCompatActivity {
         if(!validation.passwordValidation(TxtInputlayloutPassword))
             status = false;
 
-        if(!validation.deptValidation(TxtInputlayloutDept))
+        if(Role_s.equals("hod"))
+         if(!validation.deptValidation(TxtInputlayloutDept))
             status = false;
 
 
@@ -107,6 +142,9 @@ public class HodRgistrationActivity extends AppCompatActivity {
 
 
     private void upload() {
+        if(!Role_s.equals("hod"))
+            Url=Url1;
+
         final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {
@@ -172,6 +210,13 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 map.put("Dob","2018-1-1");
                 map.put("CollegeCode",CollegeCode);
 
+                if(!Role_s.equals("hod"))
+                {
+                    map.put("Role",Role_s);
+                    map.put("TgFlag","false");
+                    map.put("TgSem","false");
+
+                }
                 return  map;
 
                 //returning parameters

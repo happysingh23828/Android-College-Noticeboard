@@ -12,12 +12,12 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="Step :  3/3"
-        android:gravity="center"
-        android:textSize="30sp"
+        android:layout_height="50dp"
         android:fontFamily="@font/new_rocker"
-        android:textColor="@android:color/white"/>
+        android:gravity="center"
+        android:text="Step :  3/3"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
 
     <LinearLayout
@@ -117,4 +117,6 @@
 
 
     </LinearLayout>
+
+
 </LinearLayout>

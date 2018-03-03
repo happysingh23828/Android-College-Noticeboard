@@ -11,22 +11,29 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:src="@drawable/logo"/>
+        android:layout_weight="1.5"
+        android:src="@drawable/logo" />
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:mk_color="#ffffff"
+        app:mk_type="TwinFishesSpinner" />
 
 
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_weight="3"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
@@ -49,8 +56,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
 
             <android.support.design.widget.TextInputLayout
@@ -78,8 +84,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <Spinner
 
@@ -95,10 +100,9 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
-            android:layout_weight="0.7"
             android:background="@drawable/whitebuttonbackground"
             android:fontFamily="sans-serif"
             android:paddingLeft="30dp"
@@ -111,10 +115,9 @@
         <Button
             android:id="@+id/btn_Registration"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
-            android:layout_weight="0.7"
             android:background="@drawable/transparentbutton"
             android:fontFamily="sans-serif"
             android:paddingLeft="30dp"
