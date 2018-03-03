@@ -46,18 +46,21 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(AdminRegCollegeActivity.this,AdminRegImgActivity.class);
-                intent1.putExtra("Name",Name);
-                intent1.putExtra("Email",Email);
-                intent1.putExtra("Password",Password);
-                intent1.putExtra("MobaileNo",MobaleNo);
-                intent1.putExtra("Date",Date);
-                intent1.putExtra("Gender",Gender);
-                intent1.putExtra("CollegeName",CollegeName.getEditText().getText().toString());
-                intent1.putExtra("CollegeCode",CollegeCode.getEditText().getText().toString());
-                intent1.putExtra("CollegeState",CollegeState.getEditText().getText().toString());
-                intent1.putExtra("CollegeCity",CollegeCity.getEditText().getText().toString());
-                startActivity(intent1);
+
+                if(validate()) {
+                    Intent intent1 = new Intent(AdminRegCollegeActivity.this, AdminRegImgActivity.class);
+                    intent1.putExtra("Name", Name);
+                    intent1.putExtra("Email", Email);
+                    intent1.putExtra("Password", Password);
+                    intent1.putExtra("MobaileNo", MobaleNo);
+                    intent1.putExtra("Date", Date);
+                    intent1.putExtra("Gender", Gender);
+                    intent1.putExtra("CollegeName", CollegeName.getEditText().getText().toString());
+                    intent1.putExtra("CollegeCode", CollegeCode.getEditText().getText().toString());
+                    intent1.putExtra("CollegeState", CollegeState.getEditText().getText().toString());
+                    intent1.putExtra("CollegeCity", CollegeCity.getEditText().getText().toString());
+                    startActivity(intent1);
+                }
 
             }
         });
@@ -79,6 +82,28 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public boolean validate(){
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.collegeNameValidation(CollegeName))
+            status = false;
+
+
+        if(!validation.collegeCodeValidation(CollegeCode))
+            status = false;
+
+        if(!validation.collegeCityValidation(CollegeCity))
+            status = false;
+
+        if(!validation.collegeStateValidation(CollegeState))
+            status = false;
+
+
+        return status;
     }
 
 }

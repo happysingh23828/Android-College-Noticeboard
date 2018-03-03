@@ -131,6 +131,7 @@
                 android:textSize="18sp" />
 
             <RadioGroup
+                android:checkedButton="@id/reg_faculty_male"
                 android:id="@+id/reg_faculty_gender"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

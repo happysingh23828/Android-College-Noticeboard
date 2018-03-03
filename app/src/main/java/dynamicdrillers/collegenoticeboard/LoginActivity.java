@@ -79,11 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                    validate();
-                    userLogin();
-
-
+                    if(validate())
+                      userLogin();
             }
         });
 
@@ -99,11 +96,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void validate() {
+    private boolean validate() {
+
+        boolean status = true;
 
         Validation validation = new Validation();
-        validation.emailValidation(TxtLoginUsername);
 
+        if(!validation.emailValidation(TxtLoginUsername))
+            status = false;
+
+        if(!validation.passwordValidation(TxtLoginPassword))
+            status = false;
+
+        return status;
     }
 
     private void userLogin() {

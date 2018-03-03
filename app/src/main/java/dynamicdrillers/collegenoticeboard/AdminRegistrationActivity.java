@@ -30,8 +30,9 @@ public class AdminRegistrationActivity extends AppCompatActivity {
     private TextView Date;
 
     private RadioGroup Gender;
+    private boolean flag=false;
     String DatePre;
-    private String Date_s,Gender_s;
+    private String Date_s,Gender_s="Male";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         MobaileNo = findViewById(R.id.MobaileNo);
         Gender = findViewById(R.id.Gender);
         Date = findViewById(R.id.Date);
+
 
 
         Intent intent = getIntent();
@@ -80,15 +82,17 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         AdminNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminRegistrationActivity.this,AdminRegCollegeActivity.class);
-                intent.putExtra("status","next");
-                intent.putExtra("Name",Name.getEditText().getText().toString());
-                intent.putExtra("Email",Email.getEditText().getText().toString());
-                intent.putExtra("Password",Passwors.getEditText().getText().toString());
-                intent.putExtra("MobaileNo",MobaileNo.getEditText().getText().toString());
-                intent.putExtra("Date",Date_s);
-                intent.putExtra("Gender",Gender_s);
-                startActivity(intent);
+                if(validate()) {
+                    Intent intent = new Intent(AdminRegistrationActivity.this, AdminRegCollegeActivity.class);
+                    intent.putExtra("status", "next");
+                    intent.putExtra("Name", Name.getEditText().getText().toString());
+                    intent.putExtra("Email", Email.getEditText().getText().toString());
+                    intent.putExtra("Password", Passwors.getEditText().getText().toString());
+                    intent.putExtra("MobaileNo", MobaileNo.getEditText().getText().toString());
+                    intent.putExtra("Date", Date_s);
+                    intent.putExtra("Gender", Gender_s);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -103,10 +107,10 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         showDate(year, month+1, day);
 
 
-
         Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                flag = true;
                 int selectedId=Gender.getCheckedRadioButtonId();
                 RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
                 Gender_s = radioSexButton.getText().toString();
@@ -116,9 +120,33 @@ public class AdminRegistrationActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
 
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.nameValidation(Name))
+            status = false;
+
+
+        if(!validation.emailValidation(Email))
+            status = false;
+
+        if(!validation.passwordValidation(Passwors))
+            status = false;
+
+        if(!validation.mobailenoValidation(MobaileNo))
+            status = false;
+
+
+        return status;
+    }
 
 
     private void showDate(int year, int month, int day) {

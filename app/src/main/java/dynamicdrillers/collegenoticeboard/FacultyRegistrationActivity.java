@@ -37,7 +37,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
     android.support.v7.widget.Toolbar toolbar;
     LinearLayout role,dept;
-    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole,TxtInputlayloutDept;
+    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutRole;
     Spinner SpnSem;
     RadioGroup Gender;
     RadioButton RadioMale,RadioFemale;
@@ -66,7 +66,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
             role.setVisibility(View.VISIBLE);
             dept.setVisibility(View.VISIBLE);
             TxtInputlayloutRole = findViewById(R.id.reg_faculty_role);
-            TxtInputlayloutDept = findViewById(R.id.reg_faculty_department);
+
         }
 
 
@@ -135,11 +135,33 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
+                if(validate())
+                    upload();
             }
         });
 
 
+    }
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.nameValidation(TxtInputlayloutName))
+            status = false;
+
+
+        if(!validation.emailValidation(TxtInputlayloutEmail))
+            status = false;
+
+        if(!validation.passwordValidation(TxtInputlayloutPassword))
+            status = false;
+
+
+
+
+        return status;
     }
 
     private void upload() {
@@ -204,17 +226,10 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
 
-                if(sharedpreferenceHelper.getType().equals("hod"))
-                {
+
                     map.put("Role","Faculty");
                     map.put("Dept",sharedpreferenceHelper.getDept());
-                }
-                else
-                {
-                    map.put("Role",TxtInputlayloutRole.getEditText().getText().toString());
-                    map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
 
-                }
                 map.put("Gender",Gender_s);
                 map.put("TgFlag",Tg_s);
                 map.put("TgSem",TgSem_s);
