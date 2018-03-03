@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     URL_LOGIN = Constants.WEB_API_URL+"StudentLogin.php";
                 }
                 else{
-                    SelectedType = "Other";
+                    SelectedType = "Faculty";
                     URL_LOGIN = Constants.WEB_API_URL+"FacultyLogin.php";
                 }
             }
@@ -85,10 +85,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-            }
-        });
 
-        BtnRegistration.setOnClickListener(new View.OnClickListener() {
+
+        BtnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getBaseContext(),AdminRegistrationActivity.class);
@@ -184,6 +183,21 @@ public class LoginActivity extends AppCompatActivity {
       MySingleton mySingleton = MySingleton.getInstance(this);
       mySingleton.addToRequestQueue(stringRequest);
 
+    }
+
+    private boolean validate() {
+
+        boolean status = true;
+
+        Validation validation = new Validation();
+
+        if(!validation.emailValidation(TxtLoginUsername))
+            status = false;
+
+        if(!validation.passwordValidation(TxtLoginPassword))
+            status = false;
+
+        return status;
     }
 
 

@@ -151,7 +151,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(UpdateProImgActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UpdateProImgActivity.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

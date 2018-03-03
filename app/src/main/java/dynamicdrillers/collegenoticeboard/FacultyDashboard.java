@@ -55,7 +55,6 @@ public class FacultyDashboard extends AppCompatActivity {
         String SharedprefenceName = "USER_DATA";
         SharedPreferences sharedPreference = FacultyDashboard.this.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
 
-        Toast.makeText(this,sharedPreference.getString("name","raj").toString() , Toast.LENGTH_SHORT).show();
 
 
         ProfileIcon = (ImageView) findViewById(R.id.profileIcon);
@@ -155,7 +154,6 @@ public class FacultyDashboard extends AppCompatActivity {
 
             Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedPreferenceHelper.getHodProfileName())
                     .into(NavigationProfileImage);
-            Toast.makeText(getApplicationContext(),sharedPreferenceHelper.getHodProfileName(),Toast.LENGTH_LONG).show();
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
 
@@ -272,7 +270,6 @@ public class FacultyDashboard extends AppCompatActivity {
 
         final SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
         final String token = FirebaseInstanceId.getInstance().getToken();
-        Toast.makeText(getBaseContext(),token,Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendToken.php", new Response.Listener<String>() {
             @Override

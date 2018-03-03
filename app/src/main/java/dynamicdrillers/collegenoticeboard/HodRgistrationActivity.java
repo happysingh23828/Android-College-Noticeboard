@@ -142,7 +142,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(HodRgistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(HodRgistrationActivity.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override
