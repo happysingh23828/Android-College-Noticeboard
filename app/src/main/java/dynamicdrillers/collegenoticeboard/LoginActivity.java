@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         loader = findViewById(R.id.loader);
 
 
+
         SpnLoginType = findViewById(R.id.spn_login_type);
         SpnLoginType.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
         SpnLoginType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
