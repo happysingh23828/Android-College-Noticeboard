@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button BtnLogin;
+    Button BtnLogin,BtnRegistration;
     Spinner SpnLoginType;
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         TxtLoginUsername = findViewById(R.id.txt_login_username);
         TxtLoginPassword = findViewById(R.id.txt_login_password);
         BtnLogin = findViewById(R.id.btn_login);
-
+        BtnRegistration = findViewById(R.id.btn_Registration);
         SpnLoginType = findViewById(R.id.spn_login_type);
         SpnLoginType.setAdapter(new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Type));
         SpnLoginType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,6 +84,15 @@ public class LoginActivity extends AppCompatActivity {
                     userLogin();
 
 
+            }
+        });
+
+        BtnRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(),AdminRegistrationActivity.class);
+                i.putExtra("status","");
+                startActivity(i);
             }
         });
     }

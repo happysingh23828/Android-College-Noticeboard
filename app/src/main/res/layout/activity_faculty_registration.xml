@@ -30,12 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_perm_identity_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/reg_faculty_name"
@@ -43,10 +38,11 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_person"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
-                    android:textColor="@android:color/background_light" />
+                    android:hint="  Name"
+                    android:textColor="@android:color/background_light"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -56,13 +52,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_email_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/reg_faculty_email"
@@ -70,9 +60,10 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="   Email"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -81,13 +72,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_lock_white_24dp" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/reg_faculty_password"
@@ -96,11 +80,13 @@
                 app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableStart="@drawable/ic_lock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:textColor="@android:color/background_light" />
+                    android:textColor="@android:color/background_light"
+                    android:drawableLeft="@drawable/ic_lock"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -110,13 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_supervisor_account_white_24dp" />
 
             <TextView
                 android:id="@+id/textView"
@@ -164,13 +143,7 @@
             android:visibility="gone"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_rele" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/reg_faculty_role"
@@ -178,9 +151,10 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_person"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Role"
+                    android:hint="  Role"
                     android:textColor="@android:color/background_light" />
 
             </android.support.design.widget.TextInputLayout>
@@ -193,12 +167,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_dept" />
+
 
             <android.support.design.widget.TextInputLayout
 
@@ -207,9 +176,10 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_college"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Department"
+                    android:hint="  Department"
                     android:textColor="@android:color/background_light" />
 
             </android.support.design.widget.TextInputLayout>
@@ -222,13 +192,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
 
-            <ImageView
-
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_supervisor_account_white_24dp" />
 
             <TextView
 
@@ -238,7 +201,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.8"
-                android:text="TG"
+                android:text="  TG"
+                android:drawableLeft="@drawable/ic_gender"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp" />
 
@@ -258,12 +222,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/mark" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -289,16 +247,16 @@
 
         <Button
             android:id="@+id/reg_faculty_register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_margin="5dp"
-            android:background="@drawable/nextshap"
+            android:background="@drawable/whitebuttonbackground"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="Register"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

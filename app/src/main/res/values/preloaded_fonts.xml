@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/allerta_stencil</item>
         <item>@font/bevan</item>
         <item>@font/bungee</item>
+        <item>@font/bungee_inline</item>
+        <item>@font/changa_one</item>
         <item>@font/ewert</item>
+        <item>@font/galada</item>
+        <item>@font/new_rocker</item>
+        <item>@font/nosifer</item>
     </array>
 </resources>

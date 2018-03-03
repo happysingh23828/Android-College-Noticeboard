@@ -101,7 +101,7 @@
                     android:textSize="15sp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:alpha="0.7"
+                    android:alpha="0.85"
                     android:layout_marginTop="10dp"/>
 
 

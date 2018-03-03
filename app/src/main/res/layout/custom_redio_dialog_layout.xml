@@ -72,6 +72,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Button" />
+            android:text="Button"
+            android:textColor="@android:color/black"
+            android:background="@drawable/whitebuttonbackground"/>
     </LinearLayout>
 </LinearLayout>

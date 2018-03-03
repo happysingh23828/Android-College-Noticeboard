@@ -8,24 +8,26 @@
     android:orientation="vertical"
     tools:context="dynamicdrillers.collegenoticeboard.LoginActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:src="@drawable/logo"/>
+
+
     <LinearLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="20dp"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_perm_identity_white_24dp" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/txt_login_username"
@@ -35,23 +37,21 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Your Email"
+                    android:drawableLeft="@drawable/ic_person"
+                    android:fontFamily="@font/allerta_stencil"
+                    android:hint="  Email"
+                    android:inputType="text"
+                    android:lines="1"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_lock_white_24dp"
-                />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/txt_login_password"
@@ -59,11 +59,17 @@
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true">
 
+
                 <android.support.design.widget.TextInputEditText
+
                     android:id="@+id/edt_login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Your Password"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawableStart="@drawable/ic_lock"
+                    android:fontFamily="@font/allerta_stencil"
+                    android:hint="Password"
+
                     android:inputType="textPassword"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
@@ -72,36 +78,50 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/mark" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <Spinner
+
                 android:id="@+id/spn_login_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:textColor="@color/ColorName"/>
+                android:textColor="@color/ColorName" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
-            android:background="@drawable/nextshap"
+            android:layout_weight="0.7"
+            android:background="@drawable/whitebuttonbackground"
+            android:fontFamily="sans-serif"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:text="Login"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_Registration"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.7"
+            android:background="@drawable/transparentbutton"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="Register Your College"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

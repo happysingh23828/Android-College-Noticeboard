@@ -9,17 +9,26 @@
     android:layout_height="match_parent"
     tools:context="dynamicdrillers.collegenoticeboard.AdminRegImgActivity">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Step :  3/3"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/new_rocker"
+        android:textColor="@android:color/white"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -28,7 +37,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/ic_person" />
 
             <Button
                 android:id="@+id/AdminImgBtn"
@@ -37,16 +46,16 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/adminimg"
-                android:text="Admin  Img"
+                android:background="@drawable/whitebuttonbackground"
+                android:text="Choose Profile"
                 android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -55,7 +64,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/ic_action_name" />
 
             <Button
                 android:id="@+id/CollegeLogoBtn"
@@ -64,44 +73,48 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/collegelogo"
-                android:text="College Logo"
+                android:background="@drawable/whitebuttonbackground"
+                android:text="Choose College Logo"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="right">
-
+        android:padding="10dp"
+        android:gravity="center">
         <Button
             android:id="@+id/btn_reg_img_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/preshap"
+            android:background="@drawable/transparentbutton"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="prev"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/RegisterAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/nextshap"
+            android:background="@drawable/whitebuttonbackground"
+
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Submit"
-            android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            android:text="Register Your College"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+
 
     </LinearLayout>
 </LinearLayout>

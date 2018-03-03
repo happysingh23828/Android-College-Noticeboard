@@ -31,9 +31,6 @@
             android:name=".NoticePostShow"
             android:parentActivityName=".FacultyDashboard" />
         <activity
-            android:name=".ProfileActivity"
-            android:parentActivityName=".FacultyDashboard" />
-        <activity
             android:name=".HodRgistrationActivity"
             android:parentActivityName=".HodList" />
         <activity
@@ -41,9 +38,6 @@
             android:parentActivityName=".FacultyDashboard" />
         <activity
             android:name=".YourNotices"
-            android:parentActivityName=".FacultyDashboard" />
-        <activity
-            android:name=".EditProfile"
             android:parentActivityName=".FacultyDashboard" />
         <activity
             android:name=".AboutApp"
@@ -64,8 +58,12 @@
         <activity android:name=".AddNotice"></activity>
         <activity android:name=".FacultyDashboard"></activity>
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".FacultyRegistrationActivity"></activity>
+        <activity android:name=".AdminRegistrationActivity"></activity>
+        <activity android:name=".AdminRegCollegeActivity"></activity>
+        <activity android:name=".AdminRegImgActivity"></activity>
 
-        <activity android:name=".EditStudentProActivity" />
+
         <activity android:name=".UpdateProImgActivity"></activity>
     </application>
 

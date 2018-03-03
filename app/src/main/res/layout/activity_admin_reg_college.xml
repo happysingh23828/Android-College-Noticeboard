@@ -8,25 +8,28 @@
     android:orientation="vertical"
     tools:context="dynamicdrillers.collegenoticeboard.AdminRegCollegeActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Step :  2/3"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/new_rocker"
+        android:textColor="@android:color/white"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_location_city_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/CollegeName"
@@ -41,7 +44,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="CollegeName"
+                    android:drawableLeft="@drawable/ic_college"
+                    android:hint="  Enter Your College Name"
+                    android:inputType="text"
+                    android:lines="2"
                     android:textColor="@android:color/background_light"
                     android:textColorHighlight="@android:color/background_light"
                     android:textColorHint="@android:color/background_light"
@@ -53,13 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_code_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/CollegeCode"
@@ -71,8 +71,11 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_code"
                     android:layout_weight="1"
-                    android:hint="CollegeCode"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:hint="  Enter Your College Code"
                     android:textColor="@android:color/background_light" />
 
             </android.support.design.widget.TextInputLayout>
@@ -82,13 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_location_on_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/CollegeState"
@@ -98,10 +95,13 @@
                 tools:layout_editor_absoluteY="38dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_collegestate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="CollegeState"
+                    android:hint="  Enter State"
+                    android:inputType="text"
+                    android:lines="1"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -110,13 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_location_on_white_24dp" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/CollegeCity"
@@ -130,7 +124,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="CollegeCity"
+                    android:drawableLeft="@drawable/ic_collegestate"
+                    android:hint="  Enter Your CollegeCity"
+                    android:inputType="text"
+                    android:lines="1"
                     android:textColor="@android:color/background_light"
                     android:textColorHighlight="@android:color/background_light"
                     android:textColorHint="@android:color/background_light"
@@ -151,12 +148,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/preshap"
+                android:background="@drawable/transparentbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="prev"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/AdminCollegeNext"
@@ -164,12 +161,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/nextshap"
+                android:background="@drawable/whitebuttonbackground"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="next"
-                android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </LinearLayout>

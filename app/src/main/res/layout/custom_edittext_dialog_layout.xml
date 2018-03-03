@@ -33,7 +33,10 @@
             android:id="@+id/dialog_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Change"
+            android:background="@drawable/whitebuttonbackground"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"/>
     </LinearLayout>
 
 

@@ -175,7 +175,7 @@ public class FacultyDashboard extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.editProfile:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(getApplicationContext(),EditProfile.class));
+                        startActivity(new Intent(getApplicationContext(),StudentProfileActivity.class));
                         break;
 
                     case R.id.ProfileLogout:

@@ -48,10 +48,10 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/adminimg"
-                    android:text="Select  Img"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    android:background="@drawable/transparentbutton"
+                    android:text="Select  Image"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/edit_pro_update_img"
@@ -61,10 +61,10 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/adminimg"
-                    android:text="Update  Img"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    android:background="@drawable/whitebuttonbackground"
+                    android:text="Update  Image"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </LinearLayout>
