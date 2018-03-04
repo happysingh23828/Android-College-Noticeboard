@@ -120,11 +120,18 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
+                            {
+                                spotsDialog.dismiss();
                                 Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
-                        }
 
+                            }
+                        }
                         else
+                        {
+                            spotsDialog.dismiss();
                             Toast.makeText(holder.itemView.getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
+
+                        }
 
                     }
                 });

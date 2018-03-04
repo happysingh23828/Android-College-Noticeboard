@@ -119,12 +119,18 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
+                            {
+                                spotsDialog.dismiss();
                                 Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
-                        }
 
+                            }
+                        }
                         else
+                        {
+                            spotsDialog.dismiss();
                             Toast.makeText(holder.itemView.getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
 
+                        }
                     }
                 });
 

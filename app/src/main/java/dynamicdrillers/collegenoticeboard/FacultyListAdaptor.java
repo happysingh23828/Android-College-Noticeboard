@@ -196,11 +196,18 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
+                            {
+                                spotsDialog.dismiss();
                                 Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
-                        }
 
+                            }
+                        }
                         else
+                        {
+                            spotsDialog.dismiss();
                             Toast.makeText(holder.itemView.getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
+
+                        }
 
                     }
                 });

@@ -95,6 +95,7 @@ public class FacultyList extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i=0;i<jsonArray.length();i++)
                     {
+                        
                         JSONObject Faculty_details  = jsonArray.getJSONObject(i);
 
                         Faculty faculty = new Faculty(Faculty_details.getString("name"),Faculty_details.getString("email")

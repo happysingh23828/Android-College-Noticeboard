@@ -308,16 +308,13 @@ public class StudentProfileActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                    Toast.makeText(StudentProfileActivity.this,i+"",Toast.LENGTH_LONG).show();
                      if(i==R.id.male){
                          Gender_s="Male";
-                         Toast.makeText(StudentProfileActivity.this,Gender_s,Toast.LENGTH_LONG).show();
                      }
                      else
                      {
                          Gender_s="Female";
-                         Toast.makeText(StudentProfileActivity.this,Gender_s,Toast.LENGTH_LONG).show();
-                     }
+                       }
 
                 }
             });
