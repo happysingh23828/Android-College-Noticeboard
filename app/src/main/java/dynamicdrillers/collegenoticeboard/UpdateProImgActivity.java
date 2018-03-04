@@ -120,7 +120,6 @@ public class UpdateProImgActivity extends AppCompatActivity {
 
 
     private void upload() {
-        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.WEB_API_URL+"HodImg.php",
                 new Response.Listener<String>() {
                     @Override
