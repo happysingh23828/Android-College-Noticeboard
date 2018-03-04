@@ -2,7 +2,9 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class LoginActivity extends AppCompatActivity {
 
     Button BtnLogin,BtnReg;
@@ -32,8 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout TxtLoginUsername,TxtLoginPassword;
     String URL_LOGIN="";
     String Type[] = {"Student","Admin","Hod","Faculty"};
+    SpotsDialog alertDialog;
     String SelectedType="";
-    MKLoader loader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin = findViewById(R.id.btn_login);
         BtnReg = findViewById(R.id.btn_Registration);
 
-        loader = findViewById(R.id.loader);
+        alertDialog  = new SpotsDialog(this);
+        alertDialog.create();
 
 
 
@@ -86,7 +92,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     if(validate())
-                      userLogin();
+                    {
+                        userLogin();
+                        alertDialog.show();
+                    }
+
+
+
             }
         });
 
@@ -111,12 +123,13 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, URL_LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-              loader.setVisibility(View.VISIBLE);
+
                 try {
                     JSONObject user_detail = new JSONObject(response);
                     if(!user_detail.getBoolean("error"))
                     {
-
+                        alertDialog.dismiss();
+                        Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
                         SharedpreferenceHelper sharedPreferenceHelper = SharedpreferenceHelper.getInstance(LoginActivity.this);
                         sharedPreferenceHelper.userlogin(user_detail.getString("name"),user_detail.getString("email")
                                 ,user_detail.getString("collegecode")
@@ -139,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                                    );
                         }
 
-                        else if(SelectedType.equals("Other"))
+                        else if(SelectedType.equals("Faculty"))
                             sharedPreferenceHelper.otherUser(user_detail.getString("role")
                             ,user_detail.getString("personprofile"),user_detail.getString("dept")
                             ,user_detail.getInt("tgflag")
@@ -152,20 +165,20 @@ public class LoginActivity extends AppCompatActivity {
                                     user_detail.getString("collegecity"),
                                     user_detail.getString("collegestate"));
 
-                        loader.setVisibility(View.GONE);
+
                         startActivity(new Intent(getApplicationContext(),FacultyDashboard.class));
                         finish();
-                        Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
 
                     }
                     else
                     {
-                        loader.setVisibility(View.GONE);
+                        alertDialog.dismiss();
                         Toast.makeText(getBaseContext(),user_detail.getString("message"),Toast.LENGTH_SHORT).show();
 
                     }
 
                 } catch (JSONException e) {
+                    alertDialog.dismiss();
                     e.printStackTrace();
                 }
 
@@ -173,8 +186,10 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                alertDialog.dismiss();
 
-                error.printStackTrace();
+                Toast.makeText(getBaseContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
+
             }
         }){
             @Override

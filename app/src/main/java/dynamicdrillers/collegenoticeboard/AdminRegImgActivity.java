@@ -1,5 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,6 +29,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class AdminRegImgActivity extends AppCompatActivity {
 
     Button AdminImgBtn,CollegeLogoBtn,RegisterAdmin,BtnPrev;
@@ -49,6 +52,7 @@ public class AdminRegImgActivity extends AppCompatActivity {
     String CollegeCode="";
     String CollegeState="";
     String CollegeCity="";
+    SpotsDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,8 @@ public class AdminRegImgActivity extends AppCompatActivity {
         CollegeLogo = findViewById(R.id.CollegeLogo);
 
         BtnPrev = findViewById(R.id.btn_reg_img_prev);
-
+        alertDialog  = new SpotsDialog(this);
+        alertDialog.create();
         AdminImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +104,7 @@ public class AdminRegImgActivity extends AppCompatActivity {
 
 
                      upload();
+                     alertDialog.show();
 
                  }
              }
@@ -171,12 +177,13 @@ public class AdminRegImgActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+                        alertDialog.dismiss();
 
                         try {
                             JSONObject user_detail = new JSONObject(s);
                             if(user_detail.getBoolean("error"))
                             {
+
                                 Toast.makeText(AdminRegImgActivity.this, user_detail.getString("message"), Toast.LENGTH_LONG).show();
 
                             }
@@ -197,6 +204,9 @@ public class AdminRegImgActivity extends AppCompatActivity {
                                         user_detail.getString("collegecity"),
                                         user_detail.getString("collegestate"));
 
+                                Toast.makeText(AdminRegImgActivity.this, "You Registered Succeccfuly", Toast.LENGTH_LONG).show();
+
+
                                 Intent intent = new Intent(AdminRegImgActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
@@ -213,11 +223,11 @@ public class AdminRegImgActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                       alertDialog.dismiss();
 
                         //Showing toast
-                        Toast.makeText(AdminRegImgActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
+
+                        }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

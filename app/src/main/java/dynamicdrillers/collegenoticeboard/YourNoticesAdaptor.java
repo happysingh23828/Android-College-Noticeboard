@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by Happy-Singh on 3/1/2018.
@@ -34,6 +35,7 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
 
     List<Notice> noticelist;
     Context context;
+    SpotsDialog spotsDialog;
 
     public YourNoticesAdaptor(List<Notice> noticelist) {
         this.noticelist = noticelist;
@@ -49,6 +51,7 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
 
     @Override
     public void onBindViewHolder(final YourNoticesViewHolder holder, int position) {
+        spotsDialog  = new SpotsDialog(holder.itemView.getContext());
         final SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
         final Notice notice = noticelist.get(position);
 
@@ -100,6 +103,8 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        spotsDialog.show();
+
 
 
 
@@ -107,6 +112,7 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+                                        spotsDialog.dismiss();
 
                                         try {
 
@@ -124,7 +130,8 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                spotsDialog.dismiss();
+                                Toast.makeText(holder.itemView.getContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
 
                             }

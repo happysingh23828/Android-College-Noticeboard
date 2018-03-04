@@ -46,6 +46,9 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
         final SharedpreferenceHelper sharedpreferenceHelper  = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
         String checkTypeFlag =  sharedpreferenceHelper.getType();
 
+
+
+
         if(position==3)
         {
             if(checkTypeFlag.equals("student"))

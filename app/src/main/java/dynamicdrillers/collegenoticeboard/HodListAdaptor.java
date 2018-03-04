@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by Happy-Singh on 2/28/2018.
@@ -33,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstViewHolder>{
 
     List<Hod> hodlist;
+    SpotsDialog spotsDialog;
 
     public HodListAdaptor(List<Hod> hodlist) {
         this.hodlist = hodlist;
@@ -48,6 +50,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
     @Override
     public void onBindViewHolder(final HodlIstViewHolder holder, int position) {
 
+        spotsDialog = new SpotsDialog(holder.itemView.getContext());
         final Hod hod = hodlist.get(position);
 
         holder.HodName.setText(hod.getName());
@@ -68,14 +71,17 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+
                         if(newpassword.getText().length()>1)
                         {
                             if(newpassword.getText().toString().equals(confirmpassword.getText().toString()))
                             {
                                 StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "ChangePassword.php",
                                         new Response.Listener<String>() {
+
                                             @Override
                                             public void onResponse(String response) {
+
 
                                                 try {
 
@@ -93,6 +99,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                         }, new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
+
                                         Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
 
@@ -112,7 +119,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
-                                Toast.makeText(holder.itemView.getContext(),"Password Doen Not Matched",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
                         }
 
                         else
@@ -135,16 +142,20 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
             public void onClick(View v) {
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+
+
                 alert.setTitle("All The Data Of User Will Be Lost?  ");
 
                 alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+
                         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "AdminDeleteHod.php",
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+
 
                                         try {
 
@@ -161,6 +172,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+
                                 Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
 

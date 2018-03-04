@@ -12,6 +12,14 @@
         <item android:id="@+id/Faculties"
             android:title="Faculties"
             android:icon="@drawable/ic_faculties"
+
+            >
+        </item>
+
+        <item android:id="@+id/notfacultynotices"
+            android:title=" Notices"
+            android:visible="false"
+            android:icon="@drawable/ic_notice"
             >
         </item>
 

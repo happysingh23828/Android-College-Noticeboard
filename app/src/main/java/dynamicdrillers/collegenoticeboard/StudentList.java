@@ -1,6 +1,7 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class StudentList extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -34,11 +37,14 @@ public class StudentList extends AppCompatActivity {
     List<Student> studentList = new ArrayList<Student>();
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
     String FacultyEmail = sharedpreferenceHelper.getEmail();
+    SpotsDialog spotsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list);
+
+        spotsDialog  = new SpotsDialog(this);
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
         toolbaraddhodicon = (ImageView)findViewById(R.id.addpersonicon);
         toolbar = (Toolbar)findViewById(R.id.studentlisttoolbar);
@@ -56,6 +62,7 @@ public class StudentList extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.studentlistrecylerview);
         showStudentList();
+        spotsDialog.show();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new StudentListAdaptor(studentList));
 
@@ -84,9 +91,10 @@ public class StudentList extends AppCompatActivity {
                     }
 
 
-
+                spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getBaseContext(),"There Is No Student",Toast.LENGTH_LONG).show();
+                    spotsDialog.dismiss();
+                    Snackbar.make(getCurrentFocus(),"Please Try Again",3000).show();
                     e.printStackTrace();
                 }
 
@@ -94,7 +102,10 @@ public class StudentList extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
                 error.printStackTrace();
+                Snackbar.make(getCurrentFocus(),"Some Network Issues",3000).show();
+
 
             }
         }){

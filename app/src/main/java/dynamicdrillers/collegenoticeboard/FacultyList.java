@@ -25,12 +25,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class FacultyList extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolbarheading;
     ImageView toolbaraddhodicon;
     RecyclerView recyclerView;
+    SpotsDialog spotsDialog;
     List<Faculty> facultyList = new ArrayList<Faculty>();
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
     String HODCollegecode=sharedpreferenceHelper.getCollegeCode();
@@ -42,19 +45,37 @@ public class FacultyList extends AppCompatActivity {
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
         toolbaraddhodicon = (ImageView)findViewById(R.id.addpersonicon);
         toolbar = (Toolbar)findViewById(R.id.faultyaddtoolbar);
+
+
+        spotsDialog = new SpotsDialog(this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbarheading.setText("Faculty's List");
-        toolbaraddhodicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),FacultyRegistrationActivity.class));
-            }
-        });
+        if(sharedpreferenceHelper.getType().equals("admin"))
+        {
+            toolbaraddhodicon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),HodRgistrationActivity.class));
+                }
+            });
+        }
+        else
+        {
+            toolbaraddhodicon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),FacultyRegistrationActivity.class));
+                }
+            });
+        }
+
 
         showFacultyList();
+        spotsDialog.show();
         recyclerView =(RecyclerView)findViewById(R.id.facultylistrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
@@ -85,18 +106,22 @@ public class FacultyList extends AppCompatActivity {
 
                         facultyList.add(faculty);
                     }
+                    spotsDialog.dismiss();
 
 
 
                 } catch (JSONException e) {
+                    spotsDialog.dismiss();
                     Toast.makeText(getBaseContext(),"There Is No Faculty",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
                 error.printStackTrace();
 
             }

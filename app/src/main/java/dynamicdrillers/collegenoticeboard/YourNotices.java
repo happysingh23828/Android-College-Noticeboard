@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 import static dynamicdrillers.collegenoticeboard.ShowNoticeByType.GET_COLLEGE_NOTICE_URL;
 import static dynamicdrillers.collegenoticeboard.ShowNoticeByType.GET_TG_NOTICE_URL;
 
@@ -40,6 +42,7 @@ public class YourNotices extends AppCompatActivity {
     YourNoticesAdaptor yourNoticesAdaptor;
     String Notice_Type = "";
     TextView notice_list_heading;
+    SpotsDialog spotsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class YourNotices extends AppCompatActivity {
         setContentView(R.layout.activity_your_notices);
 
 
+        spotsDialog  = new SpotsDialog(this);
         final String tgnoticeflag = getIntent().getStringExtra("istgnotice");
         final String noticeflagtype = getIntent().getStringExtra("noticetype");
 
@@ -75,7 +79,7 @@ public class YourNotices extends AppCompatActivity {
         });
 
         // Checking Which person Calling Which Notices List
-
+        spotsDialog.show();
         if(tgnoticeflag.equals("yes"))
         {
             Notice_Type = "tg";
@@ -111,6 +115,7 @@ public class YourNotices extends AppCompatActivity {
         else
         {
             Notice_Type = sharedpreferenceHelper.getRole();
+            showCollegeNotice();
         }
 
         notice_list_heading.setText("Your Sent "+Notice_Type.toUpperCase()+" Notices ");
@@ -145,8 +150,10 @@ public class YourNotices extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),"There Is No Tg Notice..",Toast.LENGTH_LONG).show();
+                    spotsDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),"There Is No Dept Notice..",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -154,8 +161,9 @@ public class YourNotices extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -194,9 +202,10 @@ public class YourNotices extends AppCompatActivity {
                                 ,singleNotice.getString("image")
                                 ,singleNotice.getString("authoremail"),Notice_Type);
                         noticelist.add(notice);
-
+                spotsDialog.dismiss();
                     }
                 } catch (JSONException e) {
+                    spotsDialog.dismiss();
                     Toast.makeText(getApplicationContext(),"There Is No Tg Notice..",Toast.LENGTH_LONG).show();
 
                 }
@@ -205,8 +214,9 @@ public class YourNotices extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -245,8 +255,10 @@ public class YourNotices extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),"There Is No Notice..",Toast.LENGTH_LONG).show();
+                    spotsDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),"There Is No College Notice..",Toast.LENGTH_LONG).show();
 
                 }
 
@@ -254,8 +266,9 @@ public class YourNotices extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
             }
         }){

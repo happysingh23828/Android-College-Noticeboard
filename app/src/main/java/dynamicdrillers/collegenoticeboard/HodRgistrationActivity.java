@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class HodRgistrationActivity extends AppCompatActivity {
 
     TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutDept;
@@ -39,11 +41,13 @@ public class HodRgistrationActivity extends AppCompatActivity {
     RadioButton RadioMale,RadioFemale;
     Button BtnRegister;
     Toolbar toolbar;
+
     String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="";
     TextView toolbarheading;
     Spinner SpnRole;
     String Role_s="hod",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
-    String Type[] = {"hod","account","exam","scholarship","t&p"};
+    String Type[] = {"Account","Hod","Scholarship","TNP"};
+    SpotsDialog spotsDialog;
 
 
 
@@ -52,6 +56,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hod_rgistration);
 
+        spotsDialog = new SpotsDialog(this);
         TxtInputlayloutName = findViewById(R.id.reg_hod_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_hod_email);
         TxtInputlayloutPassword = findViewById(R.id.reg_hod_password);
@@ -66,7 +71,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         BtnRegister = findViewById(R.id.reg_hod_register);
 
         toolbarheading = (TextView)findViewById(R.id.notice_name);
-        toolbarheading.setText("Staf Registration");
+        toolbarheading.setText("Staff Registration");
         toolbar = (Toolbar)findViewById(R.id.hod_registration_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
@@ -79,15 +84,16 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 int selectedId=Gender.getCheckedRadioButtonId();
                 RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
                 Gender_s = radioSexButton.getText().toString();
-                Toast.makeText(HodRgistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
-            }
+                    }
         });
 
         BtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate())
-                 upload();
+                if(validate()){
+                    upload();
+                    spotsDialog.show();
+                }
             }
         });
 
@@ -99,10 +105,10 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.spn));
                 Role_s = textView.getText().toString();
-                if(Role_s.equals("hod"))
-                    TxtInputlayloutDept.setEnabled(true);
+                if(Role_s.equals("Hod"))
+                    TxtInputlayloutDept.setVisibility(View.VISIBLE);
                 else
-                    TxtInputlayloutDept.setEnabled(false);
+                    TxtInputlayloutDept.setVisibility(View.GONE);
 
             }
 
@@ -151,12 +157,14 @@ public class HodRgistrationActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
                             if(!jsonObject.getBoolean("error"))
                             {
+                                Toast.makeText(HodRgistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+
                                 Intent intent = new Intent(HodRgistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
@@ -177,10 +185,10 @@ public class HodRgistrationActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         //Showing toast
-                        Toast.makeText(HodRgistrationActivity.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(HodRgistrationActivity.this, "Some Network Issues", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

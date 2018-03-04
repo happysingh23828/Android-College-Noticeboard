@@ -26,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     private TextView Date;
     private String Date_s;
     private Calendar calendar;
+    SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
 
 
     @Override
@@ -67,6 +69,29 @@ public class StudentProfileActivity extends AppCompatActivity {
         EditEmail = findViewById(R.id.pro_edit_email);
         EditName = findViewById(R.id.pro_edit_name);
         EditGender = findViewById(R.id.pro_edit_gender);
+
+        ProImg = (CircleImageView)findViewById(R.id.pro_img);
+
+        if (sharedpreferenceHelper.getType().equals("other")) {
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .into(ProImg);
+
+        }
+        else if(sharedpreferenceHelper.getType().equals("student")) {
+
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .into(ProImg);
+        }
+        else if (sharedpreferenceHelper.getType().equals("admin")) {
+
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .into(ProImg);
+        }
+        else {
+
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .into(ProImg);
+        }
 
         EditMobaile = findViewById(R.id.pro_edit_mobaileno);
 
@@ -246,9 +271,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TxtDob.setText(sharedPreference.getString("dob",null));
                 showDialog(999);
-                Toast.makeText(getApplicationContext(), "ca",
-                        Toast.LENGTH_SHORT)
-                        .show();
+
             }
         });
 
@@ -380,7 +403,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                         loading.dismiss();
 
                         //Showing toast
-                        Toast.makeText(StudentProfileActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(StudentProfileActivity.this, "Some Netwok Issues", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

@@ -99,7 +99,8 @@
             android:textStyle="bold"
             android:layout_gravity="left"
             android:textSize="15sp"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:textColor="@android:color/black"
             style="@style/Widget.AppCompat.Button.Colored"/>
 
         <ImageView

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by Happy-Singh on 2/28/2018.
@@ -33,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.StudentListViewHolder> {
 
     List<Student> studentList;
+    SpotsDialog spotsDialog;
 
     public StudentListAdaptor(List<Student> studentList) {
         this.studentList = studentList;
@@ -48,6 +50,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
     @Override
     public void onBindViewHolder(final StudentListViewHolder holder, int position) {
 
+        spotsDialog = new SpotsDialog(holder.itemView.getContext());
         final Student student = studentList.get(position);
 
         holder.studentName.setText(student.getName());
@@ -68,6 +71,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                 builder.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        spotsDialog.show();
 
                         if(newpassword.getText().length()>1)
                         {
@@ -75,8 +79,10 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                             {
                                 StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "ChangePassword.php",
                                         new Response.Listener<String>() {
+
                                             @Override
                                             public void onResponse(String response) {
+                                                spotsDialog.dismiss();
 
                                                 try {
 
@@ -94,7 +100,8 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                         }, new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                        spotsDialog.dismiss();
+                                        Toast.makeText(holder.itemView.getContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
 
                                     }
@@ -113,7 +120,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
-                                Toast.makeText(holder.itemView.getContext(),"Password Doen Not Matched",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
                         }
 
                         else
@@ -152,11 +159,13 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                 alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        spotsDialog.show();
 
                         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "FacultyDeleteStudent.php",
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+                                        spotsDialog.dismiss();
 
                                         try {
 
@@ -169,11 +178,13 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                             e.printStackTrace();
                                         }
 
+
                                     }
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                spotsDialog.dismiss();
+                                Toast.makeText(holder.itemView.getContext(),"Some Network Issuses",Toast.LENGTH_SHORT).show();
 
 
                             }

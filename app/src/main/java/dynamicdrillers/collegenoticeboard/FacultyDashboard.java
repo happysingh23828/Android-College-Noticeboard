@@ -31,6 +31,8 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class FacultyDashboard extends AppCompatActivity {
 
     Button button;
@@ -42,6 +44,7 @@ public class FacultyDashboard extends AppCompatActivity {
     Menu menu;
     ImageView ProfileIcon, NavigationProfileImage, CollegeLogo;
     TextView NavigationText1, NavigationText2, NavigationText3, CollegeName, CollegeAddress;
+    SpotsDialog spotsDialog;
 
 
 
@@ -68,7 +71,7 @@ public class FacultyDashboard extends AppCompatActivity {
 
 
 
-
+        spotsDialog = new SpotsDialog(this);
 
         //Setting college Details In Main toolbar
         CollegeLogo = (ImageView) findViewById(R.id.toolbar_college_logo);
@@ -114,6 +117,13 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText2.setText("DEPT : " + sharedPreferenceHelper.getDept());
             NavigationText3.setText("ROLE : " + sharedPreferenceHelper.getRole());
 
+            if(!sharedPreferenceHelper.getRole().equals("Faculty"))
+            {
+                menu.findItem(R.id.dept_notices).setVisible(false);
+                menu.findItem(R.id.notfacultynotices).setTitle(sharedPreferenceHelper.getRole().toUpperCase()+" Notices");
+                menu.findItem(R.id.notfacultynotices).setVisible(true);
+
+            }
             menu.findItem(R.id.college_notices).setVisible(false);
             menu.findItem(R.id.HeadOfDept).setVisible(false);
             menu.findItem(R.id.Faculties).setVisible(false);
@@ -144,9 +154,7 @@ public class FacultyDashboard extends AppCompatActivity {
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("CollegeCode :" + sharedPreferenceHelper.getCollegeCode());
 
-
             menu.findItem(R.id.events_notice).setVisible(false);
-            menu.findItem(R.id.Faculties).setVisible(false);
             menu.findItem(R.id.dept_notices).setVisible(false);
             menu.findItem(R.id.Students).setVisible(false);
             menu.findItem(R.id.your_notices).setVisible(false);
@@ -198,9 +206,11 @@ public class FacultyDashboard extends AppCompatActivity {
                         startActivity(l);
                         break;
 
+
                     case R.id.HeadOfDept:
                         drawerLayout.closeDrawer(Gravity.START);
-                        startActivity(new Intent(FacultyDashboard.this, HodList.class));
+                        Intent n = new Intent(getApplicationContext(),HodList.class);
+                        startActivity(n);
                         break;
 
                     case R.id.your_notices:
@@ -210,6 +220,13 @@ public class FacultyDashboard extends AppCompatActivity {
                         i.putExtra("noticetype","no");
                         startActivity(i);
                         break;
+
+                    case R.id.notfacultynotices:
+                        drawerLayout.closeDrawer(Gravity.START);
+                        Intent p = new Intent(getApplicationContext(),YourNotices.class);
+                        p.putExtra("istgnotice","no");
+                        p.putExtra("noticetype",sharedPreferenceHelper.getRole());
+                        startActivity(p); break;
 
                     case R.id.dept_notices:
                         drawerLayout.closeDrawer(Gravity.START);

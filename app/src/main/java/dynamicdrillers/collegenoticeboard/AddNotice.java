@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +35,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class AddNotice extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST_NOTICE = 1;
     TextInputLayout textInputLayout;
@@ -48,6 +51,7 @@ public class AddNotice extends AppCompatActivity {
     String Role = sharedpreferenceHelper.getRole();
     Toolbar toolbar;
     TextView notice_name;
+    SpotsDialog spotsDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,7 @@ public class AddNotice extends AppCompatActivity {
         String tgnoticeflag = getIntent().getStringExtra("istgnotice");
         String noticetypeflag = getIntent().getStringExtra("noticetype");
 
+        spotsDialog = new SpotsDialog(this);
 
         title = (TextInputLayout)findViewById(R.id.NoticeTitle);
         desc = (TextInputLayout)findViewById(R.id.NoticeDesc);
@@ -132,7 +137,11 @@ public class AddNotice extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validate())
-                SendNotice();
+                {
+                    SendNotice();
+                    spotsDialog.show();
+                }
+
             }
         });
 
@@ -163,9 +172,7 @@ public class AddNotice extends AppCompatActivity {
     private void SendNotice() {
 
         final ProgressDialog progressDialog = new ProgressDialog(AddNotice.this);
-        progressDialog.setTitle("Sending....");
-        progressDialog.setMessage("Please Wait We are Sending Your Notice");
-        progressDialog.show();
+
         String WEB_URL;
 
         if(noticetype.equals("dept"))
@@ -185,23 +192,24 @@ public class AddNotice extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                progressDialog.dismiss();
+                spotsDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    Toast.makeText(getBaseContext(),jsonObject.getString("message"),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),FacultyDashboard.class));
                     finish();
 
                 } catch (JSONException e) {
-                    Toast.makeText(getBaseContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"Oops.. Please Try Again",Toast.LENGTH_SHORT).show();
+
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(getBaseContext(),error.getMessage(),Toast.LENGTH_LONG).show();
+                spotsDialog.dismiss();
+                Toast.makeText(getBaseContext(),"Some Network Issues",Toast.LENGTH_LONG).show();
 
 
             }

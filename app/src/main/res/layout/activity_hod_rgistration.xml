@@ -181,6 +181,7 @@
             <android.support.design.widget.TextInputLayout
 
                 android:id="@+id/reg_hod_department"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -188,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_college"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:hint="  Department"
                     android:textColor="@android:color/background_light" />
 

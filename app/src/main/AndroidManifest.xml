@@ -3,6 +3,8 @@
     package="dynamicdrillers.collegenoticeboard">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -62,6 +64,7 @@
         <activity android:name=".AdminRegistrationActivity"></activity>
         <activity android:name=".AdminRegCollegeActivity"></activity>
         <activity android:name=".AdminRegImgActivity"></activity>
+
 
 
         <activity android:name=".UpdateProImgActivity"></activity>

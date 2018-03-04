@@ -1,6 +1,7 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class ShowNoticeByType extends AppCompatActivity {
 
     public  static  final String GET_COLLEGE_NOTICE_URL=Constants.WEB_API_URL+"StudentGetCollegeNotice.php";
@@ -35,13 +38,14 @@ public class ShowNoticeByType extends AppCompatActivity {
     List<Notice> noticelist = new ArrayList<Notice>();
     NoticeShowAdaptor noticeShowAdaptor;
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
+    SpotsDialog spotsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_notice_by_type);
 
-
+        spotsDialog  = new SpotsDialog(this);
         //getting Notice Type And College Code From Another Activity
         Notice_Tg_Email = getIntent().getStringExtra("tgemail");
         Notice_type = getIntent().getStringExtra("NoticeType");
@@ -58,14 +62,17 @@ public class ShowNoticeByType extends AppCompatActivity {
         if(Notice_type.equals("dept"))
         {
             showDeptNotices();
+            spotsDialog.show();
         }
         else if(Notice_Tg_Email.equals("notg"))
         {
             showCollegeNotice();
+            spotsDialog.show();
         }
         else
         {
             showTgNotice();
+            spotsDialog.show();
         }
 
 
@@ -100,17 +107,19 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-
+                    spotsDialog.dismiss();
+                    Snackbar.make(getCurrentFocus(),"Please try Again....",3000).show();
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
+                Snackbar.make(getCurrentFocus(),"Some Network Issues",3000).show();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
             }
         }){
@@ -155,17 +164,20 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                   spotsDialog.dismiss();
+                   Snackbar.make(getCurrentFocus(),"Please try Again....",3000).show();
 
-                }
+               }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Snackbar.make(getCurrentFocus(),"Please try Again....",3000).show();
 
             }
         }){
@@ -204,8 +216,10 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                          }
+                         spotsDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),"There Is No Notice..",Toast.LENGTH_LONG).show();
+                    spotsDialog.dismiss();
+                    Snackbar.make(getCurrentFocus(),"Please try Again....",3000).show();
 
                 }
 
@@ -213,8 +227,9 @@ public class ShowNoticeByType extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                Snackbar.make(getCurrentFocus(),"Please try Again....",3000).show();
 
             }
         }){

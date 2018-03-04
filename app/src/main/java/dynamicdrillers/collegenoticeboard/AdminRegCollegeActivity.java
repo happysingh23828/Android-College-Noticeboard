@@ -26,9 +26,6 @@ public class AdminRegCollegeActivity extends AppCompatActivity {
         final String Gender =intent.getStringExtra("Gender");
 
 
-
-        Toast.makeText(this,Name+"\n"+Email+"\n"+Password+"\n"+MobaleNo+"\n"+Date+"\n"+Gender,Toast.LENGTH_LONG).show();
-
         CollegeName = findViewById(R.id.CollegeName);
         CollegeCode = findViewById(R.id.CollegeCode);
         CollegeState = findViewById(R.id.CollegeState);

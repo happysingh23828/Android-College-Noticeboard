@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class StudentRegistrationActivity extends AppCompatActivity {
 
     TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutEnrollment;
@@ -43,6 +45,7 @@ public class StudentRegistrationActivity extends AppCompatActivity {
     String Type[] = {"1","2","3","4","5","6","7","8"};
     Toolbar toolbar;
     TextView toolbarheading;
+    SpotsDialog spotsDialog;
 
 
     @Override
@@ -50,6 +53,7 @@ public class StudentRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
 
+        spotsDialog  = new SpotsDialog(this);
         TxtInputlayloutName = findViewById(R.id.reg_student_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_student_email);
         TxtInputlayloutPassword = findViewById(R.id.reg_student_password);
@@ -77,8 +81,7 @@ public class StudentRegistrationActivity extends AppCompatActivity {
                 int selectedId=Gender.getCheckedRadioButtonId();
                 RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
                 Gender_s = radioSexButton.getText().toString();
-                Toast.makeText(StudentRegistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
-            }
+              }
         });
 
 
@@ -102,7 +105,11 @@ public class StudentRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate())
-                upload();
+                {
+                    upload();
+                    spotsDialog.show();
+                }
+
             }
         });
 
@@ -138,12 +145,13 @@ public class StudentRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
                             if(!jsonObject.getBoolean("error"))
                             {
+                                Toast.makeText(StudentRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(StudentRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
@@ -164,10 +172,10 @@ public class StudentRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         //Showing toast
-                        Toast.makeText(StudentRegistrationActivity.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(StudentRegistrationActivity.this, "Some Network Issues", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

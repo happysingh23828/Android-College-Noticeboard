@@ -2,6 +2,7 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class HodList extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -34,12 +37,14 @@ public class HodList extends AppCompatActivity {
     String AdminCollegeCode = sharedpreferenceHelper.getCollegeCode();
     RecyclerView recyclerView;
     List<Hod> hodlist = new ArrayList<Hod>();
+    SpotsDialog spotsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hod_list);
 
+        spotsDialog = new SpotsDialog(this);
         recyclerView = (RecyclerView)findViewById(R.id.hodlistrecyclerview);
 
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
@@ -60,6 +65,7 @@ public class HodList extends AppCompatActivity {
 
 
         getHodlist();
+        spotsDialog.show();
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         recyclerView.setAdapter(new HodListAdaptor(hodlist));
 
@@ -87,10 +93,12 @@ public class HodList extends AppCompatActivity {
                         hodlist.add(hod);
                     }
 
+                    spotsDialog.dismiss();
 
 
                 } catch (JSONException e) {
-                    Toast.makeText(getBaseContext(),"There Is No HOD",Toast.LENGTH_LONG).show();
+                    spotsDialog.dismiss();
+                    Snackbar.make(getCurrentFocus(),"There Is No Hod Added",3000).show();
                     e.printStackTrace();
                 }
 
@@ -98,6 +106,7 @@ public class HodList extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                spotsDialog.dismiss();
                 error.printStackTrace();
 
             }

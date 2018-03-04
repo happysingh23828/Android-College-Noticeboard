@@ -29,5 +29,12 @@
         <item name="colorControlActivated">@color/Dialog</item>
     </style>
 
+    <style name="CustomLoader" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Loading...</item>
+        <item name="DialogSpotColor">@color/colorPrimary</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
 
 </resources>

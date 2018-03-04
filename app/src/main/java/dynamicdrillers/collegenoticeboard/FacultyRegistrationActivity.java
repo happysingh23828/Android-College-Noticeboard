@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +34,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class FacultyRegistrationActivity extends AppCompatActivity {
 
     android.support.v7.widget.Toolbar toolbar;
@@ -47,6 +50,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
     TextView toolbarheading;
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
+    SpotsDialog spotsDialog;
 
 
     @Override
@@ -54,7 +58,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_registration);
 
-
+        spotsDialog = new SpotsDialog(this);
         TxtInputlayloutName = findViewById(R.id.reg_faculty_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_faculty_email);
         TxtInputlayloutPassword = findViewById(R.id.reg_faculty_password);
@@ -127,7 +131,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 int selectedId=Gender.getCheckedRadioButtonId();
                 RadioButton radioSexButton=(RadioButton)findViewById(selectedId);
                 Gender_s = radioSexButton.getText().toString();
-                Toast.makeText(FacultyRegistrationActivity.this,radioSexButton.getText(),Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -136,7 +140,11 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate())
+                {
                     upload();
+                    spotsDialog.show();
+                }
+
             }
         });
 
@@ -171,13 +179,13 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
                             if(!jsonObject.getBoolean("error"))
                             {
-                                Toast.makeText(FacultyRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(FacultyRegistrationActivity.this,jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(FacultyRegistrationActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
@@ -185,7 +193,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                             }
                             else
                             {
-                                Toast.makeText(FacultyRegistrationActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(FacultyRegistrationActivity.this,jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException e) {
@@ -199,10 +207,10 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         //Showing toast
-                        Toast.makeText(FacultyRegistrationActivity.this,volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FacultyRegistrationActivity.this,"Some Network Issues", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

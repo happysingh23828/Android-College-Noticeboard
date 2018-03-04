@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
+
 public class UpdateProImgActivity extends AppCompatActivity {
 
     private int PICK_IMAGE_REQUEST = 1;
@@ -37,11 +39,15 @@ public class UpdateProImgActivity extends AppCompatActivity {
     Button SelectImg,UpdateImg;
     String Url = Constants.WEB_API_URL+"StudentImg.php";
     public static final String SharedprefenceName = "USER_DATA";
+    SpotsDialog spotsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_pro_img);
+
+
+        spotsDialog  = new SpotsDialog(this);
 
         SelectedImg = findViewById(R.id.img);
 
@@ -58,6 +64,8 @@ public class UpdateProImgActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 upload();
+                spotsDialog.setTitle("Uploading");
+                spotsDialog.show();
             }
         });
 
@@ -118,8 +126,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
-                        Toast.makeText(UpdateProImgActivity.this, s, Toast.LENGTH_LONG).show();
+                        spotsDialog.dismiss();
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
@@ -130,6 +137,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
                             }
                             else
                             {
+                                Toast.makeText(UpdateProImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(UpdateProImgActivity.this,FacultyDashboard.class);
                                 startActivity(intent);
                                 finish();
@@ -137,7 +145,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(UpdateProImgActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(UpdateProImgActivity.this, "Please Try Again", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -148,10 +156,10 @@ public class UpdateProImgActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+                        spotsDialog.dismiss();
 
                         //Showing toast
-                        Toast.makeText(UpdateProImgActivity.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UpdateProImgActivity.this, "Some Network Issues", Toast.LENGTH_LONG).show();
                     }
                 }) {
             @Override

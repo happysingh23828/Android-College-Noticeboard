@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by Happy-Singh on 2/28/2018.
@@ -37,6 +38,8 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
         this.facultyList = facultyList;
     }
     List<Faculty> facultyList;
+    SpotsDialog spotsDialog;
+
     @Override
     public FacultyListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -47,6 +50,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
     @Override
     public void onBindViewHolder(final FacultyListViewHolder holder, int position) {
 
+        spotsDialog = new SpotsDialog(holder.itemView.getContext());
         SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
         final Faculty faculty = facultyList.get(position);
 
@@ -71,11 +75,13 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                 alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        spotsDialog.show();
 
                         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "HodDeleteFaculty.php",
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+                                        spotsDialog.dismiss();
 
                                         try {
 
@@ -92,6 +98,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                spotsDialog.dismiss();
                                 Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
 
@@ -141,6 +148,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                 builder.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        spotsDialog.show();
 
                         if(newpassword.getText().length()>1)
                         {
@@ -151,6 +159,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                             @Override
                                             public void onResponse(String response) {
 
+                                                spotsDialog.dismiss();
                                                 try {
 
                                                     JSONObject jsonObject = new JSONObject(response);
@@ -167,6 +176,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                         }, new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
+                                        spotsDialog.dismiss();
                                         Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
 
 
@@ -186,7 +196,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
                             }
                             else
-                                Toast.makeText(holder.itemView.getContext(),"Password Doen Not Matched",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
                         }
 
                         else
