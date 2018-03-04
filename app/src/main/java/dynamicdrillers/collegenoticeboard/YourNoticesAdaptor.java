@@ -1,12 +1,15 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -188,5 +191,37 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
             NoticeDesc = (TextView)itemView.findViewById(R.id.noticedescription);
             NoticeTime = (TextView)itemView.findViewById(R.id.noticetime);
         }
+    }
+
+
+    private void dialogBulder(String Text, final String Type,String Head) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_edittext_dialog_layout);
+        dialog.setTitle("Update...");
+
+        TextView text = (TextView) dialog.findViewById(R.id.dialog_title);
+        text.setText(Head);
+
+        final TextInputLayout textInputLayout = dialog.findViewById(R.id.dialog_edittext);
+        textInputLayout.getEditText().setText(Text);
+
+        Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+        // if button is clicked, close the custom dialog
+        cencel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button delete = (Button) dialog.findViewById(R.id.dialog_btn_delete);
+        // if button is clicked, close the custom dialog
+        cencel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }
