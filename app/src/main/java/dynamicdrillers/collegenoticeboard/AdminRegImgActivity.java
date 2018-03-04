@@ -1,10 +1,11 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.AlertDialog;
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -54,16 +55,17 @@ public class AdminRegImgActivity extends AppCompatActivity {
     String CollegeCity="";
     SpotsDialog alertDialog;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_reg_img);
 
         final Intent intent = getIntent();
-         Name = intent.getStringExtra("Name");
-         Email =intent.getStringExtra("Email");
+        Name = intent.getStringExtra("Name");
+        Email =intent.getStringExtra("Email");
         Password =intent.getStringExtra("Password");
-         MobaleNo =intent.getStringExtra("MobaileNo");
+        MobaleNo =intent.getStringExtra("MobaileNo");
         Date =intent.getStringExtra("Date");
         Gender =intent.getStringExtra("Gender");
         CollegeName =intent.getStringExtra("CollegeName");

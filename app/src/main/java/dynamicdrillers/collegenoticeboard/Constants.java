@@ -5,7 +5,7 @@ package dynamicdrillers.collegenoticeboard;
  */
 
 public class Constants {
-    public static  final  String BASE_URL="http://192.168.56.1/Web-API-College-Noticeboard/";
+    public static  final  String BASE_URL="http://collegenoticeboard.000webhostapp.com/Web-API-College-Noticeboard/";
     public  static final  String WEB_API_URL=BASE_URL+"WebServicesApi/";
     public static  final  String ADMIN_PROFILE_STORAGE_URL=BASE_URL+"Storage/AdminProfiles/";
     public static  final  String STUDENT_PROFILE_STORAGE_URL=BASE_URL+"Storage/StudentProfiles/";
@@ -17,7 +17,4 @@ public class Constants {
     public static final String URL_SEND_SINGLE_PUSH = BASE_URL+"Fcm/sendSinglePush.php";
     public static final String URL_SEND_MULTIPLE_PUSH = BASE_URL+"Fcm/sendMultiplePush.php";
     public static final String URL_FETCH_DEVICES = BASE_URL+"Fcm/GetRegisteredDevices.php";
-
-
-
 }

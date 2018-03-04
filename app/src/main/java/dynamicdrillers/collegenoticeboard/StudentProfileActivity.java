@@ -3,7 +3,6 @@ package dynamicdrillers.collegenoticeboard;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -362,13 +361,12 @@ public class StudentProfileActivity extends AppCompatActivity {
 
     private void upload(final String Type,final  String Data) {
 
-        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
@@ -400,7 +398,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         //Dismissing the progress dialog
-                        loading.dismiss();
+
 
                         //Showing toast
                         Toast.makeText(StudentProfileActivity.this, "Some Netwok Issues", Toast.LENGTH_LONG).show();

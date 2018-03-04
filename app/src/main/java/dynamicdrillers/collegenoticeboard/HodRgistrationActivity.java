@@ -105,10 +105,14 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.spn));
                 Role_s = textView.getText().toString().toLowerCase();
-                if(Role_s.equals("Hod"))
-                    TxtInputlayloutDept.setVisibility(View.VISIBLE);
+                if(Role_s.equals("hod"))
+                {
+                     TxtInputlayloutDept.setVisibility(View.VISIBLE);
+                }
                 else
-                    TxtInputlayloutDept.setVisibility(View.GONE);
+                {
+                     TxtInputlayloutDept.setVisibility(View.GONE);
+                }
 
             }
 
@@ -138,7 +142,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         if(!validation.passwordValidation(TxtInputlayloutPassword))
             status = false;
 
-        if(Role_s.equals("hod"))
+        if(Role_s.equals("Hod"))
          if(!validation.deptValidation(TxtInputlayloutDept))
             status = false;
 
@@ -148,10 +152,9 @@ public class HodRgistrationActivity extends AppCompatActivity {
 
 
     private void upload() {
-        if(!Role_s.equals("hod"))
+        if(!Role_s.equals("Hod"))
             Url=Url1;
 
-        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {
                     @Override
@@ -218,7 +221,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 map.put("Dob","2018-1-1");
                 map.put("CollegeCode",CollegeCode);
 
-                if(!Role_s.equals("hod"))
+                if(!Role_s.equals("Hod"))
                 {
                     map.put("Role",Role_s);
                     map.put("TgFlag","false");
