@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
@@ -84,6 +83,7 @@ public class HodList extends AppCompatActivity {
                     for(int i=0;i<jsonArray.length();i++)
                     {
                         JSONObject Hod_details  = jsonArray.getJSONObject(i);
+
 
                         Hod hod = new Hod(Hod_details.getString("name"),Hod_details.getString("email")
                                       ,Hod_details.getString("mobileno"),Hod_details.getString("dob")

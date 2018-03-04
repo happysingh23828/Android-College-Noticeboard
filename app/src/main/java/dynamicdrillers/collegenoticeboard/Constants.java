@@ -5,7 +5,7 @@ package dynamicdrillers.collegenoticeboard;
  */
 
 public class Constants {
-    public static  final  String BASE_URL="http://collegenoticeboard.000webhostapp.com/Web-API-College-Noticeboard/";
+    public static  final  String BASE_URL="http://happystore.16mb.com/Web-API-College-Noticeboard/";
     public  static final  String WEB_API_URL=BASE_URL+"WebServicesApi/";
     public static  final  String ADMIN_PROFILE_STORAGE_URL=BASE_URL+"Storage/AdminProfiles/";
     public static  final  String STUDENT_PROFILE_STORAGE_URL=BASE_URL+"Storage/StudentProfiles/";

@@ -118,8 +118,7 @@ public class ShowNoticeByType extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 spotsDialog.dismiss();
-                Snackbar.make(getCurrentFocus(),"Some Network Issues",3000).show();
-
+                Toast.makeText(ShowNoticeByType.this,"some network issue",Toast.LENGTH_LONG).show();
 
             }
         }){

@@ -90,6 +90,7 @@ public class FacultyList extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
+                Toast.makeText(FacultyList.this,response,Toast.LENGTH_LONG).show();
 
                 try {
                     JSONArray jsonArray = new JSONArray(response);

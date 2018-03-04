@@ -1,6 +1,5 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -120,7 +119,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
 
 
     private void upload() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.WEB_API_URL+"HodImg.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {

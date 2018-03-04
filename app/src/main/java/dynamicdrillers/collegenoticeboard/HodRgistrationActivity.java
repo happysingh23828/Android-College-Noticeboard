@@ -1,6 +1,5 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -142,7 +141,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         if(!validation.passwordValidation(TxtInputlayloutPassword))
             status = false;
 
-        if(Role_s.equals("Hod"))
+        if(Role_s.equals("hod"))
          if(!validation.deptValidation(TxtInputlayloutDept))
             status = false;
 
@@ -152,7 +151,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
 
 
     private void upload() {
-        if(!Role_s.equals("Hod"))
+        if(!Role_s.equals("hod"))
             Url=Url1;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
@@ -221,7 +220,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 map.put("Dob","2018-1-1");
                 map.put("CollegeCode",CollegeCode);
 
-                if(!Role_s.equals("Hod"))
+                if(!Role_s.equals("hod"))
                 {
                     map.put("Role",Role_s);
                     map.put("TgFlag","false");

@@ -2,8 +2,8 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +28,6 @@ import java.util.Map;
 
 import dmax.dialog.SpotsDialog;
 
-import static dynamicdrillers.collegenoticeboard.ShowNoticeByType.GET_COLLEGE_NOTICE_URL;
 import static dynamicdrillers.collegenoticeboard.ShowNoticeByType.GET_TG_NOTICE_URL;
 
 public class YourNotices extends AppCompatActivity {
@@ -133,6 +132,7 @@ public class YourNotices extends AppCompatActivity {
         StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST, WEB_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
 
                 try {
                     JSONArray NoticeArrray = new JSONArray(response);
