@@ -208,7 +208,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 String CollegeCode = sharedPreference.getString("collegecode", null);
 
 
-                map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString());
+                map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString().toLowerCase());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
                 map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());

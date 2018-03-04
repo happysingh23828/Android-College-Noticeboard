@@ -243,7 +243,7 @@ public class AdminRegImgActivity extends AppCompatActivity {
                 //Adding parameters
                 Map<String,String> map = new HashMap<>();
 
-                map.put("Email",Email);
+                map.put("Email",Email.toLowerCase());
                 map.put("Password",Password);
                 map.put("CollegeCode",CollegeCode);
                 map.put("Name",Name);

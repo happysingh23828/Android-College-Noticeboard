@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -230,7 +229,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
                 String CollegeCode = sharedPreference.getString("collegecode", null);
 
 
-                map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString());
+                map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString().toLowerCase());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
 

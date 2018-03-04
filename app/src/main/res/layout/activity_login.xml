@@ -14,15 +14,6 @@
         android:layout_weight="1.5"
         android:src="@drawable/logo" />
 
-    <com.tuyenmonkey.mkloader.MKLoader
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:mk_color="#ffffff"
-        app:mk_type="TwinFishesSpinner" />
-
 
     <LinearLayout
 
