@@ -48,7 +48,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
     }
 
     @Override
-    public void onBindViewHolder(final StudentListViewHolder holder, int position) {
+    public void onBindViewHolder(final StudentListViewHolder holder, final int position) {
 
         spotsDialog = new SpotsDialog(holder.itemView.getContext());
         final Student student = studentList.get(position);
@@ -179,6 +179,10 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                             JSONObject jsonObject = new JSONObject(response);
 
                                             Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                            studentList.remove(position);
+                                            StudentListAdaptor.this.notifyItemRemoved(position);
+                                            StudentListAdaptor.this.notifyItemRangeChanged(position,studentList.size());
+
 
                                         } catch (JSONException e) {
 

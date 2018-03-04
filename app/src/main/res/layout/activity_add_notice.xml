@@ -99,7 +99,7 @@
             android:textStyle="bold"
             android:layout_gravity="left"
             android:textSize="15sp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textColor="@android:color/black"
             style="@style/Widget.AppCompat.Button.Colored"/>
 

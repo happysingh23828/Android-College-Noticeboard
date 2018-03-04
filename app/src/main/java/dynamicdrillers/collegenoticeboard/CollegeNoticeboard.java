@@ -15,10 +15,13 @@ public class CollegeNoticeboard extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if(!checkInternetConnection())
+        if(checkInternetConnection())
         {
             Toast.makeText(this,"Your Have No Internet Connection", Toast.LENGTH_SHORT).show();
         }
+        else
+            Toast.makeText(this,"Your Have  Connection", Toast.LENGTH_SHORT).show();
+
 
 
 

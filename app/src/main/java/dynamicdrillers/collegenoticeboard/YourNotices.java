@@ -119,6 +119,7 @@ public class YourNotices extends AppCompatActivity {
 
         notice_list_heading.setText("Your Sent "+Notice_Type.toUpperCase()+" Notices ");
         recyclerView = (RecyclerView)findViewById(R.id.yoursentnoticerecyclerview);
+        yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
@@ -130,6 +131,7 @@ public class YourNotices extends AppCompatActivity {
         StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST, WEB_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
 
 
                 try {

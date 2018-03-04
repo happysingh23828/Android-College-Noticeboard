@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
     String Url = Constants.WEB_API_URL+"StudentImg.php";
     public static final String SharedprefenceName = "USER_DATA";
     SpotsDialog spotsDialog;
+    SharedpreferenceHelper sharedpreferenceHelper =SharedpreferenceHelper.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,29 @@ public class UpdateProImgActivity extends AppCompatActivity {
                 showFileChooser(PICK_IMAGE_REQUEST);
             }
         });
+
+
+
+        if (sharedpreferenceHelper.getType().equals("other")) {
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .into(SelectedImg);
+
+        }
+        else if(sharedpreferenceHelper.getType().equals("student")) {
+
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .into(SelectedImg);
+        }
+        else if (sharedpreferenceHelper.getType().equals("admin")) {
+
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .into(SelectedImg);
+        }
+        else {
+
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .into(SelectedImg);
+        }
 
         UpdateImg = findViewById(R.id.edit_pro_update_img);
         UpdateImg.setOnClickListener(new View.OnClickListener() {

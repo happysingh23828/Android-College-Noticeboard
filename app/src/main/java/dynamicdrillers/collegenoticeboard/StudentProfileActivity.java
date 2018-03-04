@@ -233,7 +233,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 SharedPreferences sharedPreference = StudentProfileActivity.this.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
-                dialogBulder(sharedPreference.getString("email",null),"email","Enter Name...");
+                dialogBulder(sharedPreference.getString("email",null),"email","Enter Email...");
 
             }
         });
@@ -369,6 +369,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(s);
                             if(!jsonObject.getBoolean("error"))
                             {
+                                Toast.makeText(StudentProfileActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
                                 SharedPreferences sharedPreference = StudentProfileActivity.this.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreference.edit();
                                 editor.putString(Type,Data);

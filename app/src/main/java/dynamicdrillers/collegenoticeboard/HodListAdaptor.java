@@ -48,7 +48,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
     }
 
     @Override
-    public void onBindViewHolder(final HodlIstViewHolder holder, int position) {
+    public void onBindViewHolder(final HodlIstViewHolder holder, final int position) {
 
         spotsDialog = new SpotsDialog(holder.itemView.getContext());
         final Hod hod = hodlist.get(position);
@@ -168,6 +168,11 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                             JSONObject jsonObject = new JSONObject(response);
 
                                             Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+
+                                            hodlist.remove(position);
+                                            HodListAdaptor.this.notifyItemRemoved(position);
+                                            HodListAdaptor.this.notifyItemRangeChanged(position,hodlist.size());
+
 
                                         } catch (JSONException e) {
 

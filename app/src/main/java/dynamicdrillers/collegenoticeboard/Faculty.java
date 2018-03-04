@@ -15,6 +15,7 @@ public class Faculty {
     String tgflag;
     String tgsem;
 
+
     public Faculty(String name, String email, String mobileno, String dob, String gender,
                    String collegecode, String profilename, String tgflag, String tgsem, String dept, String role) {
         this.name = name;

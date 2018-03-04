@@ -50,7 +50,7 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
     }
 
     @Override
-    public void onBindViewHolder(final YourNoticesViewHolder holder, int position) {
+    public void onBindViewHolder(final YourNoticesViewHolder holder, final int position) {
         spotsDialog  = new SpotsDialog(holder.itemView.getContext());
         final SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
         final Notice notice = noticelist.get(position);
@@ -119,6 +119,11 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                                             JSONObject jsonObject = new JSONObject(response);
 
                                             Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+
+                                            noticelist.remove(position);
+                                            YourNoticesAdaptor.this.notifyItemRemoved(position);
+                                            YourNoticesAdaptor.this.notifyItemRangeChanged(position,noticelist.size());
+
 
                                         } catch (JSONException e) {
                                             Toast.makeText(holder.itemView.getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();

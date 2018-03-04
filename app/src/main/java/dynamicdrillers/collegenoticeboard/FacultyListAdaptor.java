@@ -1,8 +1,8 @@
 package dynamicdrillers.collegenoticeboard;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -34,11 +33,17 @@ import dmax.dialog.SpotsDialog;
  */
 
 public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.FacultyListViewHolder> {
+
+
     public FacultyListAdaptor(List<Faculty> facultyList) {
+
         this.facultyList = facultyList;
+
     }
     List<Faculty> facultyList;
     SpotsDialog spotsDialog;
+
+
 
     @Override
     public FacultyListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,7 +53,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
     }
 
     @Override
-    public void onBindViewHolder(final FacultyListViewHolder holder, int position) {
+    public void onBindViewHolder(final FacultyListViewHolder holder, final int position) {
 
         spotsDialog = new SpotsDialog(holder.itemView.getContext());
         SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
@@ -66,12 +71,13 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
 
 
         holder.deleteFaculty.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+                AlertDialog alertDialog = alert.create();
                 alert.setTitle("All The Data Of User Will Be Lost?  ");
-
                 alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -88,6 +94,12 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                                             JSONObject jsonObject = new JSONObject(response);
 
                                             Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+
+                                            facultyList.remove(position);
+                                            FacultyListAdaptor.this.notifyItemRemoved(position);
+                                            FacultyListAdaptor.this.notifyItemRangeChanged(position,facultyList.size());
+
+
 
                                         } catch (JSONException e) {
 
@@ -127,8 +139,10 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
                     }
                 });
 
-                alert.create();
+
                 alert.show();
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(R.color.colorPrimary);
+
 
 
             }

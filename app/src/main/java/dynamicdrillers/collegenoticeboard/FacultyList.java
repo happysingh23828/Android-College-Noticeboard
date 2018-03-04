@@ -95,7 +95,7 @@ public class FacultyList extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i=0;i<jsonArray.length();i++)
                     {
-                        
+
                         JSONObject Faculty_details  = jsonArray.getJSONObject(i);
 
                         Faculty faculty = new Faculty(Faculty_details.getString("name"),Faculty_details.getString("email")
@@ -110,7 +110,7 @@ public class FacultyList extends AppCompatActivity {
 
                     FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
                     recyclerView.setAdapter(facultyListAdaptor);
-                    facultyListAdaptor.notifyDataSetChanged();
+
 
                     spotsDialog.dismiss();
 
