@@ -46,7 +46,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
     TextView toolbarheading;
     Spinner SpnRole;
     String Role_s="hod",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
-    String Type[] = {"Account","Hod","Scholarship","TNP"};
+    String Type[] = {"Accounts","Hod","Scholarship","TNP"};
     SpotsDialog spotsDialog;
 
 
@@ -104,7 +104,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 LinearLayout linearLayout = (LinearLayout) SpnRole.getSelectedView();
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.spn));
-                Role_s = textView.getText().toString();
+                Role_s = textView.getText().toString().toLowerCase();
                 if(Role_s.equals("Hod"))
                     TxtInputlayloutDept.setVisibility(View.VISIBLE);
                 else
