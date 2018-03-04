@@ -119,10 +119,8 @@ public class YourNotices extends AppCompatActivity {
 
         notice_list_heading.setText("Your Sent "+Notice_Type.toUpperCase()+" Notices ");
         recyclerView = (RecyclerView)findViewById(R.id.yoursentnoticerecyclerview);
-        yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerView.setAdapter(yourNoticesAdaptor);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
 
     }
@@ -150,6 +148,9 @@ public class YourNotices extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
+
+                    recyclerView.setAdapter(yourNoticesAdaptor);
                     spotsDialog.dismiss();
                 } catch (JSONException e) {
                     spotsDialog.dismiss();
@@ -202,6 +203,9 @@ public class YourNotices extends AppCompatActivity {
                                 ,singleNotice.getString("image")
                                 ,singleNotice.getString("authoremail"),Notice_Type);
                         noticelist.add(notice);
+                        yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
+
+                        recyclerView.setAdapter(yourNoticesAdaptor);
                 spotsDialog.dismiss();
                     }
                 } catch (JSONException e) {
@@ -255,6 +259,9 @@ public class YourNotices extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                    yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
+
+                    recyclerView.setAdapter(yourNoticesAdaptor);
                     spotsDialog.dismiss();
                 } catch (JSONException e) {
                     spotsDialog.dismiss();

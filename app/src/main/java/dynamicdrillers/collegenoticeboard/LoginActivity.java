@@ -121,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
 
                 try {
                     JSONObject user_detail = new JSONObject(response);

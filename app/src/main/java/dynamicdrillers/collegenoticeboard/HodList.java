@@ -44,11 +44,12 @@ public class HodList extends AppCompatActivity {
         setContentView(R.layout.activity_hod_list);
 
         spotsDialog = new SpotsDialog(this);
-        recyclerView = (RecyclerView)findViewById(R.id.hodlistrecyclerview);
+
 
         toolbarheading = (TextView)findViewById(R.id.adddpersontoolbarheading);
         toolbaraddhodicon = (ImageView)findViewById(R.id.addpersonicon);
         toolbar = (Toolbar)findViewById(R.id.hodlisttoolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,8 +66,11 @@ public class HodList extends AppCompatActivity {
 
         getHodlist();
         spotsDialog.show();
+
+        recyclerView = (RecyclerView)findViewById(R.id.hodlistrecyclerview);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerView.setAdapter(new HodListAdaptor(hodlist));
+
 
 
 
@@ -92,7 +96,7 @@ public class HodList extends AppCompatActivity {
 
                         hodlist.add(hod);
                     }
-
+                    recyclerView.setAdapter(new HodListAdaptor(hodlist));
                     spotsDialog.dismiss();
 
 

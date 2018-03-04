@@ -78,9 +78,9 @@ public class FacultyList extends AppCompatActivity {
         spotsDialog.show();
         recyclerView =(RecyclerView)findViewById(R.id.facultylistrecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
-        recyclerView.setAdapter(facultyListAdaptor);
-        facultyListAdaptor.notifyDataSetChanged();
+
+
+
 
     }
 
@@ -90,7 +90,6 @@ public class FacultyList extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(FacultyList.this,response,Toast.LENGTH_LONG).show();
 
                 try {
                     JSONArray jsonArray = new JSONArray(response);
@@ -107,6 +106,11 @@ public class FacultyList extends AppCompatActivity {
 
                         facultyList.add(faculty);
                     }
+
+                    FacultyListAdaptor facultyListAdaptor = new FacultyListAdaptor(facultyList);
+                    recyclerView.setAdapter(facultyListAdaptor);
+                    facultyListAdaptor.notifyDataSetChanged();
+
                     spotsDialog.dismiss();
 
 

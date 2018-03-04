@@ -77,9 +77,8 @@ public class ShowNoticeByType extends AppCompatActivity {
 
 
         recyclerView = (RecyclerView)findViewById(R.id.noticelist_recylerview);
-        noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerView.setAdapter(noticeShowAdaptor);
 
 
     }
@@ -107,6 +106,9 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+
+                    noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
+                    recyclerView.setAdapter(noticeShowAdaptor);
                     spotsDialog.dismiss();
                 } catch (JSONException e) {
                     spotsDialog.dismiss();
@@ -163,6 +165,8 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                     }
+                   noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
+                   recyclerView.setAdapter(noticeShowAdaptor);
                     spotsDialog.dismiss();
                 } catch (JSONException e) {
                    spotsDialog.dismiss();
@@ -215,6 +219,8 @@ public class ShowNoticeByType extends AppCompatActivity {
                         noticelist.add(notice);
 
                          }
+                    noticeShowAdaptor = new NoticeShowAdaptor(noticelist);
+                    recyclerView.setAdapter(noticeShowAdaptor);
                          spotsDialog.dismiss();
                 } catch (JSONException e) {
                     spotsDialog.dismiss();
