@@ -344,6 +344,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             });
 
         }
+
         else{
             dialog.setContentView(R.layout.custom_edittext_dialog_layout);
             dialog.setTitle("Update...");

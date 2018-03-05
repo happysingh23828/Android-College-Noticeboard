@@ -281,10 +281,12 @@ public class AddNotice extends AppCompatActivity {
     }
 
     private void sendNotification(final String noticetype, final String data, final String collegeCode) {
-         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendNotificationByOneSignal.php",
+
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendNotificationByOneSignal.php",
                  new Response.Listener<String>() {
                      @Override
                      public void onResponse(String response) {
+
 
                      }
                  }, new Response.ErrorListener() {
@@ -303,6 +305,9 @@ public class AddNotice extends AppCompatActivity {
                return map;
              }
          };
+
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
     }
 
 

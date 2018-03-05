@@ -40,6 +40,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="  Name"
+                    android:inputType="text"
+                    android:lines="1"
                     android:textColor="@android:color/background_light"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -62,6 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="   Email"
+                    android:inputType="text"
+                    android:lines="1"
                     android:textColor="@android:color/background_light" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -173,26 +177,31 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_dept"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
-            <android.support.design.widget.TextInputLayout
+            <TextView
 
-                android:id="@+id/reg_hod_department"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="Department"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
 
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_college"
-                    android:enabled="true"
-                    android:hint="  Department"
-                    android:textColor="@android:color/background_light" />
-
-            </android.support.design.widget.TextInputLayout>
+            <Spinner
+                android:id="@+id/reg_hod_dept"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:textColor="@color/ColorName" />
 
         </LinearLayout>
 

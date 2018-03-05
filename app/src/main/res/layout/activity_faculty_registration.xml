@@ -41,6 +41,8 @@
                     android:drawableLeft="@drawable/ic_person"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:lines="1"
                     android:hint="  Name"
                     android:textColor="@android:color/background_light"/>
             </android.support.design.widget.TextInputLayout>
@@ -62,6 +64,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:drawableLeft="@drawable/ic_email"
                     android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:lines="1"
                     android:layout_height="wrap_content"
                     android:hint="   Email"
                     android:textColor="@android:color/background_light" />

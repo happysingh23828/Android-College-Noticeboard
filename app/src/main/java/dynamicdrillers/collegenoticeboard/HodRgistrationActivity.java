@@ -1,5 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,17 +36,20 @@ import dmax.dialog.SpotsDialog;
 
 public class HodRgistrationActivity extends AppCompatActivity {
 
-    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword,TxtInputlayloutDept;
+    TextInputLayout TxtInputlayloutName,TxtInputlayloutEmail,TxtInputlayloutPassword;
     RadioGroup Gender;
     RadioButton RadioMale,RadioFemale;
     Button BtnRegister;
     Toolbar toolbar;
+    LinearLayout LayoutDept;
 
     String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="Male";
     TextView toolbarheading;
-    Spinner SpnRole;
-    String Role_s="hod",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
+    Spinner SpnRole,SpnDept;
+    String Role_s="hod",Dept_s="false",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
     String Type[] = {"Accounts","Hod","Scholarship","TNP"};
+    String Dept[] = {"Cse","Me","Ec","Add new"};
+    String s[];
     SpotsDialog spotsDialog;
 
 
@@ -59,7 +63,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         TxtInputlayloutName = findViewById(R.id.reg_hod_name);
         TxtInputlayloutEmail = findViewById(R.id.reg_hod_email);
         TxtInputlayloutPassword = findViewById(R.id.reg_hod_password);
-        TxtInputlayloutDept = findViewById(R.id.reg_hod_department);
+        LayoutDept = findViewById(R.id.layout_dept);
 
 
         Gender = findViewById(R.id.reg_hod_gender);
@@ -67,6 +71,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
         RadioFemale = findViewById(R.id.reg_hod_female);
 
         SpnRole = findViewById(R.id.reg_hod_role);
+        SpnDept = findViewById(R.id.reg_hod_dept);
         BtnRegister = findViewById(R.id.reg_hod_register);
 
         toolbarheading = (TextView)findViewById(R.id.notice_name);
@@ -106,11 +111,65 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 Role_s = textView.getText().toString().toLowerCase();
                 if(Role_s.equals("hod"))
                 {
-                     TxtInputlayloutDept.setVisibility(View.VISIBLE);
+                     LayoutDept.setVisibility(View.VISIBLE);
                 }
                 else
                 {
-                     TxtInputlayloutDept.setVisibility(View.GONE);
+                     LayoutDept.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.login_type_layout,R.id.txt_type,Dept);
+        SpnDept.setAdapter(adapter);
+        SpnDept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LinearLayout linearLayout = (LinearLayout) SpnDept.getSelectedView();
+                TextView textView = linearLayout.findViewById(R.id.txt_type);
+                textView.setTextColor(getResources().getColor(R.color.white));
+                Dept_s = textView.getText().toString().toLowerCase();
+
+                if(Dept_s.equals("add new"))
+                {
+                    Toast.makeText(HodRgistrationActivity.this,Dept_s,Toast.LENGTH_LONG).show();
+
+                    final Dialog dialog = new Dialog(HodRgistrationActivity.this);
+                    dialog.setContentView(R.layout.custom_edittext_dialog_layout);
+
+                    TextView text = (TextView) dialog.findViewById(R.id.dialog_title);
+                    text.setText("Add new");
+                    final TextInputLayout textInputLayout = dialog.findViewById(R.id.dialog_edittext);
+
+
+
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_btn);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            s = new  String[Dept.length+1];
+                            for(int i = 0 ; i < Dept.length-1 ; i++){
+                                s[i] = Dept[i];
+                            }
+
+                            s[Dept.length-1] =  textInputLayout.getEditText().getText().toString();
+                            s[Dept.length] = "Add new";
+                            Dept = s;
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(HodRgistrationActivity.this,R.layout.login_type_layout,R.id.txt_type,Dept);
+                            SpnDept.setAdapter(adapter);
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+
                 }
 
             }
@@ -141,9 +200,6 @@ public class HodRgistrationActivity extends AppCompatActivity {
         if(!validation.passwordValidation(TxtInputlayloutPassword))
             status = false;
 
-        if(Role_s.equals("hod"))
-         if(!validation.deptValidation(TxtInputlayloutDept))
-            status = false;
 
 
         return status;
@@ -213,7 +269,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString().toLowerCase());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
-                map.put("Dept",TxtInputlayloutDept.getEditText().getText().toString());
+                map.put("Dept",Dept_s);
                 map.put("Gender",Gender_s);
                 map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
                 map.put("MobileNo","9999999");
