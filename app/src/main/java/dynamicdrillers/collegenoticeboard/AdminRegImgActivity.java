@@ -1,7 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;

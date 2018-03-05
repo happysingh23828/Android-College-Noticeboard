@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,12 +51,13 @@ public class AddNotice extends AppCompatActivity {
     Toolbar toolbar;
     TextView notice_name;
     SpotsDialog spotsDialog;
+    String tgnoticeflag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notice);
 
-        String tgnoticeflag = getIntent().getStringExtra("istgnotice");
+        tgnoticeflag = getIntent().getStringExtra("istgnotice");
         String noticetypeflag = getIntent().getStringExtra("noticetype");
 
         spotsDialog = new SpotsDialog(this);
@@ -195,6 +195,22 @@ public class AddNotice extends AppCompatActivity {
                 spotsDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+
+                    if(tgnoticeflag.equals("yes"))
+                    {
+                        sendNotification("tg",sharedpreferenceHelper.getEmail(),sharedpreferenceHelper.getCollegeCode());
+
+                    }
+                    else if(noticetype.equals("dept"))
+                    {
+                        sendNotification(noticetype,sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode());
+                    }
+                    else
+                    {
+                        sendNotification(noticetype,sharedpreferenceHelper.getType(),sharedpreferenceHelper.getCollegeCode());
+
+                    }
+
                     Toast.makeText(getBaseContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),FacultyDashboard.class));
                     finish();
@@ -262,6 +278,31 @@ public class AddNotice extends AppCompatActivity {
 
 
 
+    }
+
+    private void sendNotification(final String noticetype, final String data, final String collegeCode) {
+         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendNotificationByOneSignal.php",
+                 new Response.Listener<String>() {
+                     @Override
+                     public void onResponse(String response) {
+
+                     }
+                 }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+
+             }
+         }){
+             @Override
+             protected Map<String, String> getParams() throws AuthFailureError {
+               Map<String,String> map = new HashMap<>();
+               map.put("CollegeCode",collegeCode);
+               map.put("Type",noticetype);
+               map.put("Data",data);
+
+               return map;
+             }
+         };
     }
 
 
