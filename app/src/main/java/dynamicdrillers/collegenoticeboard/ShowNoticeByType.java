@@ -77,8 +77,10 @@ public class ShowNoticeByType extends AppCompatActivity {
 
 
         recyclerView = (RecyclerView)findViewById(R.id.noticelist_recylerview);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 
     }

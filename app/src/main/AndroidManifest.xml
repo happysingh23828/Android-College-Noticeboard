@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/noticeboard_logo"
+        android:icon="@drawable/ournewlogo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
 
+        <meta-data android:name="com.onesignal.NotificationAccentColor.DEFAULT" android:value="FF7B1FA2" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -62,8 +63,8 @@
         <activity android:name=".AddNotice"></activity>
         <activity android:name=".FacultyDashboard"></activity>
         <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".FacultyRegistrationActivity"></activity>
-        <activity android:name=".AdminRegistrationActivity"></activity>
+        <activity android:name=".FacultyRegistrationActivity" android:parentActivityName=".FacultyDashboard"></activity>
+        <activity android:name=".AdminRegistrationActivity" android:parentActivityName=".FacultyDashboard"></activity>
         <activity android:name=".AdminRegCollegeActivity"></activity>
         <activity android:name=".AdminRegImgActivity"></activity>
 

@@ -198,16 +198,24 @@ public class AddNotice extends AppCompatActivity {
 
                     if(tgnoticeflag.equals("yes"))
                     {
-                        sendNotification("tg",sharedpreferenceHelper.getEmail(),sharedpreferenceHelper.getCollegeCode());
+                        sendNotification("TG",sharedpreferenceHelper.getEmail(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
 
                     }
                     else if(noticetype.equals("dept"))
                     {
-                        sendNotification(noticetype,sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode());
+                        sendNotification("Dept",sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
                     }
                     else
                     {
-                        sendNotification(noticetype,sharedpreferenceHelper.getType(),sharedpreferenceHelper.getCollegeCode());
+                        if(sharedpreferenceHelper.getRole()==null)
+                        {
+                            sendNotification("Events",sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
+                        }
+                        else
+                        {
+                            sendNotification(sharedpreferenceHelper.getRole().toUpperCase(),sharedpreferenceHelper.getRole().toUpperCase(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
+
+                        }
 
                     }
 
@@ -280,7 +288,7 @@ public class AddNotice extends AppCompatActivity {
 
     }
 
-    private void sendNotification(final String noticetype, final String data, final String collegeCode) {
+    private void sendNotification(final String noticetype, final String data, final String collegeCode, final String name) {
          StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "SendNotificationByOneSignal.php",
                  new Response.Listener<String>() {
                      @Override
@@ -299,6 +307,7 @@ public class AddNotice extends AppCompatActivity {
                map.put("CollegeCode",collegeCode);
                map.put("Type",noticetype);
                map.put("Data",data);
+               map.put("Name",name);
 
                return map;
              }
