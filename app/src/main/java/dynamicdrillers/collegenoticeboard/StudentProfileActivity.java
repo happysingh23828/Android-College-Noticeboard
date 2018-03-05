@@ -1,10 +1,8 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -106,20 +104,38 @@ public class StudentProfileActivity extends AppCompatActivity {
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(StudentProfileActivity.this);
+                final Dialog dialog = new Dialog(StudentProfileActivity.this);
+                dialog.setContentView(R.layout.changepassworddialog);
+                dialog.setTitle("Do you want to delete ?");
 
-                View view1 =  View.inflate(StudentProfileActivity.this,R.layout.changepassworddialog,null);
-                final TextInputEditText newpassword = (TextInputEditText)view1.findViewById(R.id.newpassword);
-                final TextInputEditText confirmpassword = (TextInputEditText)view1.findViewById(R.id.confirmpassword);
 
-                builder.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
+
+                final TextInputEditText newpassword = (TextInputEditText)dialog.findViewById(R.id.newpassword);
+                final TextInputEditText confirmpassword = (TextInputEditText)dialog.findViewById(R.id.confirmpassword);
+
+
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
 
+                    }
+                });
+
+
+
+                Button delete = (Button) dialog.findViewById(R.id.dialog_btn_chnge);
+                // if button is clicked, close the custom dialog
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         if(newpassword.getText().length()>1)
                         {
                             if(newpassword.getText().toString().equals(confirmpassword.getText().toString()))
                             {
+                                dialog.dismiss();
                                 StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "ChangePassword.php",
                                         new Response.Listener<String>() {
                                             @Override
@@ -143,7 +159,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                                     public void onErrorResponse(VolleyError error) {
                                         Toast.makeText(StudentProfileActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
 
-
+                                        dialog.dismiss();
                                     }
                                 }){
 
@@ -167,13 +183,12 @@ public class StudentProfileActivity extends AppCompatActivity {
                         else
                             Toast.makeText(StudentProfileActivity.this,"Enter Password",Toast.LENGTH_SHORT).show();
 
+                        dialog.dismiss();
                     }
+
                 });
+                dialog.show();
 
-
-                builder.setView(view1);
-                builder.create();
-                builder.show();
             }
         });
 
@@ -459,6 +474,37 @@ public class StudentProfileActivity extends AppCompatActivity {
         }
         return null;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Toast.makeText(this,"onresume",Toast.LENGTH_LONG).show();
+
+        if (sharedpreferenceHelper.getType().equals("other")) {
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .into(ProImg);
+
+        }
+        else if(sharedpreferenceHelper.getType().equals("student")) {
+
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .into(ProImg);
+        }
+        else if (sharedpreferenceHelper.getType().equals("admin")) {
+
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .into(ProImg);
+        }
+        else {
+            Toast.makeText(this,"updated",Toast.LENGTH_LONG).show();
+
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .into(ProImg);
+        }
+
+    }
+
     private DatePickerDialog.OnDateSetListener myDateListener = new
             DatePickerDialog.OnDateSetListener() {
                 @Override

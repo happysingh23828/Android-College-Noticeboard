@@ -1,12 +1,13 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,7 +78,6 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
             holder.NoticeDesc.setText(notice.getNoticeDesc());
         }
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,19 +96,37 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                     WEB_URL = Constants.WEB_API_URL+"FacultyDeleteCollegeNotice.php";
 
 
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.custom_delete_dealog_layout);
+                dialog.setTitle("Do you want to delete ?");
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
-                alert.setTitle("Realy Want To Delete ?");
-                alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+
+
+
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+                Button delete = (Button) dialog.findViewById(R.id.dialog_btn_delete);
+                // if button is clicked, close the custom dialog
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
 
                         spotsDialog.show();
 
 
-
-
-                        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, WEB_URL ,
+                        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, WEB_URL,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
@@ -118,16 +136,16 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
 
                                             JSONObject jsonObject = new JSONObject(response);
 
-                                            Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(holder.itemView.getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
                                             noticelist.remove(position);
                                             YourNoticesAdaptor.this.notifyItemRemoved(position);
-                                            YourNoticesAdaptor.this.notifyItemRangeChanged(position,noticelist.size());
-
+                                            YourNoticesAdaptor.this.notifyItemRangeChanged(position, noticelist.size());
+                                            dialog.dismiss();
 
                                         } catch (JSONException e) {
-                                            Toast.makeText(holder.itemView.getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-
+                                            Toast.makeText(holder.itemView.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
                                             e.printStackTrace();
                                         }
 
@@ -136,16 +154,16 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 spotsDialog.dismiss();
-                                Toast.makeText(holder.itemView.getContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(holder.itemView.getContext(), "Some Network Issues", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
 
                             }
-                        }){
+                        }) {
 
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String,String> param = new HashMap<>();
-                                param.put("Id",notice.getNoticeId());
+                                Map<String, String> param = new HashMap<>();
+                                param.put("Id", notice.getNoticeId());
                                 return param;
                             }
                         };
@@ -154,15 +172,7 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
 
                     }
                 });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alert.create();
-                alert.show();
+                dialog.show();
 
 
             }
@@ -188,5 +198,37 @@ public class YourNoticesAdaptor extends RecyclerView.Adapter<YourNoticesAdaptor.
             NoticeDesc = (TextView)itemView.findViewById(R.id.noticedescription);
             NoticeTime = (TextView)itemView.findViewById(R.id.noticetime);
         }
+    }
+
+
+    private void dialogBulder(String Text, final String Type,String Head) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_edittext_dialog_layout);
+        dialog.setTitle("Update...");
+
+        TextView text = (TextView) dialog.findViewById(R.id.dialog_title);
+        text.setText(Head);
+
+        final TextInputLayout textInputLayout = dialog.findViewById(R.id.dialog_edittext);
+        textInputLayout.getEditText().setText(Text);
+
+        Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+        // if button is clicked, close the custom dialog
+        cencel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button delete = (Button) dialog.findViewById(R.id.dialog_btn_delete);
+        // if button is clicked, close the custom dialog
+        cencel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }

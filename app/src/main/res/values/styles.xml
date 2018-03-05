@@ -36,5 +36,20 @@
         <item name="DialogSpotCount">5</item>
     </style>
 
+    <style name="mythem" parent="AppTheme">
+        <item name="colorPrimary">@color/Dialog</item>
+        <item name="colorPrimaryDark">@color/Dialog</item>
+        <item name="colorAccent">@color/Dialog</item>
+        <item name="textColorError">@color/Dialog</item>
+
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/Dialog</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+
+        <item name="colorControlNormal">@color/Dialog</item>
+        <item name="colorControlActivated">@color/Dialog</item>
+
+    </style>
 
 </resources>

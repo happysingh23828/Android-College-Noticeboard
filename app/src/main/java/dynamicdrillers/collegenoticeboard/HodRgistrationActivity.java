@@ -41,7 +41,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
     Button BtnRegister;
     Toolbar toolbar;
 
-    String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="";
+    String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="Male";
     TextView toolbarheading;
     Spinner SpnRole;
     String Role_s="hod",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
