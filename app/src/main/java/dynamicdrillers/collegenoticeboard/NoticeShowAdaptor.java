@@ -2,6 +2,7 @@ package dynamicdrillers.collegenoticeboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +44,23 @@ public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.No
 
         holder.AuthorName.setText(notice.getNoticeAuthor().toUpperCase());
         holder.NoticeTime.setText(notice.getTime());
-        //Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png")
-        Picasso.with(holder.itemView.getContext()).load("http://192.168.56.1/Web-API-College-Noticeboard/Storage/PersonProfiles/Personhappy123@gmail.com.png").into(holder.Author_Profile);
+
+
+        final SharedpreferenceHelper sharedPreference = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
+        if(notice.getNotice_Type().equals("dept") || notice.getNotice_Type().equals("tg"))
+        {
+            Picasso.with(holder.itemView.getContext()).load(Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
+
+        }
+        else
+        {
+            Picasso.with(holder.itemView.getContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL+"Admin"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
+
+        }
+
+
+
+
 
         if(notice.getNoticeTitle().length()>=50)
         {
