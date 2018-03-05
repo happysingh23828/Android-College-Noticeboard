@@ -23,6 +23,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -36,7 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
-    TextView TxtName,TxtEmail,TxtMobaileNo,TxtGender,TxtDob;
+    TextView TxtName,TxtMobaileNo,TxtGender,TxtDob;
     ImageView EditEmail,EditName,EditMobaile,EditGender,EditDob;
     LinearLayout LinLayEnrollment,LinLayTgSem;
     public static final String SharedprefenceName = "USER_DATA";
@@ -56,47 +58,56 @@ public class StudentProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_profile);
 
         TxtName = findViewById(R.id.stu_pro_txt_name);
-        TxtEmail = findViewById(R.id.stu_pro_txt_email);
         TxtMobaileNo = findViewById(R.id.stu_pro_txt_mobaileno);
         TxtGender = findViewById(R.id.stu_pro_txt_gender);
         TxtDob = findViewById(R.id.stu_pro_txt_dob);
 
-        EditName = findViewById(R.id.pro_edit_email);
+
         EditDob = findViewById(R.id.pro_edit_dob);
-        EditEmail = findViewById(R.id.pro_edit_email);
+
         EditName = findViewById(R.id.pro_edit_name);
         EditGender = findViewById(R.id.pro_edit_gender);
 
         ProImg = (CircleImageView)findViewById(R.id.pro_img);
 
+        SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
         if (sharedpreferenceHelper.getType().equals("other")) {
-            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
-                    .into(ProImg);
+
+            Picasso.with(getBaseContext()).invalidate(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
+
 
         }
         else if(sharedpreferenceHelper.getType().equals("student")) {
 
-            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
-                    .into(ProImg);
+            Picasso.with(getBaseContext()).invalidate(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
+
         }
         else if (sharedpreferenceHelper.getType().equals("admin")) {
+            Picasso.with(getBaseContext()).invalidate(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
 
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
-                    .into(ProImg);
+
+
         }
-        else {
+        else if (sharedpreferenceHelper.getType().equals("hod")) {
 
-            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
-                    .into(ProImg);
+            Picasso.with(getBaseContext()).invalidate(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
+
         }
 
-        EditMobaile = findViewById(R.id.pro_edit_mobaileno);
+
+
+            EditMobaile = findViewById(R.id.pro_edit_mobaileno);
 
         UpdateImg = findViewById(R.id.update_img);
         UpdateImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(StudentProfileActivity.this,UpdateProImgActivity.class));
+                finish();
             }
         });
 
@@ -213,7 +224,6 @@ public class StudentProfileActivity extends AppCompatActivity {
         }
 
         TxtName.setText(sharedPreference.getString("name",null));
-        TxtEmail.setText(sharedPreference.getString("email",null));
         TxtMobaileNo.setText(sharedPreference.getString("mobileno",null));
         TxtGender.setText(sharedPreference.getString("gender",null));
 
@@ -243,15 +253,7 @@ public class StudentProfileActivity extends AppCompatActivity {
 
 
 
-        EditEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                SharedPreferences sharedPreference = StudentProfileActivity.this.getSharedPreferences(SharedprefenceName, Context.MODE_PRIVATE);
-                dialogBulder(sharedPreference.getString("email",null),"email","Enter Email...");
-
-            }
-        });
 
         EditName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,8 +394,10 @@ public class StudentProfileActivity extends AppCompatActivity {
                                 editor.apply();
 
                                 Intent intent = new Intent(StudentProfileActivity.this,FacultyDashboard.class);
+
                                 startActivity(intent);
                                 finish();
+
                             }
                             else
                             {
@@ -476,35 +480,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         return null;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        Toast.makeText(this,"onresume",Toast.LENGTH_LONG).show();
-
-        if (sharedpreferenceHelper.getType().equals("other")) {
-            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
-                    .into(ProImg);
-
-        }
-        else if(sharedpreferenceHelper.getType().equals("student")) {
-
-            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
-                    .into(ProImg);
-        }
-        else if (sharedpreferenceHelper.getType().equals("admin")) {
-
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
-                    .into(ProImg);
-        }
-        else {
-            Toast.makeText(this,"updated",Toast.LENGTH_LONG).show();
-
-            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
-                    .into(ProImg);
-        }
-
-    }
 
     private DatePickerDialog.OnDateSetListener myDateListener = new
             DatePickerDialog.OnDateSetListener() {

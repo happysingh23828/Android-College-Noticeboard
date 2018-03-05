@@ -154,7 +154,7 @@ public class UpdateProImgActivity extends AppCompatActivity {
 
                         try {
                             JSONObject jsonObject = new JSONObject(s);
-                            if(!jsonObject.getBoolean("error"))
+                            if(jsonObject.getBoolean("error"))
                             {
                                 Toast.makeText(UpdateProImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
 
@@ -162,9 +162,11 @@ public class UpdateProImgActivity extends AppCompatActivity {
                             else
                             {
                                 Toast.makeText(UpdateProImgActivity.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(UpdateProImgActivity.this,FacultyDashboard.class);
+                                Intent intent = new Intent(UpdateProImgActivity.this,StudentProfileActivity.class);
+
                                 startActivity(intent);
                                 finish();
+
                             }
 
                         } catch (JSONException e) {

@@ -46,7 +46,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
     String Url=Constants.WEB_API_URL+"HodRegistration.php",Gender_s="Male";
     TextView toolbarheading;
     Spinner SpnRole,SpnDept;
-    String Role_s="hod",Dept_s="false",Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
+    String Role_s="hod",Dept_s,Url1=Constants.WEB_API_URL+"FacultyRegistration.php";
     String Type[] = {"Accounts","Hod","Scholarship","TNP"};
     String Dept[] = {"Cse","Me","Ec","Add new"};
     String s[];
@@ -134,6 +134,7 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 LinearLayout linearLayout = (LinearLayout) SpnDept.getSelectedView();
                 TextView textView = linearLayout.findViewById(R.id.txt_type);
                 textView.setTextColor(getResources().getColor(R.color.white));
+
                 Dept_s = textView.getText().toString().toLowerCase();
 
                 if(Dept_s.equals("add new"))
@@ -269,7 +270,12 @@ public class HodRgistrationActivity extends AppCompatActivity {
                 map.put("Email",TxtInputlayloutEmail.getEditText().getText().toString().toLowerCase());
                 map.put("Password",TxtInputlayloutPassword.getEditText().getText().toString());
                 map.put("Name",TxtInputlayloutName.getEditText().getText().toString());
-                map.put("Dept",Dept_s);
+
+                if(Role_s.equals("hod"))
+                    map.put("Dept",Dept_s);
+                else
+                    map.put("Dept","");
+
                 map.put("Gender",Gender_s);
                 map.put("PersonPhoto","https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_960_720.png");
                 map.put("MobileNo","9999999");

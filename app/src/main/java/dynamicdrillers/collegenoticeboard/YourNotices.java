@@ -146,7 +146,7 @@ public class YourNotices extends AppCompatActivity {
                                 ,singleNotice.getString("string")
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
-                                ,singleNotice.getString("authoremail"),Notice_Type);
+                                ,singleNotice.getString("authoremail"),Notice_Type,singleNotice.getString("authortype"));
                         noticelist.add(notice);
 
                     }
@@ -203,7 +203,7 @@ public class YourNotices extends AppCompatActivity {
                                 ,singleNotice.getString("string")
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
-                                ,singleNotice.getString("authoremail"),Notice_Type);
+                                ,singleNotice.getString("authoremail"),Notice_Type,singleNotice.getString("authortype"));
                         noticelist.add(notice);
                         yourNoticesAdaptor = new YourNoticesAdaptor(noticelist);
 
@@ -256,7 +256,7 @@ public class YourNotices extends AppCompatActivity {
                                 ,singleNotice.getString("string")
                                 ,singleNotice.getString("time")
                                 ,singleNotice.getString("image")
-                                ,singleNotice.getString("authoremail"),Notice_Type);
+                                ,singleNotice.getString("authoremail"),Notice_Type,singleNotice.getString("authortype"));
 
                         noticelist.add(notice);
 

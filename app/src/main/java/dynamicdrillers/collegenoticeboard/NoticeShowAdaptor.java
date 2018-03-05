@@ -47,15 +47,20 @@ public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.No
 
 
         final SharedpreferenceHelper sharedPreference = SharedpreferenceHelper.getInstance(holder.itemView.getContext());
-        if(notice.getNotice_Type().equals("dept") || notice.getNotice_Type().equals("tg"))
-        {
+
+
+        if(notice.getAuthor_Type().equals("other"))
             Picasso.with(holder.itemView.getContext()).load(Constants.PERSON_PROFILE_STORAGE_URL+"Person"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
 
-        }
-        else
+        else if(notice.getAuthor_Type().equals("admin"))
         {
             Picasso.with(holder.itemView.getContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL+"Admin"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
 
+        }
+        else if(notice.getAuthor_Type().equals("hod"))
+        {
+
+            Picasso.with(holder.itemView.getContext()).load(Constants.HOD_PROFILE_STORAGE_URL+"Hod"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
         }
 
 

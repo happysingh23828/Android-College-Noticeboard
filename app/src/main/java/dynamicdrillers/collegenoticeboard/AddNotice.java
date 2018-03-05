@@ -254,6 +254,7 @@ public class AddNotice extends AppCompatActivity {
                 param.put("Time",Current_time);
                 param.put("Title",title.getEditText().getText().toString());
                 param.put("String",desc.getEditText().getText().toString());
+                param.put("AuthorType",sharedpreferenceHelper.getType());
 
 
                 if(uploadflag.isChecked() && bitmap!=null)
