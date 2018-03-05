@@ -1,7 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +30,7 @@ import dmax.dialog.SpotsDialog;
  * Created by Happy-Singh on 2/28/2018.
  */
 
-public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstViewHolder>{
+public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstViewHolder> {
 
     List<Hod> hodlist;
     SpotsDialog spotsDialog;
@@ -43,7 +42,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
     @Override
     public HodlIstViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.singlehodshow,parent,false);
+        View view = layoutInflater.inflate(R.layout.singlehodshow, parent, false);
         return new HodlIstViewHolder(view);
     }
 
@@ -54,28 +53,41 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
         final Hod hod = hodlist.get(position);
 
         holder.HodName.setText(hod.getName());
-        holder.HodDept.setText("Dept : "+hod.getDept());
-        Picasso.with(holder.itemView.getContext()).load(Constants.HOD_PROFILE_STORAGE_URL+"Hod"+hod.getEmail()+".png").into(holder.hodimage);
+        holder.HodDept.setText("Dept : " + hod.getDept());
+        Picasso.with(holder.itemView.getContext()).load(Constants.HOD_PROFILE_STORAGE_URL + "Hod" + hod.getEmail() + ".png").into(holder.hodimage);
 
         holder.editHod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.changepassworddialog);
+                dialog.setTitle("Do you want to delete ?");
 
-                View view =  View.inflate(holder.itemView.getContext(),R.layout.changepassworddialog,null);
-                final TextInputEditText newpassword = (TextInputEditText)view.findViewById(R.id.newpassword);
-                final TextInputEditText confirmpassword = (TextInputEditText)view.findViewById(R.id.confirmpassword);
 
-                builder.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
+
+                final TextInputEditText newpassword = (TextInputEditText)dialog.findViewById(R.id.newpassword);
+                final TextInputEditText confirmpassword = (TextInputEditText)dialog.findViewById(R.id.confirmpassword);
+
+
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
 
 
-                        if(newpassword.getText().length()>1)
-                        {
-                            if(newpassword.getText().toString().equals(confirmpassword.getText().toString()))
-                            {
+
+                Button change = (Button) dialog.findViewById(R.id.dialog_btn_chnge);
+                // if button is clicked, close the custom dialog
+                change.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (newpassword.getText().length() > 1) {
+                            if (newpassword.getText().toString().equals(confirmpassword.getText().toString())) {
                                 StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "ChangePassword.php",
                                         new Response.Listener<String>() {
 
@@ -87,7 +99,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
 
                                                     JSONObject jsonObject = new JSONObject(response);
 
-                                                    Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(holder.itemView.getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
 
                                                 } catch (JSONException e) {
@@ -100,63 +112,65 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
 
-                                        Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(holder.itemView.getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
 
                                     }
-                                }){
+                                }) {
 
                                     @Override
                                     protected Map<String, String> getParams() throws AuthFailureError {
-                                        Map<String,String> param = new HashMap<>();
-                                        param.put("Email",hod.getEmail());
-                                        param.put("NewPassword",confirmpassword.getText().toString());
-                                        param.put("PersonType","hod");
+                                        Map<String, String> param = new HashMap<>();
+                                        param.put("Email", hod.getEmail());
+                                        param.put("NewPassword", confirmpassword.getText().toString());
+                                        param.put("PersonType", "hod");
                                         return param;
                                     }
                                 };
 
                                 MySingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(stringRequest);
-                            }
-                            else
-                            {
+                            } else {
                                 spotsDialog.dismiss();
-                                Toast.makeText(holder.itemView.getContext(),"Password Does Not Matched",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(), "Password Does Not Matched", Toast.LENGTH_SHORT).show();
 
                             }
-                        }
-                        else
-                        {
+                        } else {
                             spotsDialog.dismiss();
-                            Toast.makeText(holder.itemView.getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(holder.itemView.getContext(), "Enter Password", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
+                dialog.show();
 
-
-                builder.setView(view);
-                builder.create();
-                builder.show();
             }
         });
-
 
 
         holder.deleteHod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.custom_delete_dealog_layout);
+                dialog.setTitle("Do you want to delete ?");
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
 
-
-                alert.setTitle("All The Data Of User Will Be Lost?  ");
-
-                alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
+
+                    }
+                });
 
 
+                Button delete = (Button) dialog.findViewById(R.id.dialog_btn_delete);
+                // if button is clicked, close the custom dialog
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "AdminDeleteHod.php",
                                 new Response.Listener<String>() {
                                     @Override
@@ -167,15 +181,17 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
 
                                             JSONObject jsonObject = new JSONObject(response);
 
-                                            Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(holder.itemView.getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
 
                                             hodlist.remove(position);
                                             HodListAdaptor.this.notifyItemRemoved(position);
-                                            HodListAdaptor.this.notifyItemRangeChanged(position,hodlist.size());
+                                            HodListAdaptor.this.notifyItemRangeChanged(position, hodlist.size());
 
+                                            dialog.dismiss();
 
                                         } catch (JSONException e) {
 
+                                            dialog.dismiss();
                                             e.printStackTrace();
                                         }
 
@@ -184,16 +200,16 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                Toast.makeText(holder.itemView.getContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(holder.itemView.getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
 
 
                             }
-                        }){
+                        }) {
 
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String,String> param = new HashMap<>();
-                                param.put("Email",hod.getEmail());
+                                Map<String, String> param = new HashMap<>();
+                                param.put("Email", hod.getEmail());
                                 return param;
                             }
                         };
@@ -202,18 +218,7 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
 
                     }
                 });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-
-                    }
-                });
-
-                alert.create();
-                alert.show();
+                dialog.show();
 
 
             }
@@ -226,20 +231,20 @@ public class HodListAdaptor extends RecyclerView.Adapter<HodListAdaptor.HodlIstV
         return hodlist.size();
     }
 
-    public  class HodlIstViewHolder extends  RecyclerView.ViewHolder{
+    public class HodlIstViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView hodimage;
-        TextView HodName,HodDept;
-        Button editHod,deleteHod;
+        TextView HodName, HodDept;
+        Button editHod, deleteHod;
 
         public HodlIstViewHolder(View itemView) {
             super(itemView);
 
-            hodimage = (CircleImageView)itemView.findViewById(R.id.hodphoto);
-            HodName = (TextView)itemView.findViewById(R.id.hodname);
-            HodDept = (TextView)itemView.findViewById(R.id.hoddept);
-            editHod = (Button)itemView.findViewById(R.id.hodeditprofile);
-            deleteHod = (Button)itemView.findViewById(R.id.hoddeleteprofile);
+            hodimage = (CircleImageView) itemView.findViewById(R.id.hodphoto);
+            HodName = (TextView) itemView.findViewById(R.id.hodname);
+            HodDept = (TextView) itemView.findViewById(R.id.hoddept);
+            editHod = (Button) itemView.findViewById(R.id.hodeditprofile);
+            deleteHod = (Button) itemView.findViewById(R.id.hoddeleteprofile);
         }
 
 

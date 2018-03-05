@@ -1,7 +1,6 @@
 package dynamicdrillers.collegenoticeboard;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,15 +61,37 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
             @Override
             public void onClick(View v) {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
 
-                View view =  View.inflate(holder.itemView.getContext(),R.layout.changepassworddialog,null);
-                final TextInputEditText newpassword = (TextInputEditText)view.findViewById(R.id.newpassword);
-                final TextInputEditText confirmpassword = (TextInputEditText)view.findViewById(R.id.confirmpassword);
 
-                builder.setPositiveButton("Change Password", new DialogInterface.OnClickListener() {
+
+
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.changepassworddialog);
+                dialog.setTitle("Do you want to delete ?");
+
+
+
+                final TextInputEditText newpassword = (TextInputEditText)dialog.findViewById(R.id.newpassword);
+                final TextInputEditText confirmpassword = (TextInputEditText)dialog.findViewById(R.id.confirmpassword);
+
+
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+                Button change = (Button) dialog.findViewById(R.id.dialog_btn_chnge);
+                // if button is clicked, close the custom dialog
+                change.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         spotsDialog.show();
 
                         if(newpassword.getText().length()>1)
@@ -89,10 +110,10 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                                     JSONObject jsonObject = new JSONObject(response);
 
                                                     Toast.makeText(holder.itemView.getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
-
+                                                     dialog.dismiss();
 
                                                 } catch (JSONException e) {
-
+                                                    dialog.dismiss();
                                                     e.printStackTrace();
                                                 }
 
@@ -101,6 +122,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
                                         spotsDialog.dismiss();
+                                        dialog.dismiss();
                                         Toast.makeText(holder.itemView.getContext(),"Some Network Issues",Toast.LENGTH_SHORT).show();
 
 
@@ -128,6 +150,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                         }
                         else
                         {
+                            dialog.dismiss();
                             spotsDialog.dismiss();
                             Toast.makeText(holder.itemView.getContext(),"Enter Password",Toast.LENGTH_SHORT).show();
 
@@ -135,20 +158,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
 
                     }
                 });
-
-
-                builder.setView(view);
-                builder.create();
-                builder.show();
-
-
-
-
-
-
-
-
-
+                dialog.show();
 
 
             }
@@ -160,12 +170,31 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
-                alert.setTitle("All The Data Of User Will Be Lost?  ");
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.custom_delete_dealog_layout);
+                dialog.setTitle("Do you want to delete ?");
 
-                alert.setPositiveButton("Delete Anyway", new DialogInterface.OnClickListener() {
+
+
+
+
+                Button cencel = (Button) dialog.findViewById(R.id.dialog_btn_cencel);
+                // if button is clicked, close the custom dialog
+                cencel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+                Button delete = (Button) dialog.findViewById(R.id.dialog_btn_delete);
+                // if button is clicked, close the custom dialog
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         spotsDialog.show();
 
                         StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "FacultyDeleteStudent.php",
@@ -182,10 +211,10 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                                             studentList.remove(position);
                                             StudentListAdaptor.this.notifyItemRemoved(position);
                                             StudentListAdaptor.this.notifyItemRangeChanged(position,studentList.size());
-
+                                            dialog.dismiss();
 
                                         } catch (JSONException e) {
-
+                                            dialog.dismiss();
                                             e.printStackTrace();
                                         }
 
@@ -196,7 +225,7 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
                             public void onErrorResponse(VolleyError error) {
                                 spotsDialog.dismiss();
                                 Toast.makeText(holder.itemView.getContext(),"Some Network Issuses",Toast.LENGTH_SHORT).show();
-
+                                dialog.dismiss();
 
                             }
                         }){
@@ -213,18 +242,10 @@ public class StudentListAdaptor extends RecyclerView.Adapter<StudentListAdaptor.
 
                     }
                 });
-
-                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                dialog.show();
 
 
 
-                    }
-                });
-
-                alert.create();
-                alert.show();
 
 
             }
