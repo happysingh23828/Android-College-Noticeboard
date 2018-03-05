@@ -209,11 +209,11 @@ public class AddNotice extends AppCompatActivity {
                     {
                         if(sharedpreferenceHelper.getRole()==null)
                         {
-                            sendNotification("Events",sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
+                            sendNotification(noticetype.toUpperCase(),sharedpreferenceHelper.getDept(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
                         }
                         else
                         {
-                            sendNotification(sharedpreferenceHelper.getRole().toUpperCase(),sharedpreferenceHelper.getRole().toUpperCase(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
+                            sendNotification(noticetype.toUpperCase(),sharedpreferenceHelper.getRole().toUpperCase(),sharedpreferenceHelper.getCollegeCode(),sharedpreferenceHelper.getName());
 
                         }
 
@@ -312,6 +312,8 @@ public class AddNotice extends AppCompatActivity {
                return map;
              }
          };
+
+         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 
