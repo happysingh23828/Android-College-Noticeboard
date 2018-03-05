@@ -48,7 +48,7 @@ public class DashboardNoticeAdaptor extends RecyclerView.Adapter<DashboardNotice
 
         if(position==2)
         {
-            if(sharedpreferenceHelper.getDept().equals(""))
+            if(sharedpreferenceHelper.getDept()==null)
             {
                 holder.cardViewright.setVisibility(View.GONE);
             }
