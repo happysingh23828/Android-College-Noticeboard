@@ -294,6 +294,7 @@ public class AddNotice extends AppCompatActivity {
                      @Override
                      public void onResponse(String response) {
 
+
                      }
                  }, new Response.ErrorListener() {
              @Override
@@ -313,7 +314,8 @@ public class AddNotice extends AppCompatActivity {
              }
          };
 
-         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
     }
 
 
