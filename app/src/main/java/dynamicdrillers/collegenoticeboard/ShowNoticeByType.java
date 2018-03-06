@@ -200,9 +200,12 @@ public class ShowNoticeByType extends AppCompatActivity {
     }
 
     private void showCollegeNotice() {
+
         StringRequest stringRequest =  new StringRequest(StringRequest.Method.POST,GET_COLLEGE_NOTICE_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+
 
                 try {
                     JSONArray NoticeArrray = new JSONArray(response);
