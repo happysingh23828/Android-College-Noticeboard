@@ -173,7 +173,6 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
 
     private void upload() {
 
-        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {
                     @Override
