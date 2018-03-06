@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                 ,user_detail.getString("dob")
                                 ,user_detail.getString("gender")
                                 ,user_detail.getString("type")
+
                                 );
 
                         if(SelectedType.equals("Student"))

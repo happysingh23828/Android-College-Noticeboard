@@ -72,31 +72,31 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
         if (sharedpreferenceHelper.getType().equals("other")) {
-
-            Picasso.with(getBaseContext()).invalidate(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
-
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(ProImg);
 
         }
         else if(sharedpreferenceHelper.getType().equals("student")) {
 
-            Picasso.with(getBaseContext()).invalidate(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
-
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(ProImg);
         }
         else if (sharedpreferenceHelper.getType().equals("admin")) {
-            Picasso.with(getBaseContext()).invalidate(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
 
-
-
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(ProImg);
         }
-        else if (sharedpreferenceHelper.getType().equals("hod")) {
+        else {
 
-            Picasso.with(getBaseContext()).invalidate(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(ProImg);
-
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(ProImg);
         }
+
+
 
 
 

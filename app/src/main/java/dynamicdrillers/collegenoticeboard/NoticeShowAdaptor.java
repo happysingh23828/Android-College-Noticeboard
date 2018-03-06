@@ -54,7 +54,7 @@ public class NoticeShowAdaptor extends RecyclerView.Adapter<NoticeShowAdaptor.No
 
         else if(notice.getAuthor_Type().equals("admin"))
         {
-            Picasso.with(holder.itemView.getContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL+"Admin"+notice.getNoticeAuthorImage()+".png").into(holder.Author_Profile);
+            Picasso.with(holder.itemView.getContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL+"Admin"+sharedPreference.getCollegeCode()+".png").into(holder.Author_Profile);
 
         }
         else if(notice.getAuthor_Type().equals("hod"))

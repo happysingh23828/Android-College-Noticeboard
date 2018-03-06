@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/applicationname"
+                android:text="College NoticeBoard"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"/>

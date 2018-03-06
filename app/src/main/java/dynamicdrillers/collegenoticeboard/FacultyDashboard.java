@@ -31,6 +31,9 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +49,7 @@ public class FacultyDashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     Menu menu;
     ImageView ProfileIcon, NavigationProfileImage, CollegeLogo;
-    TextView NavigationText1, NavigationText2, NavigationText3, CollegeName, CollegeAddress;
+    TextView NavigationText1, NavigationText2, NavigationText3, CollegeName, CollegeAddress,AppName;
     SpotsDialog spotsDialog;
 
 
@@ -82,8 +85,7 @@ public class FacultyDashboard extends AppCompatActivity {
         CollegeAddress = (TextView) findViewById(R.id.toolbar_college_address);
 
         Picasso.with(getBaseContext()).load(Constants.COLLEGE_LOGO_STORAGE_URL + sharedPreferenceHelper.getCollegeLogoName()).into(CollegeLogo);
-        CollegeAddress.setText(sharedPreferenceHelper.getCollegeAddress());
-        CollegeName.setText(sharedPreferenceHelper.getCollegeAddress());
+        getCollege();
 
 
         //Setting Toolbar
@@ -113,9 +115,37 @@ public class FacultyDashboard extends AppCompatActivity {
         NavigationText1.setText(sharedPreferenceHelper.getName());
         menu = navigationView.getMenu();
 
-        if (sharedPreferenceHelper.getType().equals("other")) {
-            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedPreferenceHelper.getPersonProfileName())
+
+
+        //Setting Profile Photo
+
+        SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
+        if (sharedpreferenceHelper.getType().equals("other")) {
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
                     .into(NavigationProfileImage);
+
+        }
+        else if(sharedpreferenceHelper.getType().equals("student")) {
+
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
+        }
+        else if (sharedpreferenceHelper.getType().equals("admin")) {
+
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
+        }
+        else {
+
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
+        }
+
+        if (sharedPreferenceHelper.getType().equals("other")) {
 
             NavigationText2.setText("DEPT : " + sharedPreferenceHelper.getDept());
             NavigationText3.setText("ROLE : " + sharedPreferenceHelper.getRole());
@@ -137,8 +167,6 @@ public class FacultyDashboard extends AppCompatActivity {
 
         } else if (sharedPreferenceHelper.getType().equals("student")) {
 
-            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedPreferenceHelper.getStudentProfileName())
-                    .into(NavigationProfileImage);
             NavigationText2.setText("DEPT : " + sharedPreferenceHelper.getDept());
             NavigationText3.setText("SEM : " + sharedPreferenceHelper.getSem());
 
@@ -151,9 +179,6 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.your_notices).setVisible(false);
         } else if (sharedPreferenceHelper.getType().equals("admin")) {
 
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedPreferenceHelper.getAdminProfileName())
-                    .into(NavigationProfileImage);
-
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("CollegeCode :" + sharedPreferenceHelper.getCollegeCode());
 
@@ -163,8 +188,6 @@ public class FacultyDashboard extends AppCompatActivity {
             menu.findItem(R.id.your_notices).setVisible(false);
         } else {
 
-            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedPreferenceHelper.getHodProfileName())
-                    .into(NavigationProfileImage);
             NavigationText2.setText("Email :" + sharedPreferenceHelper.getEmail());
             NavigationText3.setText("dept :" + sharedPreferenceHelper.getDept());
 
@@ -318,42 +341,77 @@ public class FacultyDashboard extends AppCompatActivity {
 
     }
 
+    private  void getCollege(){
+
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, Constants.WEB_API_URL + "GetCollegeDetails.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            CollegeName.setText(jsonObject.getString("collegename"));
+                            CollegeAddress.setText(jsonObject.getString("collegecity")+" "+jsonObject.getString("collegestate"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> param = new HashMap<>();
+                param.put("CollegeCode",sharedPreferenceHelper.getCollegeCode());
+                return  param;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
 
-
-
         SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
         if (sharedpreferenceHelper.getType().equals("other")) {
-
-            Picasso.with(getBaseContext()).invalidate(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(NavigationProfileImage);
-
+            Picasso.with(getBaseContext()).load(Constants.PERSON_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
 
         }
         else if(sharedpreferenceHelper.getType().equals("student")) {
 
-            Picasso.with(getBaseContext()).invalidate(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(NavigationProfileImage);
-
+            Picasso.with(getBaseContext()).load(Constants.STUDENT_PROFILE_STORAGE_URL + sharedpreferenceHelper.getStudentProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
         }
         else if (sharedpreferenceHelper.getType().equals("admin")) {
-            Picasso.with(getBaseContext()).invalidate(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(NavigationProfileImage);
 
-
-
+            Picasso.with(getBaseContext()).load(Constants.ADMIN_PROFILE_STORAGE_URL + sharedpreferenceHelper.getAdminProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
         }
-        else if (sharedpreferenceHelper.getType().equals("hod")){
+        else {
 
-            Picasso.with(getBaseContext()).invalidate(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName());
-            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getPersonProfileName()).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(NavigationProfileImage);
-
-
-
+            Picasso.with(getBaseContext()).load(Constants.HOD_PROFILE_STORAGE_URL + sharedpreferenceHelper.getHodProfileName())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(NavigationProfileImage);
         }
+
 
     }
-
 }
