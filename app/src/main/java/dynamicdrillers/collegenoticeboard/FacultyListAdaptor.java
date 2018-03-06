@@ -60,7 +60,7 @@ public class FacultyListAdaptor extends RecyclerView.Adapter<FacultyListAdaptor.
 
         holder.facultyName.setText(faculty.getName());
         if (sharedpreferenceHelper.getType().equals("admin"))
-            holder.facultyEmail.setText(faculty.getDept());
+            holder.facultyEmail.setText("Role : "+faculty.getRole().toUpperCase());
         else
             holder.facultyEmail.setText(faculty.getEmail());
 
