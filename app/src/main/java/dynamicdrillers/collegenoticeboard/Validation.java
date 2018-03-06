@@ -1,6 +1,7 @@
 package dynamicdrillers.collegenoticeboard;
 
 import android.support.design.widget.TextInputLayout;
+import android.widget.EditText;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -162,13 +163,12 @@ public class Validation {
         }
 
     }
-    public boolean disValidation(TextInputLayout textInputLayout){
-        if (textInputLayout.getEditText().getText().toString().isEmpty()) {
+    public boolean disValidation(EditText textInputLayout){
+        if (textInputLayout.getText().toString().isEmpty()) {
             textInputLayout.setError("Enter Discription");
             return false;
         }
         else{
-            textInputLayout.setErrorEnabled(false);
             return true;
         }
 

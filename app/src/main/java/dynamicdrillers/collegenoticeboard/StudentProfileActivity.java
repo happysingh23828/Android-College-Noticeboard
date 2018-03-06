@@ -38,8 +38,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
-    TextView TxtName,TxtMobaileNo,TxtGender,TxtDob;
-    ImageView EditEmail,EditName,EditMobaile,EditGender,EditDob;
+    TextView TxtName,TxtMobaileNo,TxtGender,TxtDob,TxtSem;
+    ImageView EditEmail,EditName,EditMobaile,EditGender,EditDob,EditSem;
     LinearLayout LinLayEnrollment,LinLayTgSem;
     public static final String SharedprefenceName = "USER_DATA";
     CircleImageView ProImg;
@@ -63,10 +63,11 @@ public class StudentProfileActivity extends AppCompatActivity {
         TxtDob = findViewById(R.id.stu_pro_txt_dob);
 
 
-        EditDob = findViewById(R.id.pro_edit_dob);
 
+        EditDob = findViewById(R.id.pro_edit_dob);
         EditName = findViewById(R.id.pro_edit_name);
         EditGender = findViewById(R.id.pro_edit_gender);
+        EditMobaile = findViewById(R.id.pro_edit_mobaileno);
 
         ProImg = (CircleImageView)findViewById(R.id.pro_img);
 
@@ -100,7 +101,7 @@ public class StudentProfileActivity extends AppCompatActivity {
 
 
 
-            EditMobaile = findViewById(R.id.pro_edit_mobaileno);
+
 
         UpdateImg = findViewById(R.id.update_img);
         UpdateImg.setOnClickListener(new View.OnClickListener() {
@@ -243,12 +244,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             Enrollment.setText(sharedPreference.getString("enrollment",null));
         }
 
-        if(sharedPreference.getString("type",null).equals("other")){
-            LinLayTgSem = findViewById(R.id.pro_tg_sem);
-            LinLayTgSem.setVisibility(View.VISIBLE);
-            TextView TgSem = LinLayTgSem.findViewById(R.id.stu_pro_txt_tg_sem);
-            TgSem.setText(sharedPreference.getString("tgsem",null));
-        }
+
 
 
 
@@ -290,6 +286,8 @@ public class StudentProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
 

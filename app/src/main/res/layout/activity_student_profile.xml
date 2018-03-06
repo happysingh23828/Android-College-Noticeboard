@@ -139,32 +139,7 @@
                 app:srcCompat="@drawable/ic_edit" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/pro_tg_sem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:visibility="gone">
 
-
-
-            <TextView
-                android:id="@+id/stu_pro_txt_tg_sem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@android:color/background_light" />
-
-            <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                app:srcCompat="@drawable/ic_edit" />
-        </LinearLayout>
 
 
         <LinearLayout

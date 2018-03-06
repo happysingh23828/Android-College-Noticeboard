@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,8 @@ import dmax.dialog.SpotsDialog;
 public class AddNotice extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST_NOTICE = 1;
     TextInputLayout textInputLayout;
-    TextInputLayout title,desc;
+    EditText desc;
+    TextInputLayout title;
     CheckBox uploadflag;
     ImageView uploaded_image;
     Button chooseImage,sendnotice;
@@ -52,6 +54,7 @@ public class AddNotice extends AppCompatActivity {
     TextView notice_name;
     SpotsDialog spotsDialog;
     String tgnoticeflag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ public class AddNotice extends AppCompatActivity {
         spotsDialog = new SpotsDialog(this);
 
         title = (TextInputLayout)findViewById(R.id.NoticeTitle);
-        desc = (TextInputLayout)findViewById(R.id.NoticeDesc);
+        desc = (EditText) findViewById(R.id.NoticeDesc);
         uploadflag = (CheckBox)findViewById(R.id.checknoticecheckbox);
         uploaded_image = (ImageView)findViewById(R.id.choosedimage);
         chooseImage = (Button)findViewById(R.id.imagechoosenotice);
@@ -253,7 +256,7 @@ public class AddNotice extends AppCompatActivity {
                 param.put("AuthorName",sharedpreferenceHelper.getName());
                 param.put("Time",Current_time);
                 param.put("Title",title.getEditText().getText().toString());
-                param.put("String",desc.getEditText().getText().toString());
+                param.put("String",desc.getText().toString());
                 param.put("AuthorType",sharedpreferenceHelper.getType());
 
 

@@ -46,7 +46,7 @@ public class FacultyRegistrationActivity extends AppCompatActivity {
     CheckBox Tg;
     Button BtnRegister;
     String Type[] = {"1","2","3","4","5","6","7","8"};
-    String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="",TgSem_s="false";
+    String Tg_s="0",Url=Constants.WEB_API_URL+"FacultyRegistration.php",Gender_s="Male",TgSem_s="false";
     TextView toolbarheading;
     SharedpreferenceHelper sharedpreferenceHelper = SharedpreferenceHelper.getInstance(this);
     SpotsDialog spotsDialog;
