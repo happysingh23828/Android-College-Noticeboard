@@ -57,44 +57,49 @@
             android:scrollbars="vertical"
             android:textColor="@color/cardview_light_background" />
 
-        <CheckBox
-            android:id="@+id/checknoticecheckbox"
-
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Upload Image"
-            android:textColor="#ffff"
-            />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/imagechoosenotice"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <CheckBox
+                android:id="@+id/checknoticecheckbox"
 
-            android:text="Choose Image"
-            android:textStyle="bold"
-            android:layout_gravity="left"
-            android:textSize="15sp"
-            android:visibility="gone"
-            android:textColor="@android:color/black"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Upload Image"
+                android:textColor="#ffff" />
+
+            <Button
+                android:id="@+id/imagechoosenotice"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+
+                android:layout_weight="1"
+                android:text="Choose Image"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/choosedimage"
-
             android:layout_width="match_parent"
+
             android:layout_height="100dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
-            />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/sendnoticebtn"
